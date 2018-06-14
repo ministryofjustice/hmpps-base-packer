@@ -1,0 +1,48 @@
+{
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "scripts/chroot_grub_ssh.sh",
+      "destination": "/tmp/chroot_grub_ssh.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/mount_target.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/oraclelinux_chroot.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/prepare_chroot.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebssurrogate",
+      "region": "eu-west-2",
+      "source_ami": "ami-4726cb20", 
+      "instance_type": "t2.micro",
+      "ssh_username": "centos",
+      "ami_name": "HMPPS Oracle Linux 7 {{timestamp}}",
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/xvdf",
+          "delete_on_termination": true,
+          "volume_size": 8,
+          "volume_type": "gp2"
+        } 
+      ],
+      "ami_virtualization_type": "hvm",
+      "ami_regions": ["eu-west-2"],
+      "ami_root_device": {
+      	"source_device_name": "/dev/xvdf",
+      	"device_name": "/dev/xvda",
+      	"delete_on_termination": true,
+      	"volume_size": 8,
+      	"volume_type": "gp2"
+      }
+    }
+  ]
+}

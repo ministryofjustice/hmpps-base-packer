@@ -1,0 +1,23 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/update.sh"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible/centos7.yml",
+      "extra_arguments": [ "-b" ]
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "source_ami": "ami-4726cb20", 
+      "instance_type": "t2.micro",
+      "ssh_username": "centos",
+      "ami_name": "HMPPS Base build {{timestamp}}"
+    }
+  ]
+}
