@@ -24,7 +24,7 @@
           "description": "Amazon Linux AMI *",
           "root-device-type": "ebs"
         },
-        "owners": ["591542846629"],
+        "owners": ["amazon"],
         "most_recent": true
       },
       "instance_type": "t2.micro",
