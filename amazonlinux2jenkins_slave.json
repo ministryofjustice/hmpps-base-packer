@@ -1,0 +1,45 @@
+{
+  "variables": {
+    "packer_profile": "packer"
+  },
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/configure_github.sh",
+      "destination": "/home/ec2-user/configure_github"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/update.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/jenkins_slave.sh"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible/amazonlinux.yml",
+      "extra_arguments": [ "-b" ]
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "description": "Amazon Linux 2 LTS*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["amazon"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ssh_username": "ec2-user",
+      "ami_name": "HMPPS Jenkins Slave Amazon Linux 2 LTS {{timestamp}}"
+    }
+  ]
+}
