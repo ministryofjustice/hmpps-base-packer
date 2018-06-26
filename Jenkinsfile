@@ -14,6 +14,12 @@ pipeline {
     agent { label "!master"}
 
     stages {
+        stage ('Notify build started') {
+            steps {
+                slackSend(message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+            }
+        }
+
         stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
@@ -32,6 +38,15 @@ pipeline {
                 //stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
                 //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
             }
+        }
+    }
+
+    post {
+        success {
+            slackSend(message: 'Build completed', color: 'good')
+        }
+        failure {
+            slackSend(message: 'Build completed', color: 'danger')
         }
     }
 }
