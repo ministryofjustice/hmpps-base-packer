@@ -24,7 +24,7 @@ cd git-crypt-0.6.0
 sudo make
 sudo make install PREFIX=/usr/local
 cd /tmp
-rm *0.6.0*
+rm -rf *0.6.0*
 
 sudo systemctl start docker
 
