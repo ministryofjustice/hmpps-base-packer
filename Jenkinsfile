@@ -1,13 +1,17 @@
 def verify_image(filename) {
-    sh '''
-    #!/usr/env/bin bash
-    docker run --rm -v `pwd`:/home/tools/data mojdigitalstudio/hmpps-packer-builder bash -c 'USER=`whoami` packer validate ''' + filename + "'"
+    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh '''
+        #!/usr/env/bin bash
+        docker run --rm -v `pwd`:/home/tools/data mojdigitalstudio/hmpps-packer-builder bash -c 'USER=`whoami` packer validate ''' + filename + "'"
+    }
 }
 
 def build_image(filename) {
-    sh '''
-    #!/usr/env/bin bash
-    docker run --rm -v `pwd`:/home/tools/data mojdigitalstudio/hmpps-packer-builder bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
+    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh '''
+        #!/usr/env/bin bash
+        docker run --rm -v `pwd`:/home/tools/data mojdigitalstudio/hmpps-packer-builder bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
+    }
 }
 
 pipeline {

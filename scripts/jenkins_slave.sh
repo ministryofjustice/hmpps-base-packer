@@ -10,11 +10,21 @@ sudo yum install -y docker \
      lvm2 \
      gcc \
      gcc-c++ \
+     openssl-devel \
      make \
      git \
      java-1.8.0-openjdk \
      python-pip \
      jq
+
+cd /tmp
+wget https://github.com/AGWA/git-crypt/archive/0.6.0.tar.gz
+tar -xf 0.6.0.tar.gz
+cd git-crypt-0.6.0
+sudo make
+sudo make install PREFIX=/usr/local
+cd /tmp
+rm *0.6.0*
 
 sudo systemctl start docker
 
