@@ -50,7 +50,7 @@ pipeline {
             slackSend(message: 'Build completed', color: 'good')
         }
         failure {
-            slackSend(message: 'Build completed', color: 'danger')
+            slackSend(message: 'Build failed', color: 'danger')
         }
     }
 }
