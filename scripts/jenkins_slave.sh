@@ -26,6 +26,7 @@ sudo make install PREFIX=/usr/local
 cd /tmp
 rm -rf *0.6.0*
 
+sudo systemctl -w vm.max_map_count=262144
 sudo systemctl start docker
 
 sudo pip install virtualenv awscli
