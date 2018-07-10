@@ -10,16 +10,7 @@
     },
     {
       "type": "shell",
-      "script": "scripts/update.sh"
-    },
-    {
-      "type": "shell",
       "script": "scripts/jenkins_slave.sh"
-    },
-    {
-      "type": "ansible",
-      "playbook_file": "./ansible/amazonlinux.yml",
-      "extra_arguments": [ "-b" ]
     }
   ],
   "builders": [
@@ -30,10 +21,10 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "description": "Amazon Linux 2 LTS*",
+          "description": "HMPPS Base Amazon Linux 2 LTS*",
           "root-device-type": "ebs"
         },
-        "owners": ["amazon"],
+        "owners": ["hmpps-engineering"],
         "most_recent": true
       },
       "instance_type": "t2.micro",
