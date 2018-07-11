@@ -24,7 +24,7 @@
           "description": "HMPPS Base Amazon Linux 2 LTS*",
           "root-device-type": "ebs"
         },
-        "owners": ["hmpps-engineering-non-prod"],
+        "owners": ["895523100917"],
         "most_recent": true
       },
       "instance_type": "t2.micro",
