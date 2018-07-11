@@ -1,2 +1,2 @@
 - src: dev-sec.os-hardening
-- src: linuxhq.yum-cron
+- src: linuxhq.yum_cron
