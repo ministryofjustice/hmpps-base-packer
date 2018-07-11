@@ -4,8 +4,7 @@ set -e
 
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 
-sudo yum install -y docker \
-     yum-utils \
+sudo yum install -y yum-utils \
      device-mapper-persistent-data \
      lvm2 \
      gcc \
@@ -16,6 +15,8 @@ sudo yum install -y docker \
      java-1.8.0-openjdk \
      python-pip \
      jq
+
+sudo amazon-linux-extras install -y docker
 
 cd /tmp
 wget https://github.com/AGWA/git-crypt/archive/0.6.0.tar.gz
