@@ -1,4 +1,4 @@
 - hosts: default
   roles:
     - dev-sec.os-hardening
-    - linuxhq.yum-cron
+    - linuxhq.yum_cron

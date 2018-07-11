@@ -10,7 +10,8 @@
     {
       "type": "ansible",
       "playbook_file": "./ansible/amazonlinux.yml",
-      "extra_arguments": [ "-b" ]
+      "extra_arguments": [ "-b" ],
+      "groups": ["amazonlinux2"]
     }
   ],
   "builders": [
@@ -30,6 +31,7 @@
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "ec2-user",
+      "ami_groups": "all",
       "ami_name": "HMPPS Base Amazon Linux 2 LTS {{timestamp}}"
     }
   ]
