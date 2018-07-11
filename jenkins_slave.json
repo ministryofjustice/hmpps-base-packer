@@ -21,7 +21,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "description": "HMPPS Base Amazon Linux 2 LTS*",
+          "name": "HMPPS Base Amazon Linux 2 LTS*",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],
