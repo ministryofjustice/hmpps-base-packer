@@ -17,11 +17,11 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-2",
-      "source_ami": "ami-3d6b7059",
+      "source_ami": "ami-ee6a718a",
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
-      "ami_name": "HMPPS Base CentOS {{timestamp}}"
+      "ami_name": "HMPPS Base CentOS {{ env BRANCH_NAME }} {{timestamp}}"
     }
   ]
 }
