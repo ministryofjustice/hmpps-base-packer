@@ -17,7 +17,7 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-2",
-      "source_ami": "ami-4726cb20", 
+      "source_ami": "ami-3d6b7059",
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
