@@ -25,7 +25,7 @@
       "source_ami": "ami-4726cb20", 
       "instance_type": "t2.micro",
       "ssh_username": "centos",
-      "ami_name": "HMPPS Oracle Linux 7 {{timestamp}}",
+      "ami_name": "HMPPS Oracle Linux 7 {{user `branch_name`}} {{timestamp}}",
       "launch_block_device_mappings": [
         {
           "device_name": "/dev/xvdf",
