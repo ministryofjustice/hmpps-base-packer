@@ -27,8 +27,6 @@
         "owners": ["410186602215"],
         "most_recent": true
       },
-
-      "source_ami": "ami-ee6a718a",
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
