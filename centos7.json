@@ -17,7 +17,16 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-2",
-      "source_ami": "ami-4726cb20", 
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "description": "CentOS Linux 7 x86_64 HVM EBS*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["410186602215"],
+        "most_recent": true
+      },
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
