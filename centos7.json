@@ -1,6 +1,7 @@
 {
   "variables": {
-    "packer_profile": "packer"
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}"
   },
   "provisioners": [
     {
@@ -30,7 +31,7 @@
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
-      "ami_name": "HMPPS Base CentOS {{timestamp}}"
+      "ami_name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}"
     }
   ]
 }
