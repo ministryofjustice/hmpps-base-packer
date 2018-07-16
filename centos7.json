@@ -31,6 +31,7 @@
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
+      "ami_groups": "all",
       "ami_name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}"
     }
   ]
