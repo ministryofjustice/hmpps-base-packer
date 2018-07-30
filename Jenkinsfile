@@ -43,6 +43,7 @@ pipeline {
                 //stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
                 //stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
                 stage('Verify Centos Alfresco 5.1') { steps { script {verify_image('alfresco51.json')}}}
+                stage('Verify Centos Alfresco 5.2') { steps { script {verify_image('alfresco52.json')}}}
                // stage('Verify Oracle Linux') { steps { script {verify_image('oraclelinux.json')}}}
             }
         }
@@ -54,6 +55,7 @@ pipeline {
                 //stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
                 //stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
                 stage('Build Centos Alfresco 5.1') { steps { script {build_image('alfresco51.json')}}}
+                stage('Build Centos Alfresco 5.2') { steps { script {build_image('alfresco52.json')}}}
                 //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
             }
         }
