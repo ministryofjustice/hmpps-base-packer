@@ -54,19 +54,24 @@ pipeline {
                 stage('Build Amazon Linux 2') { steps { script {build_image('amazonlinux2.json')}}}
                 stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
+                //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
+            }
+        }
+
+        stage('Build Packer AMIS') {
+            parallel {
                 stage('Build Centos Alfresco 5.1') { steps { script {build_image('alfresco51.json')}}}
                 stage('Build Centos Alfresco 5.2') { steps { script {build_image('alfresco52.json')}}}
-                //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
             }
         }
     }
 
     post {
         success {
-            slackSend(message: 'Build completed - ${env.JOB_NAME} ${env.BUILD_NUMBER}', color: 'good')
+            slackSend(message: "Build completed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'good')
         }
         failure {
-            slackSend(message: 'Build failed - ${env.JOB_NAME} ${env.BUILD_NUMBER}', color: 'danger')
+            slackSend(message: "Build failed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'danger')
         }
     }
 }
