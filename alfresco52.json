@@ -1,0 +1,51 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "env": "{{env `TARGET_ENV`}}",
+    "bucket": "{{env `ARTIFACT_BUCKET`}}"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/alfresco.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/alfresco.yml",
+      "extra_arguments": [ "-b", "-e artifact_bucket={{user `bucket`}}" ],
+      "galaxy_file": "./ansible/alfresco-req.yml"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env`}}-jenkins-ec2-slave-role-instance-profile",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Base CentOS master *",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.medium",
+      "ami_regions": ["eu-west-2"],
+      "ssh_username": "centos",
+      "ami_users": [
+          "895523100917",
+          "563502482979"
+      ],
+      "ami_name": "HMPPS Alfresco 5.2 {{user `branch_name`}} {{timestamp}}",
+      "ami_block_device_mappings": [{
+        "device_name": "/dev/xvdb",
+        "encrypted": true,
+        "volume_size": "512",
+        "delete_on_termination": true
+      }]
+    }
+  ]
+}

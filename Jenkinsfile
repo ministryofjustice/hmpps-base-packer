@@ -2,7 +2,13 @@ def verify_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh '''
         #!/usr/env/bin bash
-        docker run --rm -e BRANCH_NAME -v `pwd`:/home/tools/data mojdigitalstudio/hmpps-packer-builder bash -c 'USER=`whoami` packer validate ''' + filename + "'"
+        docker run --rm \
+        -e BRANCH_NAME \
+        -e TARGET_ENV \
+        -e ARTIFACT_BUCKET \
+        -v `pwd`:/home/tools/data \
+        mojdigitalstudio/hmpps-packer-builder \
+        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer validate ''' + filename + "'"
     }
 }
 
@@ -10,7 +16,13 @@ def build_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh '''
         #!/usr/env/bin bash
-        docker run --rm -e BRANCH_NAME -v `pwd`:/home/tools/data mojdigitalstudio/hmpps-packer-builder bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
+        docker run --rm \
+        -e BRANCH_NAME \
+        -e TARGET_ENV \
+        -e ARTIFACT_BUCKET \
+        -v `pwd`:/home/tools/data \
+        mojdigitalstudio/hmpps-packer-builder \
+        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
     }
 }
 
@@ -29,7 +41,9 @@ pipeline {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                 stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
                 stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
-               stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
+                stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
+                stage('Verify Centos Alfresco 5.1') { steps { script {verify_image('alfresco51.json')}}}
+                stage('Verify Centos Alfresco 5.2') { steps { script {verify_image('alfresco52.json')}}}
                // stage('Verify Oracle Linux') { steps { script {verify_image('oraclelinux.json')}}}
             }
         }
@@ -43,14 +57,21 @@ pipeline {
                 //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
             }
         }
+
+        stage('Build Alfresco AMIS') {
+            parallel {
+                stage('Build Centos Alfresco 5.1') { steps { script {build_image('alfresco51.json')}}}
+                stage('Build Centos Alfresco 5.2') { steps { script {build_image('alfresco52.json')}}}
+            }
+        }
     }
 
     post {
         success {
-            slackSend(message: 'Build completed', color: 'good')
+            slackSend(message: "Build completed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'good')
         }
         failure {
-            slackSend(message: 'Build failed', color: 'danger')
+            slackSend(message: "Build failed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'danger')
         }
     }
 }
