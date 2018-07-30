@@ -26,7 +26,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Base CentOS*",
+          "name": "HMPPS Base CentOS master *",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],

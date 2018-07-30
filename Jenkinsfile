@@ -58,7 +58,7 @@ pipeline {
             }
         }
 
-        stage('Build Packer AMIS') {
+        stage('Build Alfresco AMIS') {
             parallel {
                 stage('Build Centos Alfresco 5.1') { steps { script {build_image('alfresco51.json')}}}
                 stage('Build Centos Alfresco 5.2') { steps { script {build_image('alfresco52.json')}}}
