@@ -13,7 +13,7 @@
     {
       "type": "ansible-local",
       "playbook_file": "./ansible/alfresco.yml",
-      "extra_arguments": [ "-b", "-e artifact_bucket={{user `bucket` }}" ],
+      "extra_arguments": [ "-b", "-e artifact_bucket={{user `bucket`}}" ],
       "galaxy_file": "./ansible/alfresco-req.yml"
     }
   ],
@@ -21,7 +21,7 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-2",
-      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-dev-jenkins-ec2-slave-role-instance-profile",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env`}}-jenkins-ec2-slave-role-instance-profile",
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
