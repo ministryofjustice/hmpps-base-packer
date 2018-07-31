@@ -3,7 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env": "{{env `TARGET_ENV`}}",
-    "bucket": "{{env `ARTIFACT_BUCKET`}}"
+    "bucket": "{{env `ARTIFACT_BUCKET`}}",
+    "account_id": "563502482979"
   },
   "provisioners": [
     {
@@ -13,7 +14,7 @@
     {
       "type": "ansible-local",
       "playbook_file": "./ansible/alfresco.yml",
-      "extra_arguments": [ "-b", "-e artifact_bucket={{user `bucket`}}" ],
+      "extra_arguments": [ "-b", "-e artifact_bucket={{user `bucket`}} -e account_id={{user `account_id`}} -e role_name=admin" ],
       "galaxy_file": "./ansible/alfresco-req.yml"
     }
   ],
