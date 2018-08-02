@@ -1,4 +1,4 @@
 ---
 
 - name: alfresco
-  src: https://github.com/ministryofjustice/hmpps-alfresco-packer.git
+  src: https://github.com/ministryofjustice/hmpps-alfresco-installer.git
