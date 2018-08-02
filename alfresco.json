@@ -32,14 +32,14 @@
         "owners": ["895523100917"],
         "most_recent": true
       },
-      "instance_type": "t2.medium",
+      "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
       "ami_users": [
           "895523100917",
           "563502482979"
       ],
-      "ami_name": "HMPPS Alfresco 5.2 {{user `branch_name`}} {{timestamp}}",
+      "ami_name": "HMPPS Alfresco {{user `branch_name`}} {{timestamp}}",
       "ami_block_device_mappings": [{
         "device_name": "/dev/xvdb",
         "encrypted": true,
