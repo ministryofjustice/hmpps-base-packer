@@ -40,6 +40,10 @@
           "563502482979"
       ],
       "ami_name": "HMPPS Alfresco {{user `branch_name`}} {{timestamp}}",
+      "ssh_interface": "private_ip",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+
       "ami_block_device_mappings": [{
         "device_name": "/dev/xvdb",
         "encrypted": true,
