@@ -57,11 +57,11 @@ pipeline {
             }
         }
 
-        stage('Build Alfresco AMIS') {
-            parallel {
-                stage('Build Centos Alfresco') { steps { script {build_image('alfresco.json')}}}
-            }
-        }
+        //stage('Build Alfresco AMIS') {
+        //    parallel {
+        //        stage('Build Centos Alfresco') { steps { script {build_image('alfresco.json')}}}
+        //    }
+        //}
     }
 
     post {
