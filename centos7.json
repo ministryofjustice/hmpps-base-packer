@@ -36,6 +36,7 @@
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
       "ami_groups": "all",
+      "ssh_interface": "private_ip",
       "ami_name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}"
     }
   ]
