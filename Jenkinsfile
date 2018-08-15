@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('Verify Packer AMIS') {
+        /*stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                 stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
@@ -55,13 +55,13 @@ pipeline {
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
                 //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
             }
-        }
+        }*/
 
-        //stage('Build Alfresco AMIS') {
-        //    parallel {
-        //        stage('Build Centos Alfresco') { steps { script {build_image('alfresco.json')}}}
-        //    }
-        //}
+        stage('Build Alfresco AMIS') {
+            parallel {
+                stage('Build Centos Alfresco') { steps { script {build_image('alfresco.json')}}}
+            }
+        }
     }
 
     post {
