@@ -2,4 +2,3 @@
 
 - name: alfresco
   src: https://github.com/ministryofjustice/hmpps-alfresco-installer.git
-  version: zaiziArfifacts
