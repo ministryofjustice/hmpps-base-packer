@@ -6,6 +6,7 @@ def verify_image(filename) {
         -e BRANCH_NAME \
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
+        -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer validate ''' + filename + "'"
@@ -20,6 +21,7 @@ def build_image(filename) {
         -e BRANCH_NAME \
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
+        -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
