@@ -40,4 +40,9 @@ sudo usermod -aG docker ec2-user
 
 sudo chmod +x /home/ec2-user/configure_github
 
+#install maven
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install apache-maven
+
+
 

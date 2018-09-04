@@ -44,7 +44,6 @@ pipeline {
                 stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
                 stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
                 stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
-                stage('Verify Centos Alfresco') { steps { script {verify_image('alfresco.json')}}}
                 //stage('Verify Oracle Linux') { steps { script {verify_image('oraclelinux.json')}}}
             }
         }
@@ -58,6 +57,7 @@ pipeline {
                 //stage('Build Oracle Linux') { steps { script {build_image('oraclelinux.json')}}}
             }
         }
+    }
 
     post {
         success {
