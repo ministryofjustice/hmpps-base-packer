@@ -4,5 +4,5 @@ set -e
 
 sudo yum install -y git
 sudo easy_install pip
-sudo pip install ansible boto3 botocore boto
+sudo pip install ansible==2.6 boto3 botocore boto
 

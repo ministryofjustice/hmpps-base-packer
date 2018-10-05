@@ -33,7 +33,7 @@ sudo systemctl start docker
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-sudo pip install virtualenv awscli boto ansible botocore boto3
+sudo pip install virtualenv awscli boto ansible==2.6 botocore boto3
 sudo curl -fsSL https://goss.rocks/install | sudo sh
 
 sudo usermod -aG docker ec2-user
