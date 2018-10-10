@@ -29,10 +29,12 @@
   ],
   "provisioners": [
     {
-      "type": "powershell","inline": [
-        "./scripts/update_powershell_version.ps1",
-        "./scripts/configure_remoting_for_ansible.ps1"
-      ]
+      "type": "powershell",
+      "script": "scripts/update_powershell_version.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/configure_remoting_for_ansible.ps1"
     }
   ]
 }
