@@ -11,7 +11,7 @@
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
-      "user_data_file": "./scripts/WinRM.cmd",
+      "user_data_file": "./scripts/userdata.txt",
       "source_ami_filter": {
         "filters": {
           "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
@@ -32,9 +32,8 @@
   "provisioners": [
     {
       "type": "powershell","inline": [
-        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendWindowsIsReady.ps1 -Schedule",
-        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule",
-        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SysprepInstance.ps1 -NoShutdown"
+        "./scripts/update_powershell_version.ps1",
+        "./scripts/configure_remoting_for_ansible.ps1"
       ]
     }
   ]

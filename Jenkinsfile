@@ -54,7 +54,7 @@ def build_win_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'USER=`whoami` packer build -debug ''' + filename + "'"
+        bash -c 'USER=`whoami` packer build ''' + filename + "'"
     }
 }
 
