@@ -24,8 +24,6 @@
       "ami_users": [
           "895523100917"
       ],
-      "vpc_id": "vpc-02321f288159e5d0e",
-      "subnet_id": "subnet-00982fba28419ac5f",
       "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}"
     }
   ],
