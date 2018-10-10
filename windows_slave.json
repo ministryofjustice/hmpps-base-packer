@@ -8,7 +8,7 @@
       "type": "amazon-ebs",
       "communicator": "winrm",
       "winrm_username": "Administrator",
-      "winrm_use_ssl": true,
+      "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
       "user_data_file": "./scripts/WinRM.cmd",
