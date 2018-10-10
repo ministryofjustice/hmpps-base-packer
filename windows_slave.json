@@ -11,7 +11,7 @@
       "winrm_use_ssl": true,
       "winrm_insecure": true,
       "region": "eu-west-2",
-      "user_data_file": "./scripts/setup_winrm.ps1",
+      "user_data_file": "./scripts/WinRM.cmd",
       "source_ami_filter": {
         "filters": {
           "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
@@ -27,6 +27,15 @@
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
       "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "powershell","inline": [
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendWindowsIsReady.ps1 -Schedule",
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule",
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SysprepInstance.ps1 -NoShutdown"
+      ]
     }
   ]
 }
