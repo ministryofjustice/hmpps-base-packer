@@ -35,6 +35,10 @@
     {
       "type": "powershell",
       "script": "scripts/configure_remoting_for_ansible.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/install_pre_requisites.ps1"
     }
   ]
 }
