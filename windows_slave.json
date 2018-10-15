@@ -29,6 +29,12 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "files/firefox.ini",
+      "destination": "c:\\temp\\firefox.ini"
+
+    },
+    {
       "type": "powershell",
       "script": "scripts/update_powershell_version.ps1"
     },
