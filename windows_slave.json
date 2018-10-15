@@ -45,6 +45,15 @@
     {
       "type": "powershell",
       "script": "scripts/install_pre_requisites.ps1"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "ansible/windows-slave.yml",
+      "extra_arguments": [
+        "-vvv",
+        "--extra-vars",
+        "winrm_password={{ .WinRMPassword }}"
+      ]
     }
   ]
 }

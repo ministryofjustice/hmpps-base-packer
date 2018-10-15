@@ -1,6 +1,16 @@
 ---
 
-- hosts: localhost
+- hosts: all
+
+  vars:
+    ansible_host: 127.0.0.1
+    ansible_connection: winrm
+    ansible_winrm_transport: basic
+    ansible_winrm_server_cert_validation: ignore
+    ansible_user: Administrator
+    ansible_password: "{{ winrm_password }}"
+  gather_facts: false
+
   tasks:
     - name: create local group to contain new users
       win_group:
@@ -10,7 +20,7 @@
     - name: Create our windows slave user
       win_user:
         name: jenkins-slave
-        password: "{{ jenkins_slave_password }}"
+        password: "{{ jenkins_slave_password|default('foo') }}"
         state: present
         groups:
           - User
@@ -35,3 +45,11 @@
         path: C:\Jenkins
         reorganize: yes
         state: absent
+
+    - name: Get our firefox installer
+      win_get_url:
+        url: 'https://ftp.mozilla.org/pub/firefox/releases/52.9.0esr/win64/en-US/Firefox%20Setup%2052.9.0esr.exe'
+        dest: 'c:\temp\setup.exe'
+
+    - name: Install firefox
+      win_command: c:\temp\setup.exe /S /INI=c\:temp\firefox.ini

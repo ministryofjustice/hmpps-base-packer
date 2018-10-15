@@ -12,14 +12,3 @@ choco install python2 -y
 choco install jdk8 -y
 #--- Maven and gradle
 choco install maven gradle -y
-
-# Get firefox esr
-$url = "https://ftp.mozilla.org/pub/firefox/releases/52.9.0esr/win64/en-US/Firefox%20Setup%2052.9.0esr.exe"
-$output = "$env:temp\install-firefox.exe"
-
-$wc = New-Object System.Net.WebClient
-(New-Object System.Net.WebClient).DownloadFile($url, $output)
-
-#--- install firefox
-. $output /S /INI=$env:temp\firefox.ini
-Write-Output (Get-Command firefox.exe).Path
