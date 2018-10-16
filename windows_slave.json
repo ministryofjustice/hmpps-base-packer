@@ -36,24 +36,22 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/update_powershell_version.ps1"
+      "script": "scripts/install_pre_requisites.ps1",
+      "elevated_user": "Administrator",
+      "elevated_password": "{{ .WinRMPassword }}"
     },
     {
-      "type": "powershell",
-      "script": "scripts/configure_remoting_for_ansible.ps1"
+      "type": "file",
+      "source": "files/firefox.cfg",
+      "destination": "c:\\FireFox\\firefox.cfg"
+
     },
     {
-      "type": "powershell",
-      "script": "scripts/install_pre_requisites.ps1"
-    },
-    {
-      "type": "ansible",
-      "playbook_file": "ansible/windows-slave.yml",
-      "ansible_env_vars": ["WINRM_PASSWORD={{ .WinRMPassword }}"],
-      "extra_arguments": [
-        "-vvv",
-        "--extra-vars", "ansible_shell_type=powershell ansible_shell_executable=None winrm_password={{ .WinRMPassword }}"
-      ]
+      "type": "file",
+      "source": "files/autoconfig.js",
+      "destination": "c:\\FireFox\\defaults\\pref\\autoconfig.js"
+
     }
+
   ]
 }
