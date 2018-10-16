@@ -51,8 +51,8 @@
       "playbook_file": "ansible/windows-slave.yml",
       "extra_arguments": [
         "-vvv",
-        "--extra-vars",
-        "winrm_password={{ .WinRMPassword }}"
+        "--connection", "packer",
+        "--extra-vars", "ansible_shell_type=powershell ansible_shell_executable=None"
       ]
     }
   ]
