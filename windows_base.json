@@ -2,8 +2,10 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "env_identifier": "{{env `TARGET_ENV`}}"
+    "env_identifier": "{{env `TARGET_ENV`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
+  "sensitive_variables": ["admin_pass"],
   "builders": [
     {
       "type": "amazon-ebs",
@@ -21,7 +23,6 @@
         "most_recent": true
       },
       "instance_type": "t2.micro",
-      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-slave-role-instance-profile",
       "ami_regions": ["eu-west-2"],
       "ami_users": [
           "895523100917"
@@ -40,7 +41,10 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsManageAdminPassword.ps1"
+      "script": "scripts/WindowsManageAdminPassword.ps1",
+      "environment_vars": [
+        "ADMIN_PASSWORD={{user `admin_pass`}}"
+      ]
     }
   ]
 }

@@ -37,6 +37,8 @@ def build_image(filename) {
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
+        -e WIN_ADMIN_PASS \
+        -e WIN_JENKINS_PASS \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
@@ -60,6 +62,11 @@ def build_win_image(filename) {
 
 pipeline {
     agent { label "!master"}
+
+    environment {
+        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt | jq -r '.Parameters[0].Value')'
+        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt | jq -r '.Parameters[0].Value')'
+    }
 
     stages {
         stage ('Notify build started') {
