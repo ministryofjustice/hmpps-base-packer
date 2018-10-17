@@ -41,16 +41,12 @@
     },
     {
       "type": "powershell",
-      "environment_vars": [
-        "ADMIN_PASSWORD={{user `admin_pass`}}"
-      ],
+      "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
       "inline": ["Write-Host \"Automatically generated aws password is: $Env:ADMIN_PASSWORD\""]
     },
     {
       "type": "powershell",
-      "environment_vars": [
-        "ADMIN_PASSWORD={{user `admin_pass`}}"
-      ],
+      "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
       "script": "scripts/WindowsManageAdminPassword.ps1"
     }
   ]

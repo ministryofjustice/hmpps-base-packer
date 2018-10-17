@@ -15,26 +15,41 @@ def verify_image(filename) {
 
 def verify_win_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-        sh '''
+        sh """
         #!/usr/env/bin bash
         docker run --rm \
         -e BRANCH_NAME \
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
-        -e WIN_ADMIN_PASS=${env.WIN_ADMIN_PASS} \
-        -e WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS} \
+        -e WIN_ADMIN_PASS \
+        -e WIN_JENKINS_PASS \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'env'
-        //bash -c 'env; exit 1; USER=`whoami` packer validate ''' + filename + "'"
+        bash -c 'USER=`whoami` packer validate """ + filename + "'"
     }
 }
 
 def build_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-        sh '''
+        sh """
         #!/usr/env/bin bash
+        docker run --rm \
+        -e BRANCH_NAME \
+        -e TARGET_ENV \
+        -e ARTIFACT_BUCKET \
+        -e ZAIZI_BUCKET \
+        -v `pwd`:/home/tools/data \
+        mojdigitalstudio/hmpps-packer-builder \
+        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build """ + filename + "'"
+    }
+}
+
+def build_win_image(filename) {
+    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh """
+        #!/usr/env/bin bash
+        set -x
         docker run --rm \
         -e BRANCH_NAME \
         -e TARGET_ENV \
@@ -44,22 +59,7 @@ def build_image(filename) {
         -e WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS} \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
-    }
-}
-
-def build_win_image(filename) {
-    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-        sh '''
-        #!/usr/env/bin bash
-        docker run --rm \
-        -e BRANCH_NAME \
-        -e TARGET_ENV \
-        -e ARTIFACT_BUCKET \
-        -e ZAIZI_BUCKET \
-        -v `pwd`:/home/tools/data \
-        mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'USER=`whoami` packer build ''' + filename + "'"
+        bash -c 'USER=`whoami` packer build """ + filename + "'"
     }
 }
 
@@ -68,7 +68,9 @@ pipeline {
 
     environment {
         WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_ADMIN_USER   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
         WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_JENKINS_USER = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
     }
 
     stages {
