@@ -11,7 +11,7 @@
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
-      "user_data_file": "./scripts/userdata.txt",
+      "user_data_file": "./scripts/WindowsBaseUserData.txt",
       "source_ami_filter": {
         "filters": {
           "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
@@ -24,33 +24,21 @@
       "ami_users": [
           "895523100917"
       ],
-      "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS Windows Server Base {{user `branch_name`}} {{timestamp}}"
     }
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "files/firefox.ini",
-      "destination": "c:\\temp\\firefox.ini"
-
+      "type": "powershell",
+      "script": "scripts/WindowsBaseRequirements.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/install_pre_requisites.ps1",
-      "elevated_user": "Administrator",
-      "elevated_password": "{{ .WinRMPassword }}"
+      "script": "scripts/WindowsDisableUAC.ps1"
     },
     {
-      "type": "file",
-      "source": "files/firefox.cfg",
-      "destination": "c:\\FireFox\\firefox.cfg"
-
-    },
-    {
-      "type": "file",
-      "source": "files/autoconfig.js",
-      "destination": "c:\\FireFox\\defaults\\pref\\autoconfig.js"
-
+      "type": "powershell",
+      "script": "scripts/WindowsManageAdminPassword.ps1"
     }
   ]
 }

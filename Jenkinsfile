@@ -79,7 +79,7 @@ pipeline {
 
         stage('Verify Packer Windows AMIS') {
             parallel {
-                stage('Verify Windows Server Slave') { steps { script {verify_win_image('windows_slave.json')}}}
+                stage('Verify Windows Server Base') { steps { script {verify_win_image('windows_base.json')}}}
             }
         }
 
@@ -92,9 +92,9 @@ pipeline {
         //    }
         //}
 
-        stage('Build Packer Windows AMIS') {
+        stage('Build Packer Windows Base AMIS') {
             parallel {
-                stage('Build Windows Server Slave') { steps { script {build_win_image('windows_slave.json')}}}
+                stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
             }
         }
     }
