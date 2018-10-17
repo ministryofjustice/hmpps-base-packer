@@ -6,8 +6,6 @@ if (!(Test-Path $ChocoInstallPath)) {
     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 
-#--- Python ---
-choco install python2 -y
 #--- JDK 8 ---
 choco install jdk8 make -y
 #--- Maven and gradle

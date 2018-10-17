@@ -1,22 +1,27 @@
 {
   "variables": {
     "packer_profile": "packer",
-    "branch_name": "{{env `BRANCH_NAME`}}"
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "jenkins_pass": "{{env `WIN_JENKINS_PASS`}}"
   },
   "builders": [
     {
       "type": "amazon-ebs",
       "communicator": "winrm",
       "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
-      "user_data_file": "./scripts/userdata.txt",
       "source_ami_filter": {
         "filters": {
-          "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Windows Server Base {{user `branch_name`}}*",
+          "root-device-type": "ebs"
         },
-        "owners": ["amazon"],
+        "owners": ["895523100917"],
         "most_recent": true
       },
       "instance_type": "t2.micro",
@@ -36,9 +41,12 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/install_pre_requisites.ps1",
-      "elevated_user": "Administrator",
-      "elevated_password": "{{ .WinRMPassword }}"
+      "script": "scripts/WindowsSlaveInstallSoftware.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsManageJenkinsUser.ps1",
+      "environment_vars": "JENKINS_PASSWORD={{user `jenkins_pass`}}"
     },
     {
       "type": "file",

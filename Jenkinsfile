@@ -109,6 +109,12 @@ pipeline {
                 stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
             }
         }
+
+        stage('Build Packer Windows AMIS') {
+            parallel {
+                stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
+            }
+        }
     }
 
     post {

@@ -8,7 +8,7 @@
     ansible_winrm_transport: basic
     ansible_winrm_server_cert_validation: ignore
     ansible_user: Administrator
-    ansible_password: "{{ winrm_password }}"
+    ansible_password: "{{ winrm_password }}"I
   gather_facts: false
 
   tasks:
