@@ -1,7 +1,8 @@
 {
   "variables": {
     "packer_profile": "packer",
-    "branch_name": "{{env `BRANCH_NAME`}}"
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "env_identifier": "{{env `TARGET_ENV`}}"
   },
   "builders": [
     {
@@ -20,6 +21,7 @@
         "most_recent": true
       },
       "instance_type": "t2.micro",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-slave-role-instance-profile",
       "ami_regions": ["eu-west-2"],
       "ami_users": [
           "895523100917"
