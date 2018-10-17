@@ -22,9 +22,12 @@ def verify_win_image(filename) {
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
+        -e WIN_ADMIN_PASS=${env.WIN_ADMIN_PASS} \
+        -e WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS} \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'USER=`whoami` packer validate ''' + filename + "'"
+        bash -c 'env'
+        //bash -c 'env; exit 1; USER=`whoami` packer validate ''' + filename + "'"
     }
 }
 
@@ -37,8 +40,8 @@ def build_image(filename) {
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
-        -e WIN_ADMIN_PASS \
-        -e WIN_JENKINS_PASS \
+        -e WIN_ADMIN_PASS=${env.WIN_ADMIN_PASS} \
+        -e WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS} \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
@@ -64,8 +67,8 @@ pipeline {
     agent { label "!master"}
 
     environment {
-        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt | jq -r '.Parameters[0].Value')'
-        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt | jq -r '.Parameters[0].Value')'
+        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
     }
 
     stages {

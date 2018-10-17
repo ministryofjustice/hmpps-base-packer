@@ -5,7 +5,7 @@
     "env_identifier": "{{env `TARGET_ENV`}}",
     "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
-  "sensitive_variables": ["admin_pass"],
+  "sensitive-variables": ["admin_pass"],
   "builders": [
     {
       "type": "amazon-ebs",
@@ -41,10 +41,17 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsManageAdminPassword.ps1",
       "environment_vars": [
         "ADMIN_PASSWORD={{user `admin_pass`}}"
-      ]
+      ],
+      "inline": ["Write-Host \"Automatically generated aws password is: $Env:ADMIN_PASSWORD\""]
+    },
+    {
+      "type": "powershell",
+      "environment_vars": [
+        "ADMIN_PASSWORD={{user `admin_pass`}}"
+      ],
+      "script": "scripts/WindowsManageAdminPassword.ps1"
     }
   ]
 }
