@@ -1,0 +1,63 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "jenkins_pass": "{{env `WIN_JENKINS_PASS`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
+      "winrm_use_ssl": false,
+      "winrm_insecure": true,
+      "region": "eu-west-2",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Windows Server Base {{user `branch_name`}}*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917"
+      ],
+      "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/firefox.ini",
+      "destination": "c:\\temp\\firefox.ini"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsSlaveInstallSoftware.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsManageJenkinsUser.ps1",
+      "environment_vars": "JENKINS_PASSWORD={{user `jenkins_pass`}}"
+    },
+    {
+      "type": "file",
+      "source": "files/mozilla.cfg",
+      "destination": "C:\\Program Files\\Mozilla Firefox\\mozilla.cfg"
+
+    },
+    {
+      "type": "file",
+      "source": "files/autoconfig.js",
+      "destination": "C:\\Program Files\\Mozilla Firefox\\defaults\\pref\\autoconfig.js"
+
+    }
+  ]
+}

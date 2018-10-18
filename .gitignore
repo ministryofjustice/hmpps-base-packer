@@ -32,3 +32,6 @@ packer_cache/
 
 # For built boxes
 *.box
+
+# IntelliJ/Pycharm ide files
+.idea/

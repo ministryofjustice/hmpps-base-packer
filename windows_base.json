@@ -1,0 +1,53 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "env_identifier": "{{env `TARGET_ENV`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
+  },
+  "sensitive-variables": ["admin_pass"],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "winrm_use_ssl": false,
+      "winrm_insecure": true,
+      "region": "eu-west-2",
+      "user_data_file": "./scripts/WindowsBaseUserData.txt",
+      "source_ami_filter": {
+        "filters": {
+          "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
+        },
+        "owners": ["amazon"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917"
+      ],
+      "ami_name": "HMPPS Windows Server Base {{user `branch_name`}} {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsBaseRequirements.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsDisableUAC.ps1"
+    },
+    {
+      "type": "powershell",
+      "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
+      "inline": ["Write-Host \"Automatically generated aws password is: $Env:ADMIN_PASSWORD\""]
+    },
+    {
+      "type": "powershell",
+      "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
+      "script": "scripts/WindowsManageAdminPassword.ps1"
+    }
+  ]
+}
