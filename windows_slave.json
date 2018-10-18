@@ -50,13 +50,13 @@
     {
       "type": "file",
       "source": "files/mozilla.cfg",
-      "destination": "c:\\FireFox\\mozilla.cfg"
+      "destination": "C:\\Program Files\\Mozilla Firefox\\mozilla.cfg"
 
     },
     {
       "type": "file",
       "source": "files/autoconfig.js",
-      "destination": "c:\\FireFox\\defaults\\pref\\autoconfig.js"
+      "destination": "C:\\Program Files\\Mozilla Firefox\\defaults\\pref\\autoconfig.js"
 
     }
   ]
