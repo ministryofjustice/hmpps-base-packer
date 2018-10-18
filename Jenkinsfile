@@ -2,6 +2,7 @@ def verify_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh '''
         #!/usr/env/bin bash
+        set +x
         docker run --rm \
         -e BRANCH_NAME \
         -e TARGET_ENV \
@@ -17,6 +18,7 @@ def verify_win_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
+        set +x
         docker run --rm \
         -e BRANCH_NAME \
         -e TARGET_ENV \
@@ -32,6 +34,7 @@ def build_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
+        set +x
         docker run --rm \
         -e BRANCH_NAME \
         -e TARGET_ENV \
@@ -47,31 +50,20 @@ def build_win_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
-        set -x
+        set +x
         docker run --rm \
         -e BRANCH_NAME \
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
-        -e WIN_ADMIN_PASS \
-        -e WIN_ADMIN_USER \
-        -e WIN_JENKINS_PASS \
-        -e WIN_JENKINS_USER \
+        -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
+        -e WIN_ADMIN_USER="${env.WIN_ADMIN_USER}" \
+        -e WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}" \
+        -e WIN_JENKINS_USER="${env.WIN_JENKINS_USER}" \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'USER=`whoami` packer build """ + filename + "'"
     }
-}
-
-def export_win_passwords() {
-    sh """
-    #!/usr/env/bin bash
-    set +x
-    export WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}"
-    export WIN_ADMIN_USER="${env.WIN_ADMIN_USER}"
-    export WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}"
-    export WIN_JENKINS_USER="${env.WIN_JENKINS_USER}"
-    """
 }
 
 pipeline {
@@ -88,14 +80,6 @@ pipeline {
         stage ('Notify build started') {
             steps {
                 slackSend(message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
-            }
-        }
-
-        stage ('Output our user data to a file') {
-            steps {
-                script {
-                    export_win_passwords()
-                }
             }
         }
 
