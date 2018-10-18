@@ -48,6 +48,10 @@
       "environment_vars": "JENKINS_PASSWORD={{user `jenkins_pass`}}"
     },
     {
+      "type": "powershell",
+      "script": "scripts/WindowsFirewallAllowSMB.ps1"
+    },
+    {
       "type": "file",
       "source": "files/mozilla.cfg",
       "destination": "c:\\FireFox\\mozilla.cfg"
