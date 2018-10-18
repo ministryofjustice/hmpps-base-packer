@@ -37,7 +37,6 @@
       "type": "file",
       "source": "files/firefox.ini",
       "destination": "c:\\temp\\firefox.ini"
-
     },
     {
       "type": "powershell",
@@ -50,8 +49,8 @@
     },
     {
       "type": "file",
-      "source": "files/firefox.cfg",
-      "destination": "c:\\FireFox\\firefox.cfg"
+      "source": "files/mozilla.cfg",
+      "destination": "c:\\FireFox\\mozilla.cfg"
 
     },
     {
