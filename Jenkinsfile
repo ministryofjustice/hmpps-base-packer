@@ -63,14 +63,18 @@ def build_win_image(filename) {
 
 def write_win_passwords() {
     sh """
-    #!/usr/env/bin bash
-    cat << EOT >> ${env.BUILD_NAME}_${env.BUILD_ID}
-    export WIN_ADMIN_PASS=${env.WIN_ADMIN_PASS}
-    export WIN_ADMIN_USER=${env.WIN_ADMIN_USER}
-    export WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS}
-    export WIN_JENKINS_USER=${env.WIN_JENKINS_USER}
+#!/usr/env/bin bash
+cat << EOT >> ${env.BUILD_NAME}_${env.BUILD_ID}
+export WIN_ADMIN_PASS=${env.WIN_ADMIN_PASS}
+export WIN_ADMIN_USER=${env.WIN_ADMIN_USER}
+export WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS}
+export WIN_JENKINS_USER=${env.WIN_JENKINS_USER}
 EOT
     """
+}
+
+def remove_win_passwords() {
+    new File(" ${env.BUILD_NAME}_${env.BUILD_ID}").delete()
 }
 
 pipeline {
@@ -87,6 +91,14 @@ pipeline {
         stage ('Notify build started') {
             steps {
                 slackSend(message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
+            }
+        }
+
+        stage ('Output our user data to a file') {
+            steps {
+                script {
+                    write_win_passwords()
+                }
             }
         }
 
@@ -133,6 +145,9 @@ pipeline {
         }
         failure {
             slackSend(message: "Build failed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'danger')
+        }
+        always {
+            remove_win_passwords()
         }
     }
 }
