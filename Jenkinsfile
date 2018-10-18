@@ -65,10 +65,10 @@ def write_win_passwords() {
     sh """
 #!/usr/env/bin bash
 cat << EOT >> ${env.BUILD_NAME}_${env.BUILD_ID}
-export WIN_ADMIN_PASS=${env.WIN_ADMIN_PASS}
-export WIN_ADMIN_USER=${env.WIN_ADMIN_USER}
-export WIN_JENKINS_PASS=${env.WIN_JENKINS_PASS}
-export WIN_JENKINS_USER=${env.WIN_JENKINS_USER}
+export WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}"
+export WIN_ADMIN_USER="${env.WIN_ADMIN_USER}"
+export WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}"
+export WIN_JENKINS_USER="${env.WIN_JENKINS_USER}"
 EOT
     """
 }
