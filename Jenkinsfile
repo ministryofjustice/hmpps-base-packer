@@ -53,26 +53,24 @@ def build_win_image(filename) {
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
+        -e WIN_ADMIN_PASS \
+        -e WIN_ADMIN_USER \
+        -e WIN_JENKINS_PASS \
+        -e WIN_JENKINS_USER \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'source ${env.JOB_NAME}_${env.BUILD_ID}; USER=`whoami` packer build """ + filename + "'"
+        bash -c 'USER=`whoami` packer build """ + filename + "'"
     }
 }
 
-def write_win_passwords() {
+def export_win_passwords() {
     sh """
-#!/usr/env/bin bash
-cat << EOT >> ${env.JOB_NAME}_${env.BUILD_ID}
-export WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}"
-export WIN_ADMIN_USER="${env.WIN_ADMIN_USER}"
-export WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}"
-export WIN_JENKINS_USER="${env.WIN_JENKINS_USER}"
-EOT
+    #!/usr/env/bin bash
+    export WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}"
+    export WIN_ADMIN_USER="${env.WIN_ADMIN_USER}"
+    export WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}"
+    export WIN_JENKINS_USER="${env.WIN_JENKINS_USER}"
     """
-}
-
-def remove_win_passwords() {
-    new File(" ${env.JOB_NAME}_${env.BUILD_ID}").delete()
 }
 
 pipeline {
@@ -95,7 +93,7 @@ pipeline {
         stage ('Output our user data to a file') {
             steps {
                 script {
-                    write_win_passwords()
+                    export_win_passwords()
                 }
             }
         }
@@ -143,9 +141,6 @@ pipeline {
         }
         failure {
             slackSend(message: "Build failed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'danger')
-        }
-        always {
-            remove_win_passwords()
         }
     }
 }
