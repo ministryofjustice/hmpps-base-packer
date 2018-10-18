@@ -64,7 +64,7 @@ def build_win_image(filename) {
 }
 
 def export_win_passwords() {
-    sh returnStdout: false; script: """
+    sh """
     #!/usr/env/bin bash
     set +x
     export WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}"
