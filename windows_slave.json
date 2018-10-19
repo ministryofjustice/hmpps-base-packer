@@ -14,6 +14,9 @@
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
