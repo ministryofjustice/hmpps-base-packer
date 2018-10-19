@@ -61,6 +61,12 @@
       "source": "files/autoconfig.js",
       "destination": "C:\\Program Files\\Mozilla Firefox\\defaults\\pref\\autoconfig.js"
 
+    },
+    {
+      "type": "file",
+      "source": "files/Override.ini",
+      "destination": "C:\\Program Files\\Mozilla Firefox\\browser\\Override.ini"
+
     }
   ]
 }
