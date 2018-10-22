@@ -72,6 +72,10 @@
       "source": "files/Override.ini",
       "destination": "C:\\Program Files\\Mozilla Firefox\\browser\\Override.ini"
 
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/ReenableUserData.ps1"
     }
   ]
 }

@@ -51,6 +51,10 @@
       "type": "powershell",
       "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
       "script": "scripts/WindowsManageAdminPassword.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/ReenableUserData.ps1"
     }
   ]
 }
