@@ -13,6 +13,8 @@ choco install git make -y
 choco install jdk8 make -y
 #--- Maven and gradle
 choco install maven gradle -y
+#--- Install Non Sucking Service Manager
+choco install nssm -y
 
 #--- Download firefox
 $url = "https://ftp.mozilla.org/pub/firefox/releases/52.9.0esr/win64/en-US/Firefox%20Setup%2052.9.0esr.exe"

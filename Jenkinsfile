@@ -85,20 +85,20 @@ pipeline {
 
         stage('Verify Packer AMIS') {
             parallel {
-                stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
+              //  stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                // stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
-                stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
-                stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
+               // stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
+               // stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
                 stage('Verify Windows Server Base') { steps { script {verify_win_image('windows_base.json')}}}
             }
         }
 
         stage('Build Packer Base AMIS') {
             parallel {
-                stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
+               // stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
                // stage('Build Amazon Linux 2') { steps { script {build_image('amazonlinux2.json')}}}
-                stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
-                stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
+                //stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
+                //stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
                 stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
             }
         }

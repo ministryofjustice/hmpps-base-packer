@@ -52,6 +52,11 @@
     },
     {
       "type": "file",
+      "source": "files/swarm-client-3.14.jar",
+      "destination": "c:\\JenkinsHome\\swarm-client.jar"
+    },
+    {
+      "type": "file",
       "source": "files/mozilla.cfg",
       "destination": "C:\\Program Files\\Mozilla Firefox\\mozilla.cfg"
 
