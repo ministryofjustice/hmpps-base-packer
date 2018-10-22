@@ -12,6 +12,10 @@ try
     {
         foreach ($element in $xmlElementToModify.Plugin)
         {
+            if ($element.name -eq "Ec2SetPassword")
+            {
+                $element.State = "Enabled"
+            }
             if ($element.name -eq "Ec2HandleUserData")
             {
                 $element.State = "Enabled"
