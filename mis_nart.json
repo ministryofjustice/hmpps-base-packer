@@ -1,0 +1,49 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "jenkins_pass": "{{env `WIN_JENKINS_PASS`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
+      "winrm_use_ssl": false,
+      "winrm_insecure": true,
+      "region": "eu-west-2",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Windows Server Base {{user `branch_name`}}*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917",
+          "479759138745"
+      ],
+      "ami_name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsMISNARTInstallRequirements.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/ReenableUserData.ps1"
+    }
+  ]
+}
