@@ -8,9 +8,8 @@ if (!(Test-Path $ChocoInstallPath)) {
 
 #--- Git ---
 choco install git make -y
-
 #--- JDK 8 ---
-choco install jdk8 make -y
+choco install jdk8 -y
 #--- Maven and gradle
 choco install maven gradle -y
 #--- Install Non Sucking Service Manager
@@ -25,5 +24,6 @@ $wc.DownloadFile($url, $output)
 
 & "$env:temp\setup.exe" -ms /INI=c:\temp\firefox.ini
 # Set Java memory limits
-[System.Environment]::SetEnvironmentVariable('JAVA_OPTS,  -Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::System)
-[System.Environment]::SetEnvironmentVariable('_JAVA_OPTS,  -Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::System)
+[System.Environment]::SetEnvironmentVariable('JAVA_OPTS',  '-Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::System)
+[System.Environment]::SetEnvironmentVariable('_JAVA_OPTS',  '-Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::System)
+[System.Environment]::SetEnvironmentVariable('MAVEN_HOME',  'C:\ProgramData\chocolatey\lib\maven\apache-maven-3.5.4', [System.EnvironmentVariableTarget]::System)

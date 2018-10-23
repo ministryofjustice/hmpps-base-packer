@@ -42,6 +42,10 @@
       "script": "scripts/WindowsMISNARTInstallRequirements.ps1"
     },
     {
+      "type": "windows-shell",
+      "script": "scripts/WindowsMISNARTSaltBoostrap.bat"
+    },
+    {
       "type": "powershell",
       "script": "scripts/ReenableUserData.ps1"
     }

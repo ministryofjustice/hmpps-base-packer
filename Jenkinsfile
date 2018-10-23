@@ -105,7 +105,7 @@ pipeline {
 
         stage('Build Packer Dependant AMIS') {
             parallel {
-               // stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
+                stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('mis_nart.json')}}}
             }
         }
