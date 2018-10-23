@@ -20,5 +20,4 @@ choco install python3 miniconda3 -y
 
 RefreshEnv
 
-pip3 install pygit --user
-
+conda install pygit python=3
