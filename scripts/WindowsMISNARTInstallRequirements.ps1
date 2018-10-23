@@ -6,9 +6,6 @@ Add-Content -Path C:\Windows\System32\Drivers\etc\hosts -Value "172.26.243.12 sa
 
 RefreshEnv
 
-#--- Salt Minion ----
-choco install saltminion -y
-
 #--- Git ----
 choco install git -y
 
@@ -16,7 +13,12 @@ choco install git -y
 choco install jdk8 -y
 
 #--- Visual C++ ----
-
 choco install vcredist2012 -y
 
+#--- Python 3 and Miniconda
+choco install python3 miniconda3 -y
+
 RefreshEnv
+
+pip3 install pygit --user
+
