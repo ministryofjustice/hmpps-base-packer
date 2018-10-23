@@ -1,3 +1,6 @@
+$ErrorActionPreference = "Stop"
+$VerbosePreference="Continue"
+
 # Host entry
 #Add-Content -Path C:\Windows\System32\Drivers\etc\hosts -Value "172.26.243.12 salt"
 
