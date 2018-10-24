@@ -47,6 +47,30 @@
     },
     {
       "type": "powershell",
+      "inline": ["echo $env:path"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsInstallJDK8.ps1"
+    },
+    {
+      "type": "powershell",
+      "inline": ["echo $env:path"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsInstallMaven.ps1"
+    },
+    {
+      "type": "powershell",
+      "inline": ["echo $env:path"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsInstallFirefox.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/WindowsManageJenkinsUser.ps1",
       "environment_vars": "JENKINS_PASSWORD={{user `jenkins_pass`}}"
     },
