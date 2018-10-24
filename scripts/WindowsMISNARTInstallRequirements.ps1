@@ -16,8 +16,11 @@ choco install jdk8 -y
 choco install vcredist2012 -y
 
 #--- Python 3 and Miniconda
-choco install python3 miniconda3 -y
+choco install miniconda3 --params=="/InstallationType=AllUsers /AddToPath=1" -y
 
 RefreshEnv
 
+$toolsDir = (Get-ToolsLocation)
+
+echo $toolsDir
 #conda install pygit python=3
