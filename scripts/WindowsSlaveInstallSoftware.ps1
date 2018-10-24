@@ -4,12 +4,6 @@ $VerbosePreference="Continue"
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-function Unzip  {
-    param([string]$zipfile, [string]$outpath)
-
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
-}
-
 if (!(Test-Path $ChocoInstallPath)) {
     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 }
@@ -22,12 +16,12 @@ choco install jdk8 -params 'installdir=c:\\java8' -y
 $env:JAVA_HOME="C:\\java8"
 RefreshEnv
 
-#--- Download Maven
+#--- Download & Install Maven
 $url = "http://mirror.vorboss.net/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip"
 $output = "C:\maven.zip"
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($url, $output)
-Unzip("C:\\maven.zip", "C:\\")
+[System.IO.Compression.ZipFile]::ExtractToDirectory("C:\\maven.zip", "C:\\")
 #Rename to something clean
 Rename-Item -Path "C:\\apache-maven-3.5.4" -NewName "C:\\maven"
 #Add maven to env and path
@@ -36,6 +30,7 @@ Rename-Item -Path "C:\\apache-maven-3.5.4" -NewName "C:\\maven"
 $env:MAVEN_HOME="C:\\maven"
 RefreshEnv
 [System.Environment]::SetEnvironmentVariable("Path", $env:Path + ";%MAVEN_HOME%\bin;%JAVA_HOME%\bin", [EnvironmentVariableTarget]::Machine)
+
 #--- Install Non Sucking Service Manager
 choco install nssm -y
 

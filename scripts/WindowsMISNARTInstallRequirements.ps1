@@ -20,7 +20,4 @@ choco install miniconda3 -params="/InstallationType=AllUsers /AddToPath=1" -y
 
 RefreshEnv
 
-$toolsDir = (Get-ToolsLocation)
-
-echo $toolsDir
 #conda install pygit python=3
