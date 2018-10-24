@@ -13,6 +13,10 @@ choco install git make -y
 #--- JDK 8 ---
 choco install jdk8 -params 'installdir=c:\\java8' -y
 [System.Environment]::SetEnvironmentVariable('JAVA_HOME', 'C:\java8', [System.EnvironmentVariableTarget]::Machine)
+# Set Java memory limits
+[System.Environment]::SetEnvironmentVariable('JAVA_OPTS',  '-Xms6144m -Xmx12288m', [System.EnvironmentVariableTarget]::Machine)
+[System.Environment]::SetEnvironmentVariable('_JAVA_OPTS',  '-Xms6144m -Xmx12288m', [System.EnvironmentVariableTarget]::Machine)
+
 $env:JAVA_HOME="C:\\java8"
 RefreshEnv
 
@@ -29,6 +33,7 @@ Rename-Item -Path "C:\\apache-maven-3.5.4" -NewName "C:\\maven"
 [System.Environment]::SetEnvironmentVariable('MAVEN_HOME', 'C:\maven', [System.EnvironmentVariableTarget]::Machine)
 $env:MAVEN_HOME="C:\\maven"
 RefreshEnv
+Remove-Item -Path "$output"
 [System.Environment]::SetEnvironmentVariable("Path", $env:Path + ";%MAVEN_HOME%\bin;%JAVA_HOME%\bin", [EnvironmentVariableTarget]::Machine)
 
 #--- Install Non Sucking Service Manager
@@ -40,10 +45,6 @@ $output = "$env:temp\setup.exe"
 
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($url, $output)
-
 & "$env:temp\setup.exe" -ms /INI=c:\temp\firefox.ini
-# Set Java memory limits
-[System.Environment]::SetEnvironmentVariable('JAVA_OPTS',  '-Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::Machine)
-[System.Environment]::SetEnvironmentVariable('_JAVA_OPTS',  '-Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::Machine)
-[System.Environment]::SetEnvironmentVariable('MAVEN_HOME',  'C:\ProgramData\chocolatey\lib\maven\apache-maven-3.5.4', [System.EnvironmentVariableTarget]::Machine)
+Remove-Item -Path "$output"
 
