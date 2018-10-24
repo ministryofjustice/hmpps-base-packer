@@ -8,7 +8,7 @@ Add-GroupMember -Name Administrators -Member Jenkins
 
 #Create JenkinsHome directory on root
 Install-Directory -Path "c:\JenkinsHome"
-[System.Environment]::SetEnvironmentVariable('JENKINS_HOME',  'C:\ProgramData\chocolatey\lib\maven\apache-maven-3.5.4', [System.EnvironmentVariableTarget]::Machine)
+[System.Environment]::SetEnvironmentVariable('JENKINS_HOME', 'C:\JenkinsHome', [System.EnvironmentVariableTarget]::Machine)
 
 #As it says on the tin
 Disable-IEEnhancedSecurityConfiguration

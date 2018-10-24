@@ -2,6 +2,14 @@ $ChocoInstallPath = "$env:SystemDrive\ProgramData\Chocolatey\bin"
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+function Unzip  {
+    param([string]$zipfile, [string]$outpath)
+
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+}
+
 if (!(Test-Path $ChocoInstallPath)) {
     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 }
@@ -9,9 +17,25 @@ if (!(Test-Path $ChocoInstallPath)) {
 #--- Git ---
 choco install git make -y
 #--- JDK 8 ---
-choco install jdk8 -y
-#--- Maven and gradle
-choco install maven gradle -y
+choco install jdk8 -params 'installdir=c:\\java8' -y
+[System.Environment]::SetEnvironmentVariable('JAVA_HOME', 'C:\java8', [System.EnvironmentVariableTarget]::Machine)
+$env:JAVA_HOME="C:\\java8"
+RefreshEnv
+
+#--- Download Maven
+$url = "http://mirror.vorboss.net/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip"
+$output = "C:\maven.zip"
+$wc = New-Object System.Net.WebClient
+$wc.DownloadFile($url, $output)
+Unzip("C:\\maven.zip", "C:\\")
+#Rename to something clean
+Rename-Item -Path "C:\\apache-maven-3.5.4" -NewName "C:\\maven"
+#Add maven to env and path
+[System.Environment]::SetEnvironmentVariable('M2_HOME', 'C:\maven', [System.EnvironmentVariableTarget]::Machine)
+[System.Environment]::SetEnvironmentVariable('MAVEN_HOME', 'C:\maven', [System.EnvironmentVariableTarget]::Machine)
+$env:MAVEN_HOME="C:\\maven"
+RefreshEnv
+[System.Environment]::SetEnvironmentVariable("Path", $env:Path + ";%MAVEN_HOME%\bin;%JAVA_HOME%\bin", [EnvironmentVariableTarget]::Machine)
 #--- Install Non Sucking Service Manager
 choco install nssm -y
 
@@ -27,3 +51,4 @@ $wc.DownloadFile($url, $output)
 [System.Environment]::SetEnvironmentVariable('JAVA_OPTS',  '-Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::Machine)
 [System.Environment]::SetEnvironmentVariable('_JAVA_OPTS',  '-Xms4096m -Xmx8192m', [System.EnvironmentVariableTarget]::Machine)
 [System.Environment]::SetEnvironmentVariable('MAVEN_HOME',  'C:\ProgramData\chocolatey\lib\maven\apache-maven-3.5.4', [System.EnvironmentVariableTarget]::Machine)
+
