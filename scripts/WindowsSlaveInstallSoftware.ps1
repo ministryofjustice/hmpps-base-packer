@@ -1,12 +1,7 @@
-$ChocoInstallPath = "$env:SystemDrive\ProgramData\Chocolatey\bin"
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-
-if (!(Test-Path $ChocoInstallPath)) {
-    iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-}
 
 #--- Git ---
 choco install git make -y
