@@ -3,9 +3,7 @@ $VerbosePreference="Continue"
 
 # Get our our password details from ssm
 $keyname = "/$env:TARGET_ENV/jenkins/windows/slave/admin/password"
-echo $keyname
-$admin_password = (aws --region eu-west-2 ssm get-parameters --with-decryption --names ${keyname} --query Parameter.Value)
-echo $admin_password.length
+$admin_password = "(aws --region eu-west-2 ssm get-parameters --with-decryption --names ${keyname} --query Parameters[0].Value)"
 # Update the admin user
-$adminCreds = New-Credential -UserName Administrator -Password "$admin_password"
+$adminCreds = New-Credential -UserName Administrator -Password $admin_password
 Install-User -Credential $adminCreds
