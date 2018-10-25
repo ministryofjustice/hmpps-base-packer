@@ -99,12 +99,19 @@ pipeline {
             }
         }
 
-        /*stage('Build Packer Dependant AMIS') {
+        stage('Verify Packer Dependant AMIS') {
+            parallel {
+                stage('Verify Windows Server Jenkins Slave') { steps { script {verify_win_image('windows_slave.json')}}}
+                stage('Verify Windows Server MIS Nart') { steps { script {verify_win_image('windows_misnart.json')}}}
+            }
+        }
+
+        stage('Build Packer Dependant AMIS') {
             parallel {
                 stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
             }
-        }*/
+        }
     }
 
     post {

@@ -44,12 +44,6 @@
     },
     {
       "type": "powershell",
-      "inline": ["Write-Host \"Target env is: $Env:TARGET_ENV\""],
-      "environment_vars": "TARGET_ENV={{user `env_identifier`}}"
-
-    },
-    {
-      "type": "powershell",
       "script": "scripts/WindowsManageAdminPassword.ps1",
       "environment_vars": "TARGET_ENV={{user `env_identifier`}}"
     }

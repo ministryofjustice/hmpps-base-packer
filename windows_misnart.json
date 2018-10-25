@@ -51,6 +51,11 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/WindowsManageMISUser.ps1",
+      "environment_vars": "TARGET_ENV={{user `env_identifier`}}"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/ReenableUserData.ps1"
     }
   ]
