@@ -2,7 +2,8 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "env_identifier": "{{env `TARGET_ENV`}}"
+    "env_identifier": "{{env `TARGET_ENV`}}",
+    "WIN_ADMIN_PASS": "{{env `WIN_ADMIN_PASS`}}"
   },
   "sensitive-variables": ["admin_pass"],
   "builders": [
@@ -45,7 +46,7 @@
     {
       "type": "powershell",
       "script": "scripts/WindowsManageAdminPassword.ps1",
-      "environment_vars": "TARGET_ENV={{user `env_identifier`}}"
+      "environment_vars": "TARGET_ENV={{user `env_identifier`}} WIN_ADMIN_PASS={{user `WIN_ADMIN_PASS`}}"
     }
   ]
 }
