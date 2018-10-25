@@ -47,23 +47,11 @@
     },
     {
       "type": "powershell",
-      "inline": ["echo $env:path"]
-    },
-    {
-      "type": "powershell",
       "script": "scripts/WindowsInstallJDK8.ps1"
     },
     {
       "type": "powershell",
-      "inline": ["echo $env:path"]
-    },
-    {
-      "type": "powershell",
       "script": "scripts/WindowsInstallMaven.ps1"
-    },
-    {
-      "type": "powershell",
-      "inline": ["echo $env:path"]
     },
     {
       "type": "powershell",
