@@ -57,6 +57,9 @@ def build_win_image(filename) {
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
         -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
+        -e WIN_MIS_USER="${env.WIN_MIS_USER}" \
+        -e WIN_MIS_USER="${env.WIN_MIS_PASS}" \
+        -e WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}" \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'USER=`whoami` packer build """ + filename + "'"
@@ -67,10 +70,10 @@ pipeline {
     agent { label "jenkins_slave"}
 
     environment {
-        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
-        WIN_ADMIN_USER   = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/admin/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
-        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
-        WIN_JENKINS_USER = '$(aws ssm get-parameters --names /dev/jenkins/windows/slave/jenkins/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /${env.TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /${env.TARGET_ENV}/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_MIS_USER     = '$(aws ssm get-parameters --names /${env.TARGET_ENV}/jenkins/windows/mis/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_MIS_PASS     = '$(aws ssm get-parameters --names /${env.TARGET_ENV}/jenkins/windows/mis/pass --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
     }
 
     stages {
