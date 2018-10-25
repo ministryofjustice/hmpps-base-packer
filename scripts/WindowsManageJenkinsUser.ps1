@@ -3,9 +3,9 @@ $VerbosePreference="Continue"
 
 # Create jenkins user
 # Get our our password details from ssm
-$keyname = "/$env:TARGET_ENV/jenkins/windows/slave/jenkins/password"
-$jenkins_password = (aws --region eu-west-2 ssm get-parameters --with-decryption --names ${keyname} --query Parameters[0].Value)
-$jenkinsCreds = New-Credential -UserName Jenkins -Password $jenkins_password
+#$keyname = "/$env:TARGET_ENV/jenkins/windows/slave/jenkins/password"
+#$jenkins_password = (aws --region eu-west-2 ssm get-parameters --with-decryption --names ${keyname} --query Parameters[0].Value)
+$jenkinsCreds = New-Credential -UserName Jenkins -Password "$env:JENKINS_PASS"
 Install-User -Credential $jenkinsCreds
 Add-GroupMember -Name Administrators -Member Jenkins
 

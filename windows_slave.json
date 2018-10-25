@@ -2,7 +2,8 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "jenkins_pass": "{{env `WIN_JENKINS_PASS`}}"
   },
   "builders": [
     {
@@ -63,7 +64,7 @@
     {
       "type": "powershell",
       "script": "scripts/WindowsManageJenkinsUser.ps1",
-      "environment_vars": "TARGET_ENV={{user `env_identifier`}}"
+      "environment_vars": "TARGET_ENV={{user `env_identifier`}}, JENKINS_PASS={{user `jenkins_pass`}}"
     },
     {
       "type": "file",
