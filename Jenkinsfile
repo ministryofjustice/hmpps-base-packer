@@ -56,6 +56,7 @@ def build_win_image(filename) {
         -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
+        -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'USER=`whoami` packer build """ + filename + "'"

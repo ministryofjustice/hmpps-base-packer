@@ -2,8 +2,7 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-    "jenkins_pass": "{{env `WIN_JENKINS_PASS`}}"
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
   "builders": [
     {
