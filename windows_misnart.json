@@ -39,6 +39,14 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "scripts/WindowsInstallGit.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsInstallJDK8.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/WindowsMISNARTInstallRequirements.ps1"
     },
     {

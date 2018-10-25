@@ -43,6 +43,10 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/WindowsInstallGit.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/WindowsSlaveInstallSoftware.ps1"
     },
     {

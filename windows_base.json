@@ -2,8 +2,7 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "env_identifier": "{{env `TARGET_ENV`}}",
-    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
+    "env_identifier": "{{env `TARGET_ENV`}}"
   },
   "sensitive-variables": ["admin_pass"],
   "builders": [
@@ -16,6 +15,7 @@
       "region": "eu-west-2",
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-slave-role-instance-profile",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
       "user_data_file": "./scripts/WindowsBaseUserData.txt",
       "source_ami_filter": {
@@ -44,12 +44,10 @@
     },
     {
       "type": "powershell",
-      "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
-      "inline": ["Write-Host \"Automatically generated aws password is: $Env:ADMIN_PASSWORD\""]
+      "inline": ["Write-Host \"Target env is: $Env:TARGET_ENV\""]
     },
     {
       "type": "powershell",
-      "environment_vars": "ADMIN_PASSWORD={{user `admin_pass`}}",
       "script": "scripts/WindowsManageAdminPassword.ps1"
     }
   ]
