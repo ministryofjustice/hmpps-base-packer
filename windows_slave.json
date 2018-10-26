@@ -64,7 +64,10 @@
     {
       "type": "powershell",
       "script": "scripts/WindowsManageJenkinsUser.ps1",
-      "environment_vars": "TARGET_ENV={{user `env_identifier`}}, JENKINS_PASS={{user `jenkins_pass`}}"
+      "environment_vars": [
+        "TARGET_ENV={{user `env_identifier`}}",
+        "JENKINS_PASS={{user `jenkins_pass`}}"
+      ]
     },
     {
       "type": "file",

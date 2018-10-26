@@ -46,7 +46,10 @@
     {
       "type": "powershell",
       "script": "scripts/WindowsManageAdminPassword.ps1",
-      "environment_vars": "TARGET_ENV={{user `env_identifier`}}, WIN_ADMIN_PASS={{user `win_pass`}}"
+      "environment_vars": [
+        "TARGET_ENV={{user `env_identifier`}}",
+        "WIN_ADMIN_PASS={{user `win_pass`}}"
+      ]
     }
   ]
 }
