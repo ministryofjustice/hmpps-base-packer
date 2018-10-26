@@ -4,7 +4,7 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
     "mis_user": "{{env `WIN_MIS_USER`}}",
-    "mis_password": "{{env `WIN_MIS_PASSWORD`}}"
+    "mis_password": "{{env `WIN_MIS_PASS`}}"
   },
   "builders": [
     {
