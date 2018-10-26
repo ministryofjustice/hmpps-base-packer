@@ -56,7 +56,7 @@
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
         "MIS_USER={{user `mis_user`}}",
-        "MIS_PASSWORD={{user `mis_pass`}}"
+        "MIS_PASSWORD={{user `mis_password`}}"
       ]
     },
     {
