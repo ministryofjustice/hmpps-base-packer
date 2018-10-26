@@ -30,13 +30,13 @@
         {
           "device_name": "/dev/sda1",
           "volume_size": 40,
-          "type": "gp2",
+          "volume_type": "gp2",
           "delete_on_termination": true
         },
         {
           "device_name": "/dev/xvdb",
           "volume_size": 50,
-          "type": "gp2",
+          "volume_type": "gp2",
           "delete_on_termination": true
         }
       ],
