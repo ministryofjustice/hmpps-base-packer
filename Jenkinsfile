@@ -83,7 +83,7 @@ pipeline {
             }
         }
 
-        stage('Verify Packer AMIS') {
+       /* stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                 //stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
@@ -117,12 +117,12 @@ pipeline {
                 stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
             }
-        }
+        }*/
 
         stage('Build Packer MIS Dependant AMIS') {
             parallel {
                 stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bcs.json')}}}
-                stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
+           //     stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
             }
         }
     }

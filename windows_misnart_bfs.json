@@ -2,9 +2,7 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-    "mis_user": "{{env `WIN_MIS_USER`}}",
-    "mis_password": "{{env `WIN_MIS_PASS`}}"
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
   "builders": [
     {
