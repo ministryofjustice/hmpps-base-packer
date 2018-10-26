@@ -122,7 +122,7 @@ pipeline {
         stage('Build Packer MIS Dependant AMIS') {
             parallel {
                 stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bcs.json')}}}
-                stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
+                stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
             }
         }
     }
