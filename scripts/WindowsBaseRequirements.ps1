@@ -8,7 +8,16 @@ if (!(Test-Path $ChocoInstallPath)) {
 }
 
 # Install awscli, jq and python2
-choco install python2 -y
-choco install awscli jq carbon -y
+choco install miniconda3 -params="/InstallationType=AllUsers /AddToPath=1" -y
 
+#Awscli
+choco install -y awscli
 
+#JQ
+choco install jq -y
+
+#Carbon
+choco install carbon -y
+
+#Make IE play nice
+Disable-IEEnhancedSecurityConfiguration

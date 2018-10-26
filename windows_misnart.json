@@ -3,7 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-    "jenkins_pass": "{{env `WIN_JENKINS_PASS`}}"
+    "mis_user": "{{env `WIN_MIS_USER`}}",
+    "mis_password": "{{env `WIN_MIS_PASS`}}"
   },
   "builders": [
     {
@@ -30,24 +31,16 @@
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ami_users": [
-          "895523100917"
+          "895523100917",
+          "479759138745"
       ],
-      "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}"
     }
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "files/firefox.ini",
-      "destination": "c:\\temp\\firefox.ini"
-    },
-    {
       "type": "powershell",
       "script": "scripts/WindowsInstallGit.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/WindowsSlaveInstallSoftware.ps1"
     },
     {
       "type": "powershell",
@@ -55,42 +48,16 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsInstallMaven.ps1"
+      "script": "scripts/WindowsMISNARTInstallRequirements.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsInstallFirefox.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/WindowsManageJenkinsUser.ps1",
+      "script": "scripts/WindowsManageMISUser.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
-        "JENKINS_PASS={{user `jenkins_pass`}}"
+        "MIS_USER={{user `mis_user`}}",
+        "MIS_PASSWORD={{user `mis_password`}}"
       ]
-    },
-    {
-      "type": "file",
-      "source": "files/swarm-client-3.14.jar",
-      "destination": "c:\\JenkinsHome\\swarm-client.jar"
-    },
-    {
-      "type": "file",
-      "source": "files/mozilla.cfg",
-      "destination": "C:\\Program Files\\Mozilla Firefox\\mozilla.cfg"
-
-    },
-    {
-      "type": "file",
-      "source": "files/autoconfig.js",
-      "destination": "C:\\Program Files\\Mozilla Firefox\\defaults\\pref\\autoconfig.js"
-
-    },
-    {
-      "type": "file",
-      "source": "files/Override.ini",
-      "destination": "C:\\Program Files\\Mozilla Firefox\\browser\\Override.ini"
-
     },
     {
       "type": "powershell",
