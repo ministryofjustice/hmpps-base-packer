@@ -22,7 +22,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Windows Server Base {{user `branch_name`}}*",
+          "name": "HMPPS MIS NART Windows Server {{user `branch_name`}}*",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],
@@ -43,36 +43,15 @@
         },
         {
           "device_name": "/dev/xvdb",
-          "volume_size": 50,
+          "volume_size": 300,
           "volume_type": "gp2",
           "delete_on_termination": true
         }
       ],
-      "ami_name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS MIS NART BCS Windows Server {{user `branch_name`}} {{timestamp}}"
     }
   ],
   "provisioners": [
-    {
-      "type": "powershell",
-      "script": "scripts/WindowsInstallGit.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/WindowsInstallJDK8.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/WindowsMISNARTInstallRequirements.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/WindowsManageMISUser.ps1",
-      "environment_vars": [
-        "TARGET_ENV={{user `env_identifier`}}",
-        "MIS_USER={{user `mis_user`}}",
-        "MIS_PASSWORD={{user `mis_password`}}"
-      ]
-    },
     {
       "type": "powershell",
       "script": "scripts/ReenableUserData.ps1"

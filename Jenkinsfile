@@ -103,10 +103,12 @@ pipeline {
             }
         }
 
-        stage('Verify Packer Dependant AMIS') {
+        stage('Verify Packer Windows Dependant AMIS') {
             parallel {
                 stage('Verify Windows Server Jenkins Slave') { steps { script {verify_win_image('windows_slave.json')}}}
                 stage('Verify Windows Server MIS Nart') { steps { script {verify_win_image('windows_misnart.json')}}}
+                stage('Verify Windows Server MIS Nart BCS') { steps { script {verify_win_image('windows_misnart_bcs.json')}}}
+                stage('Verify Windows Server MIS Nart BFS') { steps { script {verify_win_image('windows_misnart_bfs.json')}}}
             }
         }
 
@@ -114,6 +116,13 @@ pipeline {
             parallel {
                 stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
+            }
+        }
+
+        stage('Build Packer MIS Dependant AMIS') {
+            parallel {
+                stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bcs.json')}}}
+                stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
             }
         }
     }
