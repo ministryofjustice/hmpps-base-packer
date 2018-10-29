@@ -2,9 +2,7 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-    "mis_user": "{{env `WIN_MIS_USER`}}",
-    "mis_password": "{{env `WIN_MIS_PASS`}}"
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
   "builders": [
     {
@@ -52,6 +50,20 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsResizePartition.ps1",
+      "environment_vars": [
+        "TARGET_DRIVE=C"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsResizePartition.ps1",
+      "environment_vars": [
+        "TARGET_DRIVE=D"
+      ]
+    },
     {
       "type": "powershell",
       "script": "scripts/ReenableUserData.ps1"

@@ -3,8 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-    "mis_user": "{{env `WIN_MIS_USER`}}",
-    "mis_password": "{{env `WIN_MIS_PASS`}}"
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
+    "target_env":  "{{env `TARGET_ENV`}}"
   },
   "builders": [
     {
@@ -18,11 +18,12 @@
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile",
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS MIS NART Windows Server {{user `branch_name`}}*",
+          "name": "HMPPS MIS NART Windows Server master *",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],
@@ -52,6 +53,35 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsResizePartition.ps1",
+      "environment_vars": [
+        "TARGET_DRIVE=C"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsResizePartition.ps1",
+      "environment_vars": [
+        "TARGET_DRIVE=D"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "files/ora32_client.rsp",
+      "destination": "c:\\temp\\ora32_client.rsp"
+    },
+    {
+      "type": "file",
+      "source": "files/ora64_client.rsp",
+      "destination": "c:\\temp\\ora64_client.rsp"
+    } ,
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsBCSPackageInstallation.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+    },
     {
       "type": "powershell",
       "script": "scripts/ReenableUserData.ps1"
