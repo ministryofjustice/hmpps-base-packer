@@ -65,16 +65,6 @@
       ]
     },
     {
-      "type": "file",
-      "source": "files/ora32_client.rsp",
-      "destination": "c:\\temp\\ora32_client.rsp"
-    },
-    {
-      "type": "file",
-      "source": "files/ora64_client.rsp",
-      "destination": "c:\\temp\\ora64_client.rsp"
-    },
-    {
       "type": "powershell",
       "script": "scripts/ReenableUserData.ps1"
     }
