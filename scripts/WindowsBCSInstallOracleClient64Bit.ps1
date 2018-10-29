@@ -8,4 +8,4 @@ aws s3 cp "s3://$env:ARTIFACT_BUCKET/mis/Data Services Related/win64_11gR2_clien
 #Unpack our installer
 [System.IO.Compression.ZipFile]::ExtractToDirectory("c:\\temp\\win64_11gR2_client.zip", "C:\\temp")
 Rename-Item -Path C:\temp\client -NewName c:\temp\ora64_installer
-Remove-Item –path C:\temp\win64_11gR2_client.zip –recurse
+#Remove-Item –path C:\temp\win64_11gR2_client.zip –recurse
