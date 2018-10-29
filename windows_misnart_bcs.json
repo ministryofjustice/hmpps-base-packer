@@ -79,7 +79,7 @@
     },
     {
       "type": "windows-shell",
-      "script": "scripts/WindowsInstallOracleClient.bat",
+      "script": "scripts/WindowsBCSInstallOracleClient.bat",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
