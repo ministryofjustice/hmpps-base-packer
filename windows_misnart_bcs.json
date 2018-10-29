@@ -69,18 +69,22 @@
     },
     {
       "type": "file",
-      "source": "files/ora32_client.rsp",
-      "destination": "c:\\temp\\ora32_client.rsp"
-    },
-    {
-      "type": "file",
       "source": "files/ora64_client.rsp",
       "destination": "c:\\temp\\ora64_client.rsp"
     } ,
     {
       "type": "powershell",
-      "script": "scripts/WindowsBCSPackageInstallation.ps1",
+      "script": "scripts/WindowsInstallOracleClient64Bit.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+    },
+    {
+      "type": "windows-shell",
+      "script": "scripts/WindowsInstallOracleClient.bat",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsBCSInstallSQLDeveloper.ps1"
     },
     {
       "type": "powershell",
