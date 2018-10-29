@@ -68,6 +68,7 @@ def build_win_image(filename) {
 
 pipeline {
     agent { label "jenkins_slave"}
+    options{ timestamps() }
 
     environment {
         WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
