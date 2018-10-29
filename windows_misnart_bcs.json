@@ -55,6 +55,20 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "scripts/WindowsResizePartition.ps1",
+      "environment_vars": [
+        "TARGET_DRIVE=C"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/WindowsResizePartition.ps1",
+      "environment_vars": [
+        "TARGET_DRIVE=D"
+      ]
+    },
+    {
+      "type": "powershell",
       "script": "scripts/WindowsBCSPackageInstallation.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
