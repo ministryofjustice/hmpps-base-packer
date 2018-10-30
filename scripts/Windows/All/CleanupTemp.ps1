@@ -1,1 +1,4 @@
-Remove-Item C:\temp -Recurse -ErrorAction Ignore
+$ErrorActionPreference = "Stop"
+$VerbosePreference="Continue"
+
+Remove-Item -Path C:\temp -Recurse -ErrorAction Ignore
