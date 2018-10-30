@@ -87,8 +87,7 @@
     {
       "type": "powershell",
       "script": "scripts/Windows/All/ReenableUserData.ps1"
-    }
-  ,
+    },
     {
       "type": "powershell",
       "script": "scripts/Windows/All/CleanupTemp.ps1"

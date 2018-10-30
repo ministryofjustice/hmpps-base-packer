@@ -55,14 +55,18 @@
   "provisioners": [
     {
       "type": "powershell",
-      "script": "scripts/WindowsResizePartition.ps1",
+      "script": "scripts/Windows/All/MakeTemp.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/ResizePartition.ps1",
       "environment_vars": [
         "TARGET_DRIVE=C"
       ]
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsResizePartition.ps1",
+      "script": "scripts/Windows/All/ResizePartition.ps1",
       "environment_vars": [
         "TARGET_DRIVE=D"
       ]
@@ -74,21 +78,25 @@
     } ,
     {
       "type": "powershell",
-      "script": "scripts/WindowsBCSInstallOracleClient64Bit.ps1",
+      "script": "scripts/Windows/BCS/FetchOracleClient64Bit.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "windows-shell",
-      "script": "scripts/WindowsBCSInstallOracleClient.bat"
+      "script": "scripts/Windows/BCS/InstallOracleClient.bat"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsBCSInstallSQLDeveloper.ps1",
+      "script": "scripts/Windows/BCS/InstallSQLDeveloper.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "powershell",
-      "script": "scripts/ReenableUserData.ps1"
+      "script": "scripts/Windows/All/ReenableUserData.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/CleanupTemp.ps1"
     }
   ]
 }
