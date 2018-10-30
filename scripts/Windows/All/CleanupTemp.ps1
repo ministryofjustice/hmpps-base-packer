@@ -1,0 +1,1 @@
+Remove-Item C:\temp -Recurse -ErrorAction Ignore

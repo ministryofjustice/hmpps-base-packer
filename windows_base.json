@@ -18,7 +18,7 @@
       "subnet_id": "subnet-00982fba28419ac5f",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-slave-role-instance-profile",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "user_data_file": "./scripts/WindowsBaseUserData.txt",
+      "user_data_file": "scripts/Windows/Base/ConfigureWinRM.txt",
       "source_ami_filter": {
         "filters": {
           "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
@@ -37,19 +37,27 @@
   "provisioners": [
     {
       "type": "powershell",
-      "script": "scripts/WindowsBaseRequirements.ps1"
+      "script": "scripts/Windows/All/MakeTemp.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsDisableUAC.ps1"
+      "script": "scripts/Windows/Base/Requirements.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsManageAdminPassword.ps1",
+      "script": "scripts/Windows/Base/DisableUAC.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Base/AdminPassword.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
         "WIN_ADMIN_PASS={{user `win_pass`}}"
       ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/CleanupTemp.ps1"
     }
   ]
 }
