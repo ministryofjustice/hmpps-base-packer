@@ -1,4 +1,0 @@
-<script>
-winrm quickconfig -q & winrm set winrm/config/winrs @{MaxMemoryPerShellMB="2048"} & winrm set winrm/config @{MaxTimeoutms="3000000"} & winrm set winrm/config/client/auth @{Basic="true"} & winrm set winrm/config/service/auth @{Basic="true"} & winrm set winrm/config/service @{AllowUnencrypted="true"} & netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow & net stop winrm & sc config "WinRM" start= auto & net start "WinRM" & winrm create winrm/config/listener?Address=*+Transport=HTTP & net start "Winrm"
-</script>
-<persist>true</persist>
