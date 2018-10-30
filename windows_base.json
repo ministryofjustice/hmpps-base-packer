@@ -3,7 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env_identifier": "{{env `TARGET_ENV`}}",
-    "win_pass": "{{env `WIN_ADMIN_PASS`}}"
+    "win_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
   },
   "sensitive-variables": ["admin_pass"],
   "builders": [
