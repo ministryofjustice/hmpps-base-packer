@@ -51,6 +51,11 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/Windows/Base/YamlSupport.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+    },
+    {
+      "type": "powershell",
       "script": "scripts/Windows/Base/ManageAdminPassword.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
