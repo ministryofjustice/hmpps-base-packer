@@ -79,12 +79,12 @@
     },
     {
       "type": "windows-shell",
-      "script": "scripts/WindowsBCSInstallOracleClient.bat",
-      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+      "script": "scripts/WindowsBCSInstallOracleClient.bat"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsBCSInstallSQLDeveloper.ps1"
+      "script": "scripts/WindowsBCSInstallSQLDeveloper.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "powershell",
