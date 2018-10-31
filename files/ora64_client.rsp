@@ -145,7 +145,7 @@ oracle.install.client.customComponents=oracle.sqlj:11.2.0.4.0,oracle.rdbms.util:
 #
 # Example    : oracle.install.client.schedulerAgentHostName = acme.domain.com
 #------------------------------------------------------------------------------
-oracle.install.client.schedulerAgentHostName=172.31.5.61
+oracle.install.client.schedulerAgentHostName=
 
 #------------------------------------------------------------------------------
 # Port number to be used for by the Oracle Scheduler Agent.
