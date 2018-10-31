@@ -43,27 +43,27 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsInstallGit.ps1"
+      "script": "scripts/Windows/JenkinsSlave/InstallGit.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsSlaveInstallSoftware.ps1"
+      "script": "scripts/Windows/JenkinsSlave/SoftwareRequirements.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsInstallJDK8.ps1"
+      "script": "scripts/Windows/JenkinsSlave/InstallJDK8.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsInstallMaven.ps1"
+      "script": "scripts/Windows/JenkinsSlave/InstallMaven.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsInstallFirefox.ps1"
+      "script": "scripts/Windows/JenkinsSlave/InstallFirefox.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsManageJenkinsUser.ps1",
+      "script": "scripts/Windows/JenkinsSlave/ManageJenkinsUser.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
         "JENKINS_PASS={{user `jenkins_pass`}}"
@@ -94,7 +94,11 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/ReenableUserData.ps1"
+      "script": "scripts/Windows/All/ReenableUserData.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/CleanupTemp.ps1"
     }
   ]
 }

@@ -3,7 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env_identifier": "{{env `TARGET_ENV`}}",
-    "win_pass": "{{env `WIN_ADMIN_PASS`}}"
+    "win_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
   },
   "sensitive-variables": ["admin_pass"],
   "builders": [
@@ -18,7 +19,7 @@
       "subnet_id": "subnet-00982fba28419ac5f",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-slave-role-instance-profile",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "user_data_file": "./scripts/WindowsBaseUserData.txt",
+      "user_data_file": "scripts/Windows/Base/ConfigureWinRM.txt",
       "source_ami_filter": {
         "filters": {
           "description": "Microsoft Windows Server 2012 R2 RTM 64-bit Locale English AMI provided by Amazon"
@@ -37,15 +38,25 @@
   "provisioners": [
     {
       "type": "powershell",
-      "script": "scripts/WindowsBaseRequirements.ps1"
+      "script": "scripts/Windows/Base/Requirements.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsDisableUAC.ps1"
+      "script": "scripts/Windows/Base/DisableUAC.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/WindowsManageAdminPassword.ps1",
+      "script": "scripts/Windows/Base/InstallOpenSSH.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Base/YamlSupport.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Base/ManageAdminPassword.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
         "WIN_ADMIN_PASS={{user `win_pass`}}"

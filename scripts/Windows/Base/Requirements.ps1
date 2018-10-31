@@ -1,4 +1,3 @@
-
 $ChocoInstallPath = "$env:SystemDrive\ProgramData\Chocolatey\bin"
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
