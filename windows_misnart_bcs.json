@@ -78,12 +78,8 @@
     } ,
     {
       "type": "powershell",
-      "script": "scripts/Windows/BCS/FetchOracleClient64Bit.ps1",
+      "script": "scripts/Windows/BCS/FetchAndInstallOracleClient64Bit.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
-    },
-    {
-      "type": "windows-shell",
-      "script": "scripts/Windows/BCS/InstallOracleClient.bat"
     },
     {
       "type": "powershell",
