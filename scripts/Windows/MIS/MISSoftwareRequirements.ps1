@@ -1,6 +1,8 @@
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
+Set-ExecutionPolicy Bypass
+
 #--- Visual C++ ----
 choco install vcredist2012 vcredist2015 vcredist-all -y --force
 

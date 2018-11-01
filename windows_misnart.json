@@ -76,8 +76,6 @@
     },
     {
       "type": "powershell",
-      "elevated_user": "Administrator",
-      "elevated_password": "{{user `admin_pass`}}",
       "script": "scripts/Windows/MIS/MISSoftwareRequirements.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
