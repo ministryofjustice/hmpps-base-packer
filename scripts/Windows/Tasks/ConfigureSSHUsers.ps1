@@ -1,11 +1,14 @@
-import-module psyaml
+$ErrorActionPreference = "Stop"
+$VerbosePreference="Continue"
+
+Import-Module psyaml
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 if (-not (Test-Path env:TARGET_ENVIRONMENT)) {
     $env:TARGET_ENVIRONMENT = 'dev'
 }
 
-
-$url = "https://github.com/ministryofjustice/hmpps-delius-ansible/blob/master/group_vars/$env:TARGET_ENVIRONMENT.yml"
+$url = "https://raw.githubusercontent.com/ministryofjustice/hmpps-delius-ansible/master/group_vars/$env:TARGET_ENVIRONMENT.yml"
 
 #download our yaml file
 Invoke-WebRequest -Uri "$url" -OutFile "$env:TEMP\users.yaml"
@@ -18,37 +21,38 @@ foreach ($line in $fileContent) {
 
 $yaml = ConvertFrom-YAML $content
 
-foreach($group in $yaml.groups_to_create) {
-    if(-not (Get-Group -Name ${group.name})) {
-        Install-Group -Name $group.name
-    }
-}
-
 foreach($user in $yaml.users) {
-    $keyname = "/$env:TARGET_ENVIRONMENT/${user['username']}/windows/rds/password"
+    $keyname = "/$env:TARGET_ENVIRONMENT/windows/rds/" + $user.username + "/password"
+    $password = $(try{aws --region eu-west-2 ssm get-parameter --with-decryption --name $keyname } catch {$False})
 
-    if (-not (Get-User -Name ${user['username']})) {
+    if ($password) {
+        $password = $($password | jq .Parameter.Value)
+    }
+
+    if (-not $(try{Get-User -UserName $user.username} catch {$False})) {
         #If we don't have a password we generate one
         if(-not $password) {
             $passwordLen = (Get-Random -Minimum 32 -Maximum 64)
             $password = [System.Web.Security.Membership]::GeneratePassword($passwordLen, 10)
             aws --region eu-west-2 ssm put-parameter --name $keyname --type SecureString --value $password
         }
-
-    } else {
-        $password = aws --region eu-west-2 ssm get-parameter --with-decryption --name $keyname --query Parameters[0].Value
     }
 
-    $creds = New-Credentials -User $user['username'] -Password $password
-    Install-User -Credentials $creds -FullName "$user['name']"
-    if ($user['groups'] contains 'wheel') {
-        Add-GroupMember -Name Administrators -Member "$user['username']"
-    }
-    foreach ($group in $user['groups]) {
-        if ($group -ne 'adm' || $group -ne 'wheel') {
-            Add-GroupMember -Name $group -Member "$user['username']"
+    $creds = New-Credential -UserName $user.username -Password $password
+    Install-User -Credential $creds -FullName $user.name
 
-        }
+    if ($user.groups.Contains('wheel')) {
+        Add-GroupMember -Name Administrators -Member $user.username
     }
+
+    # Create home directory
+    $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+    $cred = New-Object System.Management.Automation.PSCredential -ArgumentList $user.username,$securePassword
+    Start-Process cmd /c -WindowStyle Hidden -Credential $cred -ErrorAction SilentlyContinue
+
+    #Create the .ssh directory and add our key to authorize_keys
+    $userHome = "C:\Users\" + $user.username
+    Install-Directory -Path "$userHome\.ssh"
+    $user.ssh_key | Out-File -FilePath "$userHome\.ssh\authorized_keys"
 
 }

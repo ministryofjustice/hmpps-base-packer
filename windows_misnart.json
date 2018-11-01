@@ -4,7 +4,9 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
     "mis_user": "{{env `WIN_MIS_USER`}}",
-    "mis_password": "{{env `WIN_MIS_PASS`}}"
+    "mis_password": "{{env `WIN_MIS_PASS`}}",
+    "bobj_user": "{{env `WIN_BOBJ_USER`}}",
+    "bobj_pass": "{{env `WIN_BOBJ_PASS`}}"
   },
   "builders": [
     {
@@ -82,6 +84,15 @@
         "TARGET_ENV={{user `env_identifier`}}",
         "MIS_USER={{user `mis_user`}}",
         "MIS_PASSWORD={{user `mis_password`}}"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/MIS/ManageMISUser.ps1",
+      "environment_vars": [
+        "TARGET_ENV={{user `env_identifier`}}",
+        "MIS_USER={{user `bobj_user`}}",
+        "MIS_PASSWORD={{user `bobj_pass`}}"
       ]
     },
     {
