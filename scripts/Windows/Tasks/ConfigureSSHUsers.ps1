@@ -22,6 +22,7 @@ foreach ($line in $fileContent) {
 
 $yaml = ConvertFrom-YAML $content
 
+#Add update users
 foreach($user in $yaml.users) {
     $keyname = "/$env:TARGET_ENVIRONMENT/windows/rds/" + $user.username + "/password"
     $password = $(try{aws --region eu-west-2 ssm get-parameter --with-decryption --name $keyname } catch {$False})
@@ -54,6 +55,15 @@ foreach($user in $yaml.users) {
     #Create the .ssh directory and add our key to authorize_keys
     $userHome = "C:\Users\" + $user.username
     Install-Directory -Path "$userHome\.ssh"
-    $user.ssh_key | Out-File -FilePath "$userHome\.ssh\authorized_keys"
+    Set-Content -Path "$userHome\.ssh\authorized_keys" -Value $user.ssh_key
 
+#    $acl = Get-Acl -Path $userHome
+#    Set-Acl -LiteralPath "$userHome\.ssh" -AclObject $acl
+}
+
+#Remove users
+foreach($user in $yaml.users_deleted) {
+    if($(try{Get-User -UserName $user.username} catch {$False})) {
+        Uninstall-User -Username $user.username
+    }
 }
