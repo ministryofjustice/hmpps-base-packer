@@ -6,7 +6,8 @@
     "mis_user": "{{env `WIN_MIS_USER`}}",
     "mis_password": "{{env `WIN_MIS_PASS`}}",
     "bobj_user": "{{env `WIN_BOBJ_USER`}}",
-    "bobj_pass": "{{env `WIN_BOBJ_PASS`}}"
+    "bobj_pass": "{{env `WIN_BOBJ_PASS`}}",
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
   },
   "builders": [
     {
@@ -75,7 +76,8 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/MIS/MISSoftwareRequirements.ps1"
+      "script": "scripts/Windows/MIS/MISSoftwareRequirements.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "powershell",
