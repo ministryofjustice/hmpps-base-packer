@@ -61,15 +61,6 @@
         "TARGET_ENV={{user `env_identifier`}}",
         "WIN_ADMIN_PASS={{user `win_pass`}}"
       ]
-    },
-    {
-      "type": "file",
-      "source": "scripts/Windows/Tasks/ConfigureSSHUsers.ps1",
-      "destination": "C:\\ProgramData\\ConfigureSSHUsers.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/Windows/Tasks/InstallConfigureUserTask.ps1"
     }
   ]
 }
