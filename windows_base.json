@@ -61,6 +61,14 @@
         "TARGET_ENV={{user `env_identifier`}}",
         "WIN_ADMIN_PASS={{user `win_pass`}}"
       ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/ReenableUserData.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Tasks/InstallConfigureUserTask.ps1"
     }
   ]
 }

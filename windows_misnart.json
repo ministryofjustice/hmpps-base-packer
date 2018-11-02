@@ -27,7 +27,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Windows Server Base master*",
+          "name": "HMPPS Windows Server Base {{user `branch_name`}}*",
           "root-device-type": "ebs"
         },
         "owners": [
@@ -117,14 +117,6 @@
       "type": "file",
       "source": "scripts/Windows/Tasks/ConfigureSSHUsers.ps1",
       "destination": "C:\\ProgramData\\ConfigureSSHUsers.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/Windows/All/ReenableUserData.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/Windows/Tasks/InstallConfigureUserTask.ps1"
     },
     {
       "type": "powershell",
