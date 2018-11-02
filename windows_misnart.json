@@ -27,7 +27,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Windows Server Base {{user `branch_name`}}*",
+          "name": "HMPPS Windows Server Base master*",
           "root-device-type": "ebs"
         },
         "owners": [
