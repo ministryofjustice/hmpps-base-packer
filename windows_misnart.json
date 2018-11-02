@@ -114,8 +114,17 @@
       ]
     },
     {
+      "type": "file",
+      "source": "scripts/Windows/Tasks/ConfigureSSHUsers.ps1",
+      "destination": "C:\\ProgramData\\ConfigureSSHUsers.ps1"
+    },
+    {
       "type": "powershell",
       "script": "scripts/Windows/All/ReenableUserData.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Tasks/InstallConfigureUserTask.ps1"
     },
     {
       "type": "powershell",
