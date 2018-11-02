@@ -3,9 +3,11 @@ $VerbosePreference="Continue"
 
 Set-ExecutionPolicy Bypass
 
+$ErrorActionPreference = "silentlycontinue"
+#We have a failing KB at present, so lets skip the error
 #--- Visual C++ ----
-#choco install vcredist2012 vcredist2015 vcredist-all -y --force
-choco install vcredist2012 vcredist2015 -y
+choco install vcredist2012 vcredist2015 vcredist-all -y --force
+$ErrorActionPreference = "Stop"
 
 #--- DotNet 4.5 ---
 choco install dotnet4.5 dotnet4.5.2 -y
