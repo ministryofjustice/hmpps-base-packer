@@ -105,15 +105,6 @@
       ]
     },
     {
-      "type": "file",
-      "source": "scripts/Windows/Tasks/ConfigureSSHUsers.ps1",
-      "destination": "C:\\ProgramData\\ConfigureSSHUsers.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/Windows/All/CleanupTemp.ps1"
-    },
-    {
       "type": "powershell",
       "script": "scripts/Windows/MIS/ManageMISUser.ps1",
       "environment_vars": [
@@ -121,6 +112,14 @@
         "MIS_USER={{user `bobj_user`}}",
         "MIS_PASSWORD={{user `bobj_pass`}}"
       ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/ReenableUserData.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/All/CleanupTemp.ps1"
     }
   ]
 }
