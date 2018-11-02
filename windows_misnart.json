@@ -7,7 +7,8 @@
     "mis_password": "{{env `WIN_MIS_PASS`}}",
     "bobj_user": "{{env `WIN_BOBJ_USER`}}",
     "bobj_pass": "{{env `WIN_BOBJ_PASS`}}",
-    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
+    "target_env":  "{{env `TARGET_ENV`}}"
   },
   "builders": [
     {
