@@ -28,8 +28,6 @@ def build_win_image(filename) {
         -e WIN_MIS_USER="${env.WIN_MIS_USER}" \
         -e WIN_MIS_PASS="${env.WIN_MIS_PASS}" \
         -e WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}" \
-        -e WIN_BOBJ_USER="${env.WIN_BOBJ_USER}" \
-        -e WIN_BOBJ_PASS="${env.WIN_BOBJ_PASS}" \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'USER=`whoami` packer build """ + filename + "'"
@@ -44,9 +42,6 @@ pipeline {
         WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
         WIN_MIS_USER     = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/mis/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
         WIN_MIS_PASS     = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/mis/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
-        WIN_BOBJ_USER    = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/busobj/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
-        WIN_BOBJ_PASS    = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/busobj/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
-
     }
 
     stages {
@@ -59,6 +54,17 @@ pipeline {
         stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Windows Server Base') { steps { script {verify_win_image('windows_base.json')}}}
+            }
+        }
+
+        stage('Build Packer Base AMIS') {
+            parallel {
+                stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
+            }
+        }
+
+        stage('Verify Packer Windows Dependant AMIS') {
+            parallel {
                 stage('Verify Windows Server Jenkins Slave') { steps { script {verify_win_image('windows_slave.json')}}}
                 stage('Verify Windows Server MIS Nart') { steps { script {verify_win_image('windows_misnart.json')}}}
                 stage('Verify Windows Server MIS Nart BCS') { steps { script {verify_win_image('windows_misnart_bcs.json')}}}
@@ -66,25 +72,19 @@ pipeline {
             }
         }
 
-        /*stage('Build Packer Base AMIS') {
-            parallel {
-                stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
-            }
-        }*/
-
         stage('Build Packer Dependant AMIS') {
             parallel {
-           //     stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
+                stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
             }
         }
 
-        /*stage('Build Packer MIS Dependant AMIS') {
+        stage('Build Packer MIS Dependant AMIS') {
             parallel {
                 stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bcs.json')}}}
                 stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
             }
-        }*/
+        }
     }
 
     post {
