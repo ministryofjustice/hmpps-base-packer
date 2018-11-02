@@ -66,25 +66,25 @@ pipeline {
             }
         }
 
-        stage('Build Packer Base AMIS') {
+        /*stage('Build Packer Base AMIS') {
             parallel {
                 stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
             }
-        }
+        }*/
 
         stage('Build Packer Dependant AMIS') {
             parallel {
-                stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
+           //     stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
             }
         }
 
-        stage('Build Packer MIS Dependant AMIS') {
+        /*stage('Build Packer MIS Dependant AMIS') {
             parallel {
                 stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bcs.json')}}}
                 stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
             }
-        }
+        }*/
     }
 
     post {
