@@ -4,33 +4,33 @@
   roles:
     - packages
     - marcinpraczko.goss-install
-  tasks:
-    - name: Install pip packages
-      pip:
-        name: "{{ pip.packages }}"
-        state: present
-
-    - name: Install docker and compose
-      include_role: bootstrap
-      tasks_from: docker.yml
-
-    - name: Install goss
-      raw: "curl -fsSL https://goss.rocks/install | sh"
-      become: true
-
-    - name: Ensure our configure_github script is executeable
-      file:
-        dest:  /home/centos/configure_github
-        mode: a+x
-      become: true
-
-    - name: Add Maven Repository
-      yum_repository:
-        name: "maven"
-        description: "Apache Maven Official Repository"
-        baseurl: "http://repos.fedorapeople.org/repos/dchen/apache-maven/"
-
-    - name: Install Maven
-      yum:
-        name: apache-maven
-        state: latest
+#  tasks:
+#    - name: Install pip packages
+#      pip:
+#        name: "{{ pip.packages }}"
+#        state: present
+#
+#    - name: Install docker and compose
+#      include_role: bootstrap
+#      tasks_from: docker.yml
+#
+#    - name: Install goss
+#      raw: "curl -fsSL https://goss.rocks/install | sh"
+#      become: true
+#
+#    - name: Ensure our configure_github script is executeable
+#      file:
+#        dest:  /home/centos/configure_github
+#        mode: a+x
+#      become: true
+#
+#    - name: Add Maven Repository
+#      yum_repository:
+#        name: "maven"
+#        description: "Apache Maven Official Repository"
+#        baseurl: "http://repos.fedorapeople.org/repos/dchen/apache-maven/"
+#
+#    - name: Install Maven
+#      yum:
+#        name: apache-maven
+#        state: present
