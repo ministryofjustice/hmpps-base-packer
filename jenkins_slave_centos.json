@@ -12,6 +12,10 @@
       "destination": "/home/centos/configure_github"
     },
     {
+      "type": "shell",
+      "script": "scripts/centos_slave.sh"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "./ansible/centos_slave.yml",
       "extra_arguments": [

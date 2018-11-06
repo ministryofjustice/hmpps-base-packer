@@ -9,9 +9,6 @@ system:
     - gcc-c++
     - openssl-devel
     - make
-    - git
-    - java-1.8.0-openjdk
-    - python-pip
     - jq
 
 pip:
@@ -19,7 +16,6 @@ pip:
     - virtualenv
     - awscli
     - boto
-    - ansible==2.6
     - botocore
     - boto3
 
