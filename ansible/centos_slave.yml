@@ -4,10 +4,6 @@
   roles:
     - packages
   tasks:
-    - name: Install pip packages
-      pip:
-        name: "{{ pip.packages }}"
-        state: present
 
     - name: Install docker and compose
       include_role:

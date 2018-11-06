@@ -11,12 +11,4 @@ system:
     - make
     - jq
 
-pip:
-  packages:
-    - virtualenv
-    - awscli
-    - boto
-    - botocore
-    - boto3
-
 install_jdk: true
