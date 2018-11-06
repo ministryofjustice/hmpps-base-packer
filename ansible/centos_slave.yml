@@ -3,7 +3,6 @@
 - hosts: localhost
   roles:
     - packages
-    - marcinpraczko.goss-install
   tasks:
     - name: Install pip packages
       pip:
@@ -11,8 +10,9 @@
         state: present
 
     - name: Install docker and compose
-      include_role: bootstrap
-      tasks_from: docker.yml
+      include_role:
+        name: bootstrap
+        tasks_from: docker.yml
 
     - name: Install goss
       raw: "curl -fsSL https://goss.rocks/install | sh"
