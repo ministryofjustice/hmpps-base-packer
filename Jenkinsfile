@@ -31,7 +31,7 @@ def build_image(filename) {
 }
 
 pipeline {
-    agent { label "centos"}
+    agent { label "jenkins_slave"}
 
     stages {
         stage ('Notify build started') {
