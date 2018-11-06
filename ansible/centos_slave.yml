@@ -20,28 +20,6 @@
         mode: a+x
       become: true
 
-#    - name: Get our maven repo file
-#      get_url:
-#        url: http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo
-#        dest: /etc/yum.repos.d/epel-apache-maven.repo
-#      become: true
-#
-#    - name: Update our release version
-#      replace:
-#        path: /etc/yum.repos.d/epel-apache-maven.repo
-#        regexp: '\$releasever'
-#        replace: '\17\2'
-#        backup: yes
-#      become: true
-#      sudo sed -i s/\$releasever/6/g
-#      sudo yum install -y apache-maven
-#      mvn --version
-    - name: Add Maven Repository
-      yum_repository:
-        name: "maven"
-        description: "Apache Maven Official Repository"
-        baseurl: "http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-7/"
-
     - name: Install Maven
       yum:
         name: apache-maven

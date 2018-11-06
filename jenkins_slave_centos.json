@@ -12,6 +12,11 @@
       "destination": "/home/centos/configure_github"
     },
     {
+      "type": "file",
+      "source": "files/epel-apache-maven.repo",
+      "destination": "/etc/yum.repos.d/epel-apache-maven.repo"
+    },
+    {
       "type": "shell",
       "script": "scripts/centos_slave.sh"
     },
