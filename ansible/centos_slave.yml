@@ -1,0 +1,23 @@
+---
+
+- hosts: localhost
+  roles:
+    - packages
+    - { role: marcinpraczko.goss-install, goss_dst_dir: /usr/local/bin }
+  tasks:
+
+    - name: Install docker and compose
+      include_role:
+        name: bootstrap
+        tasks_from: docker.yml
+
+    - name: Ensure our configure_github script is executeable
+      file:
+        dest:  /home/centos/configure_github
+        mode: a+x
+      become: true
+
+    - name: Install Maven
+      yum:
+        name: apache-maven
+        state: present

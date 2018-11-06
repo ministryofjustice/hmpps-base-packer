@@ -43,18 +43,23 @@ pipeline {
         stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
-                //stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
-                stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
                 stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
+                stage('Verify Centos 7 Jenkins Slave') { steps { script {verify_image('jenkins_slave_centos.json')}}}
+                stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
             }
         }
 
         stage('Build Packer Base AMIS') {
             parallel {
                 stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
-                //stage('Build Amazon Linux 2') { steps { script {build_image('amazonlinux2.json')}}}
-                stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
+                stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
+            }
+        }
+
+        stage('Build Packer Dependanty AMIS') {
+            parallel {
+                stage('Build Centos Jenkins Slave') { steps { script {build_image('jenkins_slave_centos.json')}}}
             }
         }
     }

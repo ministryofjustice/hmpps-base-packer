@@ -13,6 +13,10 @@
       "script": "scripts/centos7_awscli.sh"
     },
     {
+      "type": "shell",
+      "script": "scripts/ansible_galaxy_base.sh"
+    },
+    {
       "type": "ansible",
       "playbook_file": "./ansible/centos7.yml",
       "extra_arguments": [ "-b" ]
