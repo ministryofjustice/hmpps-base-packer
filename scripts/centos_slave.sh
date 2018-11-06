@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Installing locally so in future we can run ansible to boostrap our instances
 sudo yum install -y \
     git \
     python-pip
