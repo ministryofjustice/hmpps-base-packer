@@ -2,7 +2,8 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "target_env": "{{env `TARGET_ENV`}}"
+    "target_env": "{{env `TARGET_ENV`}}",
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
   },
   "provisioners": [
     {
@@ -11,10 +12,15 @@
       "destination": "/home/centos/configure_github"
     },
     {
-      "type": "ansible",
+      "type": "ansible-local",
       "playbook_file": "./ansible/centos_slave.yml",
-      "extra_arguments": [ "-b" ],
-      "groups": ["centos_slave"]
+      "extra_arguments": [
+        "-b",
+        "-e artifact_bucket={{user `artifact_bucket`}}"
+      ],
+      "galaxy_file": "./ansible/centos_slave_req.yml",
+      "inventory_groups": "centos_slave",
+      "group_vars": "./ansible/group_vars"
     }
   ],
   "builders": [
