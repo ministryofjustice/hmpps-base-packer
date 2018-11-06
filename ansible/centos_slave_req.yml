@@ -1,5 +1,4 @@
 ---
-- name: marcinpraczko.goss-install
 - name: bootstrap
   src: https://github.com/ministryofjustice/hmpps-bootstrap.git
   version: centos
