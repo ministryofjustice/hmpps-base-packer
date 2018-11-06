@@ -1,0 +1,50 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "target_env": "{{env `TARGET_ENV`}}"
+  },
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/configure_github.sh",
+      "destination": "/home/centos/configure_github"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible/centos_slave.yml",
+      "extra_arguments": [ "-b" ],
+      "groups": ["centos_slave"]
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Base CentOS {{user `branch_name`}}*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917",
+          "077643444046",
+          "723123699647"
+      ],
+      "ssh_interface": "private_ip",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "ssh_username": "centos",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "ami_name": "HMPPS Jenkins Slave Centos {{user `branch_name`}} {{timestamp}}",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile"
+    }
+  ]
+}

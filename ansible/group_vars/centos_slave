@@ -1,0 +1,26 @@
+---
+
+system:
+  packages:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - gcc
+    - gcc-c++
+    - openssl-devel
+    - make
+    - git
+    - java-1.8.0-openjdk
+    - python-pip
+    - jq
+
+pip:
+  packages:
+    - virtualenv
+    - awscli
+    - boto
+    - ansible==2.6
+    - botocore
+    - boto3
+
+install_jdk: true
