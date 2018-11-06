@@ -31,7 +31,7 @@ def build_image(filename) {
 }
 
 pipeline {
-    agent { label "jenkins_slave"}
+    agent { label "centos"}
 
     stages {
         stage ('Notify build started') {
@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        /*stage('Verify Packer AMIS') {
+        stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                 stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
@@ -55,7 +55,7 @@ pipeline {
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
                 stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
             }
-        }*/
+        }
 
         stage('Build Packer Dependanty AMIS') {
             parallel {
