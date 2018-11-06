@@ -3,7 +3,6 @@
 - hosts: localhost
   roles:
     - packages
-    - { role: marcinpraczko.goss-install, goss_dst_dir: /usr/local/bin }
   tasks:
 
     - name: Install docker and compose
@@ -21,3 +20,7 @@
       yum:
         name: apache-maven
         state: present
+
+    - name: Install Goss
+      raw: "curl -fsSL https://goss.rocks/install | sh"
+      become: true
