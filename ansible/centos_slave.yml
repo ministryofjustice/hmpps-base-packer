@@ -11,10 +11,6 @@
         name: bootstrap
         tasks_from: docker.yml
 
-#    - name: Install goss
-#      raw: "curl -fsSL https://goss.rocks/install | sh"
-#      become: true
-
     - name: Ensure our configure_github script is executeable
       file:
         dest:  /home/centos/configure_github

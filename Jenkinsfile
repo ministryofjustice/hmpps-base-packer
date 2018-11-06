@@ -50,7 +50,7 @@ pipeline {
 
         stage('Build Packer Base AMIS') {
             parallel {
-         //       stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
+                stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
             }
         }
