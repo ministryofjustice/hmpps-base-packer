@@ -3,6 +3,7 @@
 - hosts: localhost
   roles:
     - packages
+    - marcinpraczko.goss-install
   tasks:
 
     - name: Install docker and compose
@@ -10,9 +11,9 @@
         name: bootstrap
         tasks_from: docker.yml
 
-    - name: Install goss
-      raw: "curl -fsSL https://goss.rocks/install | sh"
-      become: true
+#    - name: Install goss
+#      raw: "curl -fsSL https://goss.rocks/install | sh"
+#      become: true
 
     - name: Ensure our configure_github script is executeable
       file:

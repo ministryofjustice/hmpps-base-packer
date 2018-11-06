@@ -2,7 +2,6 @@
 - name: marcinpraczko.goss-install
 - name: bootstrap
   src: https://github.com/ministryofjustice/hmpps-bootstrap.git
-  version: dockerFileFlags
+  version: centos
 - name: packages
   src:  https://github.com/ministryofjustice/hmpps-ansible-packages.git
-  version: optomizeYum

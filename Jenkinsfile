@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        /*stage('Verify Packer AMIS') {
+        stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                 stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
@@ -50,10 +50,10 @@ pipeline {
 
         stage('Build Packer Base AMIS') {
             parallel {
-                stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
+         //       stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
             }
-        }*/
+        }
 
         stage('Build Packer Dependanty AMIS') {
             parallel {
