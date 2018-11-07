@@ -1,0 +1,47 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}"
+  },
+  "provisioners": [
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/centos_ecs.yml",
+      "extra_arguments": [
+        "-b"
+      ],
+      "galaxy_file": "./ansible/centos_ecs_req.yml",
+      "inventory_groups": "centos_ecs",
+      "group_vars": "./ansible/group_vars"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Base CentOS {{user `branch_name`}}*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917",
+          "077643444046",
+          "723123699647"
+      ],
+      "ssh_interface": "private_ip",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "ssh_username": "centos",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "ami_name": "HMPPS ECS Centos {{user `branch_name`}} {{timestamp}}"
+    }
+  ]
+}
