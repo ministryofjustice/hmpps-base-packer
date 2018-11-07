@@ -4,6 +4,4 @@
   version: centos
 - name: packages
   src:  https://github.com/ministryofjustice/hmpps-ansible-packages.git
-- name: sys_user
-  src:  https://github.com/ministryofjustice/hmpps-delius-core-system-user.git
-  version: makeResilient
+

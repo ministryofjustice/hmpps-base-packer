@@ -1,2 +1,4 @@
 - src: dev-sec.os-hardening
 - src: linuxhq.yum_cron
+- name: sys_user
+  src:  https://github.com/ministryofjustice/hmpps-delius-core-system-user.git

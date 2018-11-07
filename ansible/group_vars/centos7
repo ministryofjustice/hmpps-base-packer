@@ -1,0 +1,11 @@
+---
+
+system_groups:
+  - group: hmpps_sys_user
+    gid: 1200
+
+system_users:
+  - name: hmpps_sys_user
+    uid: 1200
+    group: hmpps_sys_user
+    groups: wheel
