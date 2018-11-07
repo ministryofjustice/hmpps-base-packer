@@ -45,22 +45,30 @@
       iptables:
         table: nat
         action: append
-        chain: "{{ item.chain }}"
-        protocol: "{{ item.protocol|default('tcp') }}"
-        match: "{{ item.match|default([]) }}"
+        chain: "PREROUTING"
+        protocol: "tcp"
         destination: "169.254.170.2"
         destination_port: "80"
-        jump: "{[ item.jump }}"
-        to_destination: "{{ item.to_dest|default('') }}"
-        to_ports: "{{ item.to_ports|default('') }}"
-      with_items:
-        - {chain: "PREROUTING", jump: "DNAT", to_dest: "127.0.0.1:51679"}
-        - {chain: "OUTPUT", jump: "REDIRECT", match: "tcp", to_ports: "51679"}
+        jump: "DNAT"
+        to_destination: "127.0.0.1:51679"
+      become: true
+
+    - name: Configure our iptables for ecs
+      iptables:
+        table: nat
+        action: append
+        chain: "OUTPUT"
+        protocol: "tcp"
+        match: "tcp"
+        destination: "169.254.170.2"
+        destination_port: "80"
+        jump: "REDIRECT"
+        to_ports: "51679"
       become: true
 
     - name: Get our ecs-agent
       docker_image:
-        name: docker pull amazon/amazon-ecs-agent
+        name: amazon/amazon-ecs-agent
 
     - name: Run our ecs container
       raw: "docker run --name ecs-agent \
