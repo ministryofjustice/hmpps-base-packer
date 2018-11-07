@@ -14,13 +14,12 @@
 
     - name: Create our required directories
       file:
-        state: present
-        type: directory
         path: "{{ item }}"
+        state: directory
       with_items:
-        - /var/log/ecs
-        - /etc/ecs
-        - /var/lib/ecs/data
+        - "/var/log/ecs"
+        - "/etc/ecs"
+        - "/var/lib/ecs/data"
       become: true
 
     - name: Ensure our ECS config file exists
