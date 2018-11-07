@@ -10,8 +10,11 @@
         name: bootstrap
         tasks_from: docker.yml
 
-    # See https://github.com/aws/amazon-ecs-agent for all the shiny gubbins
+    - name: Create our system user and add it to the docker group
+      include_role:
+        name: sys_user
 
+    # See https://github.com/aws/amazon-ecs-agent for all the shiny gubbins
     - name: Create our required directories
       file:
         path: "{{ item }}"
