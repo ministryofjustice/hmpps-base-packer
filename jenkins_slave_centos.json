@@ -35,7 +35,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Base Docker CentOS {{user `branch_name`}}*",
+          "name": "HMPPS Base Docker Centos {{user `branch_name`}}*",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],

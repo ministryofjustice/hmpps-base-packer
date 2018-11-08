@@ -59,11 +59,11 @@ pipeline {
             }
         }*/
 
-        stage('Build Centos Docker AMI') {
+        /*stage('Build Centos Docker AMI') {
             parallel {
                 stage('Build Centos Docker') { steps { script {build_image('centos_docker.json')}}}
             }
-        }
+        }*/
 
         stage('Build Centos Docker Dependant AMIS') {
             parallel {
