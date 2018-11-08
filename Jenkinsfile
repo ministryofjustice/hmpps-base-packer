@@ -61,7 +61,7 @@ pipeline {
 
         stage('Build Centos Docker AMI') {
             parallel {
-                stage('Build Centos Dokcker') { steps { script {build_image('centos_docker.json')}}}
+                stage('Build Centos Docker') { steps { script {build_image('centos_docker.json')}}}
             }
         }
 
