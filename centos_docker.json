@@ -8,8 +8,7 @@
       "type": "ansible-local",
       "playbook_file": "./ansible/centos_docker.yml",
       "extra_arguments": [
-        "-b",
-        "-vvv"
+        "-b"
       ],
       "galaxy_file": "./ansible/centos_req.yml",
       "inventory_groups": "centos_docker",
