@@ -5,12 +5,6 @@
     - packages
   tasks:
 
-    - name: Install docker and compose
-      include_role:
-        name: bootstrap
-        tasks_from: docker.yml
-
-    -
     # See https://github.com/aws/amazon-ecs-agent for all the shiny gubbins
     - name: Create our required directories
       file:

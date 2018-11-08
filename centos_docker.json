@@ -6,12 +6,12 @@
   "provisioners": [
     {
       "type": "ansible-local",
-      "playbook_file": "./ansible/centos_ecs.yml",
+      "playbook_file": "./ansible/centos_docker.yml",
       "extra_arguments": [
         "-b"
       ],
       "galaxy_file": "./ansible/centos_req.yml",
-      "inventory_groups": "centos_ecs",
+      "inventory_groups": "centos_docker",
       "group_vars": "./ansible/group_vars"
     }
   ],
@@ -23,7 +23,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Base Docker Centos {{user `branch_name`}}*",
+          "name": "HMPPS Base CentOS {{user `branch_name`}}*",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],
@@ -41,7 +41,7 @@
       "subnet_id": "subnet-00982fba28419ac5f",
       "ssh_username": "centos",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "ami_name": "HMPPS ECS Centos {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS Base Docker Centos {{user `branch_name`}} {{timestamp}}"
     }
   ]
 }

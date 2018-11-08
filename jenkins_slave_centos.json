@@ -22,7 +22,7 @@
         "-b",
         "-e artifact_bucket={{user `artifact_bucket`}}"
       ],
-      "galaxy_file": "./ansible/centos_slave_req.yml",
+      "galaxy_file": "./ansible/centos_req.yml",
       "inventory_groups": "centos_slave",
       "group_vars": "./ansible/group_vars"
     }
@@ -35,7 +35,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Base CentOS {{user `branch_name`}}*",
+          "name": "HMPPS Base Docker Centos {{user `branch_name`}}*",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],

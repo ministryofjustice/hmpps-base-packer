@@ -1,0 +1,11 @@
+---
+
+- hosts: localhost
+  roles:
+    - packages
+  tasks:
+
+    - name: Install docker and compose
+      include_role:
+        name: bootstrap
+        tasks_from: docker.yml
