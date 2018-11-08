@@ -1,7 +1,0 @@
----
-- name: bootstrap
-  src: https://github.com/ministryofjustice/hmpps-bootstrap.git
-  version: centos
-- name: packages
-  src:  https://github.com/ministryofjustice/hmpps-ansible-packages.git
-
