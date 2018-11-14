@@ -1,3 +1,5 @@
+---
+
 - hosts: localhost
   roles:
     - dev-sec.os-hardening
