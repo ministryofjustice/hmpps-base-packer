@@ -22,9 +22,7 @@
       "extra_arguments": [
         "-b"
       ],
-      "galaxy_file": "./ansible/requirements.yml",
-      "inventory_groups": "centos7",
-      "group_vars": "./ansible/group_vars"
+      "galaxy_file": "./ansible/requirements.yml"
     }
   ],
   "builders": [

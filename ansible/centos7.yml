@@ -1,4 +1,13 @@
 - hosts: localhost
+  pre_tasks:
+    - name: Get our maxuid
+      raw: tr -s ' ' < /etc/login.defs | tr -s '\t' | tr '\t' ' ' | grep  "^UID_MAX" | cut -d " " -f2
+      register: sysuser_uid
+
+    - name: Set User Facts
+      set_fact:
+        system_groups: [{group: hmpps_sys_user, gid: "{{ (sysuser_uid.stdout|int)/2|int }}"}]
+        system_users:  [{name: hmpps_sys_user, uid: "{{ (sysuser_uid.stdout|int)/2|int }} }}", group: hmpps_sys_user, groups: wheel }]
   roles:
     - dev-sec.os-hardening
     - linuxhq.yum_cron
