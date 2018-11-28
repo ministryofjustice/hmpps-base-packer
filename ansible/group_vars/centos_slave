@@ -9,6 +9,5 @@ system:
     - gcc-c++
     - openssl-devel
     - make
-    - jq
 
 install_jdk: true

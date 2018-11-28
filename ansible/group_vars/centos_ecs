@@ -5,7 +5,6 @@ system:
     - yum-utils
     - device-mapper-persistent-data
     - lvm2
-    - jq
 
 install_jdk: false
 
