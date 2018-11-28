@@ -9,3 +9,7 @@ system_users:
     uid: 10000
     group: hmpps_sys_user
     groups: wheel
+
+system:
+  packages:
+    - jq
