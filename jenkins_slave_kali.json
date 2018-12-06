@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "target_env": "{{env `TARGET_ENV`}}",
+    "artifact_bucket": "{{env `ARTIFACT_BUCKET`}}"
+  },
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/configure_github.sh",
+      "destination": "/home/ec2-user/configure_github"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/jenkins_kali_slave.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "source_ami": "ami-0effb6b7c7602646a",
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917",
+          "077643444046",
+          "723123699647"
+      ],
+      "ssh_username": "ec2-user",
+      "temporary_security_group_source_cidr": "217.33.148.210/32",
+      "ami_name": "HMPPS Jenkins Slave Kali {{user `branch_name`}} {{timestamp}}",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile"
+    }
+  ]
+}
