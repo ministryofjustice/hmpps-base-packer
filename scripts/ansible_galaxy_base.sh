@@ -4,7 +4,8 @@
 sudo yum install -y \
     git \
     python-pip \
-    wget
+    wget \
+    yum-utils
 
 sudo pip install ansible==2.6 virtualenv awscli boto botocore boto3
 
