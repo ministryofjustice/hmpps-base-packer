@@ -48,6 +48,7 @@ pipeline {
                 stage('Verify Centos 7 Jenkins Slave') { steps { script {verify_image('jenkins_slave_centos.json')}}}
                 stage('Verify Centos 7 ECS-Ready') { steps { script {verify_image('centos_ecs.json')}}}
                 stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
+                stage('Verify Kali Linux Jenkins Slave') { steps { script {verify_image('jenkins_kali_slave.json')}}}
             }
         }
 
@@ -56,6 +57,7 @@ pipeline {
                 stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
                 stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
+                stage('Build Kali Linux Jenkins Slave') { steps { script {build_image('jenkins_kali_slave.json')}}}
             }
         }
 
