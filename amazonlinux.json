@@ -36,7 +36,8 @@
       "temporary_security_group_source_cidr": "10.0.0.0/8",
       "ssh_username": "ec2-user",
       "ami_groups": "all",
-      "ami_name": "HMPPS Base Amazon Linux {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS Base Amazon Linux {{user `branch_name`}} {{timestamp}}",
+      "ssh_file_transfer_method": "sftp"
     }
   ]
 }
