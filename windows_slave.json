@@ -63,6 +63,10 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/Windows/JenkinsSlave/InstallChromeEnterprise.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/Windows/JenkinsSlave/ManageJenkinsUser.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
