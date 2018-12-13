@@ -30,21 +30,27 @@
       args:
         warn: false
 
-    - name: Install our new kernel
-      yum:
-        name: kernel-ml
-        state: present
-        enablerepo: elrepo-kernel
-      become: true
+# Currently we only need this for alfresco clustering on aws which is yet to be implemented
+# and the new kernel is having knock on implications with oracle products
+# So we are removing this for now until we get time to fully test the implications of
+# upgrading our kernel
 
-    - name: Set our new kernel as default
-      command: grub2-set-default 0
-      become: true
-
-    - name: Regenerate grub
-      command: grub2-mkconfig -o /boot/grub2/grub.cfg
-      become: true
-
-    - name: Clean up old kernels
-      command: package-cleanup --oldkernels
-      become: true
+#
+#    - name: Install our new kernel
+#      yum:
+#        name: kernel-ml
+#        state: present
+#        enablerepo: elrepo-kernel
+#      become: true
+#
+#    - name: Set our new kernel as default
+#      command: grub2-set-default 0
+#      become: true
+#
+#    - name: Regenerate grub
+#      command: grub2-mkconfig -o /boot/grub2/grub.cfg
+#      become: true
+#
+#    - name: Clean up old kernels
+#      command: package-cleanup --oldkernels
+#      become: true
