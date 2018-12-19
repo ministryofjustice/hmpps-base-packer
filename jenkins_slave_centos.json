@@ -22,7 +22,7 @@
         "-b",
         "-e artifact_bucket={{user `artifact_bucket`}}"
       ],
-      "galaxy_file": "./ansible/centos_req.yml",
+      "galaxy_file": "./ansible/centos_slave_req.yml",
       "inventory_groups": "centos_slave",
       "group_vars": "./ansible/group_vars"
     },
