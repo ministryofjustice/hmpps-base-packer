@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        /*stage('Verify Packer AMIS') {
+        stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Amazon Linux') { steps { script {verify_image('amazonlinux.json')}}}
                 stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
@@ -50,14 +50,14 @@ pipeline {
                 stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
                 stage('Verify Kali Linux Jenkins Slave') { steps { script {verify_image('jenkins_slave_kali.json')}}}
             }
-        }*/
+        }
 
-        /*stage('Build Packer Base AMIS') {
+        stage('Build Packer Base AMIS') {
             parallel {
-           //     stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
+                stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
-            //    stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
-             //   stage('Build Kali Linux Jenkins Slave') { steps { script {build_image('jenkins_slave_kali.json')}}}
+                stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
+                stage('Build Kali Linux Jenkins Slave') { steps { script {build_image('jenkins_slave_kali.json')}}}
             }
         }
 
@@ -65,12 +65,12 @@ pipeline {
             parallel {
                 stage('Build Centos Docker') { steps { script {build_image('centos_docker.json')}}}
             }
-        }*/
+        }
 
         stage('Build Centos Docker Dependant AMIS') {
             parallel {
                 stage('Build Centos Jenkins Slave') { steps { script {build_image('jenkins_slave_centos.json')}}}
-        //        stage('Build Centos 7 ECS-Ready') { steps { script {build_image('centos_ecs.json')}}}
+                stage('Build Centos 7 ECS-Ready') { steps { script {build_image('centos_ecs.json')}}}
             }
         }
     }
