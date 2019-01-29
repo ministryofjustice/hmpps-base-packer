@@ -33,6 +33,14 @@ def build_image(filename) {
 pipeline {
     agent { label "jenkins_slave"}
 
+    options {
+        ansiColor('xterm')
+    }
+
+    triggers {
+        cron(env.BRANCH_NAME=='master'? '0 2 * * *': '')
+    }
+
     stages {
         stage ('Notify build started') {
             steps {
