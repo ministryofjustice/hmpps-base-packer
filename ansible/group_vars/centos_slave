@@ -13,5 +13,5 @@ system:
 install_jdk: true
 install_chrome: true
 install_chrome_driver: true
-chrome_version: "-0:71.0.3578.98-1.x86_64"
+chrome_version: "71.0.3578.98-1"
 chromedriver_version: "2.44"
