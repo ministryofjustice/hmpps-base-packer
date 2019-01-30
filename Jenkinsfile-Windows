@@ -74,11 +74,11 @@ pipeline {
             }
         }*/
 
-        stage('Build Packer Base AMIS') {
+       /* stage('Build Packer Base AMIS') {
             parallel {
                 stage('Build Windows Server Base') { steps { script {build_win_image('windows_base.json')}}}
             }
-        }
+        }*/
 
        stage('Build Packer Dependant AMIS') {
             parallel {
