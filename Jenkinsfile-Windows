@@ -64,7 +64,7 @@ pipeline {
             }
         }
 
-        stage('Verify Packer AMIS') {
+       /* stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Windows Server Base') { steps { script {verify_win_image('windows_base.json')}}}
                 stage('Verify Windows Server Jenkins Slave') { steps { script {verify_win_image('windows_slave.json')}}}
@@ -72,7 +72,7 @@ pipeline {
                 stage('Verify Windows Server MIS Nart BCS') { steps { script {verify_win_image('windows_misnart_bcs.json')}}}
                 stage('Verify Windows Server MIS Nart BFS') { steps { script {verify_win_image('windows_misnart_bfs.json')}}}
             }
-        }
+        }*/
 
         stage('Build Packer Base AMIS') {
             parallel {
@@ -80,19 +80,19 @@ pipeline {
             }
         }
 
-        stage('Build Packer Dependant AMIS') {
+       stage('Build Packer Dependant AMIS') {
             parallel {
                 stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
-                stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
+       //         stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
             }
         }
 
-        stage('Build Packer MIS Dependant AMIS') {
+        /*stage('Build Packer MIS Dependant AMIS') {
             parallel {
                 stage('Build Windows Server MIS Nart BCS') { steps { script {build_win_image('windows_misnart_bcs.json')}}}
                 stage('Build Windows Server MIS Nart BFS') { steps { script {build_win_image('windows_misnart_bfs.json')}}}
             }
-        }
+        }*/
     }
 
     post {
