@@ -35,3 +35,4 @@ packer_cache/
 
 # IntelliJ/Pycharm ide files
 .idea/
+.venv

@@ -19,19 +19,21 @@ def build_image(filename) {
         sh """
         #!/usr/env/bin bash
         set +x
-        docker run --rm \
-        -e BRANCH_NAME \
-        -e TARGET_ENV \
-        -e ARTIFACT_BUCKET \
-        -e ZAIZI_BUCKET \
-        -v `pwd`:/home/tools/data \
-        mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build """ + filename + "'"
+
+        virtualenv venv_${filename} -p python3
+        . venv_${filename}/bin/activate
+        pip install -r requirements.txt
+
+        python3 generate_metadata.py ${filename}
+
+        deactivate
+        rm -rf venv_${filename}
+        """
     }
 }
 
 pipeline {
-    agent { label "jenkins_slave"}
+    agent { label "python3"}
 
     options {
         ansiColor('xterm')
