@@ -27,11 +27,19 @@ def find_json_value(json_obj, key):
 
 
 def extract_galaxy_libs(filename):
+    galaxy_libs = {}
+
     with open(filename) as json_data:
         data = json.load(json_data)
         json_data.close()
+        galaxy_file = find_json_value(data, 'galaxy_file')
 
-    print(find_json_value(data, 'galaxy_file'))
+        if galaxy_file:
+            with open(galaxy_file) as galaxy_file_data:
+                galaxy_data = yaml.load(galaxy_file_data)
+                print(galaxy_data)
+
+    return galaxy_libs
 
 
 if __name__ == "__main__":
