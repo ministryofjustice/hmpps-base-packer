@@ -2,7 +2,7 @@
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
-choco install googlechrome -y --version 71.0.3578.98
+choco install googlechrome -y -ignore-checksums --version 71.0.3578.98
 
 # Create our master preference file
 $fileData = @"
