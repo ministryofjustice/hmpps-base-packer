@@ -5,6 +5,11 @@
   },
   "provisioners": [
     {
+      "type": "file",
+      "source": "./centos_docker.json_meta.json",
+      "destination": "/opt/meta-data/centos_docker.json"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "./ansible/centos_docker.yml",
       "extra_arguments": [

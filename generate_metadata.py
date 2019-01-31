@@ -78,7 +78,7 @@ def find_jenkins_env_data():
     jenkins_data = {
         'build_data': [
             {'jenkins': {
-                'build_time': datetime.datetime.now(),
+                'build_time': str(datetime.datetime.now()),
                 'build_url': os.getenv('BUILD_URL', ''),
                 'build_number': os.getenv('BUILD_ID', ''),
                 'build_tag': os.getenv('BUILD_TAG', '')
@@ -99,4 +99,3 @@ if __name__ == "__main__":
     meta_data = list()
     meta_data.append({'ansible_galaxy': extract_galaxy_libs(filename=sys.argv[1])})
     meta_data.append(find_jenkins_env_data())
-    print(write_file(filename=sys.argv[1], data=meta_data))

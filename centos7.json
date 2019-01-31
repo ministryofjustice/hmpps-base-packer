@@ -9,6 +9,11 @@
       "script": "scripts/update.sh"
     },
     {
+      "type": "file",
+      "source": "./centos7.json_meta.json",
+      "destination": "/opt/meta-data/centos7.json"
+    },
+    {
       "type": "shell",
       "script": "scripts/centos7_awscli.sh"
     },

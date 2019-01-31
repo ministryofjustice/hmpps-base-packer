@@ -18,17 +18,24 @@ def build_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
-        set -x
         virtualenv venv_${filename} -p python3
         . venv_${filename}/bin/activate
         pip install -r requirements.txt
-        set +x
         python3 generate_metadata.py ${filename}
-        set -x
         deactivate
         rm -rf venv_${filename}
 
-        cat ./${filename}_meta.json
+        set +x
+        docker run --rm \
+        -e BRANCH_NAME \
+        -e TARGET_ENV \
+        -e ARTIFACT_BUCKET \
+        -e ZAIZI_BUCKET \
+        -v `pwd`:/home/tools/data \
+        mojdigitalstudio/hmpps-packer-builder \
+        bash -c 'USER=`whoami` packer build ${filename}'
+
+        rm ./${filename}_meta.json
         """
     }
 }
