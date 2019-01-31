@@ -11,14 +11,10 @@
     },
     {
       "type": "shell",
-      "environment_vars" : [
-        "PACKER_SOURCE_AMI={{ .SourceAMIName }}",
-        "PACKER_SOURCE_AMI_ID={{ .SourceAMI }}"
-      ],
       "inline": [
         "echo \"PackerBuildName: ${PACKER_BUILD_NAME}\" >> /opt/meta-data/ami.meta",
-        "echo \"SourceAMIName: ${PACKER_SOURCE_AMI}\" >> /opt/meta-data/ami.meta",
-        "echo \"SourceAMIId: ${PACKER_SOURCE_AMI_ID}\" >> /opt/meta-data/ami.meta",
+        "PACKER_SOURCE_AMI_ID=`curl -S http://169.254.169.254/latest/meta-data/ami-id`",
+        "echo \"SourceAMIId: $PACKER_SOURCE_AMI_ID\" >> /opt/meta-data/ami.meta",
         "echo \"UpdateDateTime: `date`\" >> /opt/meta-data/ami.meta",
         "echo \"\n\" >> /opt/meta-data/ami.meta"
       ]
@@ -63,7 +59,6 @@
       "ami_name": "HMPPS ECS Centos {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "Centos7",
-        "Release": "Latest",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS ECS CentOS {{user `branch_name`}} {{timestamp}}"
