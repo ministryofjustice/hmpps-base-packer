@@ -4,7 +4,7 @@ import json
 import sys
 import os
 import shutil
-
+import datetime
 
 def find_repo_revision(repo, filename, branch='master'):
     shutil.rmtree(os.path.join(filename + '_git'), ignore_errors=True)
@@ -67,8 +67,36 @@ def extract_galaxy_libs(filename):
     return galaxy_libs
 
 
-if __name__ == "__main__":
-    meta_data = []
-    meta_data.append({'ansible_galaxy': extract_galaxy_libs(filename=sys.argv[1])})
+def write_file(filename, data):
+    with open('./{}_meta.json'.format(filename), 'w') as meta_file:
+        print(data, file=meta_file)
 
-    print(meta_data)
+    return './{}_meta.json'.format(filename)
+
+
+def find_jenkins_env_data():
+    jenkins_data = {
+        'build_data': [
+            {'jenkins': {
+                'build_time': datetime.datetime.now(),
+                'build_url': os.getenv('BUILD_URL', ''),
+                'build_number': os.getenv('BUILD_ID', ''),
+                'build_tag': os.getenv('BUILD_TAG', '')
+            }},
+            {'git': {
+                'git_repo': os.getenv('GIT_URL', ''),
+                'git_commit': os.getenv('GIT_COMMIT', ''),
+                'git_previous_commit': os.getenv('GIT_PREVIOUS_COMMIT', ''),
+                'git_branch': os.getenv('GIT_BRANCH', '')
+            }}
+        ]
+    }
+
+    return jenkins_data
+
+
+if __name__ == "__main__":
+    meta_data = list()
+    meta_data.append({'ansible_galaxy': extract_galaxy_libs(filename=sys.argv[1])})
+    meta_data.append(find_jenkins_env_data())
+    print(write_file(filename=sys.argv[1], data=meta_data))
