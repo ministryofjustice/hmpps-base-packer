@@ -9,7 +9,7 @@ def verify_image(filename) {
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
-        mojdigitalstudio/hmpps-packer-builder \
+        mojdigitalstudio/hmpps-packer-builder:0.0.113-alpha \
         bash -c 'USER=`whoami` packer validate ''' + filename + "'"
     }
 }
@@ -32,7 +32,7 @@ def build_image(filename) {
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
-        mojdigitalstudio/hmpps-packer-builder \
+        mojdigitalstudio/hmpps-packer-builder:0.0.113-alpha \
         bash -c 'USER=`whoami` packer build ${filename}'
 
         rm ./meta/${filename}_meta.json
