@@ -5,6 +5,25 @@
   },
   "provisioners": [
     {
+      "type": "file",
+      "source": "./meta/centos_docker.json_meta.json",
+      "destination": "/opt/meta-data/centos_docker.json"
+    },
+    {
+      "type": "shell",
+      "environment_vars" : [
+        "PACKER_SOURCE_AMI={{ .SourceAMIName }}",
+        "PACKER_SOURCE_AMI_ID={{ .SourceAMI }}"
+      ],
+      "inline": [
+        "echo \"PackerBuildName: ${PACKER_BUILD_NAME}\" >> /opt/meta-data/ami.meta",
+        "echo \"SourceAMIName: ${PACKER_SOURCE_AMI}\" >> /opt/meta-data/ami.meta",
+        "echo \"SourceAMIId: ${PACKER_SOURCE_AMI_ID}\" >> /opt/meta-data/ami.meta",
+        "echo \"UpdateDateTime: `date`\" >> /opt/meta-data/ami.meta",
+        "echo \"\n\" >> /opt/meta-data/ami.meta"
+      ]
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "./ansible/centos_docker.yml",
       "extra_arguments": [

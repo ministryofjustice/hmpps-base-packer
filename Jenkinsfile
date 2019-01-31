@@ -18,6 +18,13 @@ def build_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
+        virtualenv venv_${filename} -p python3
+        . venv_${filename}/bin/activate
+        pip install -r requirements.txt
+        python3 generate_metadata.py ${filename}
+        deactivate
+        rm -rf venv_${filename}
+
         set +x
         docker run --rm \
         -e BRANCH_NAME \
@@ -26,12 +33,16 @@ def build_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build """ + filename + "'"
+        bash -c 'ansible-galaxy install -r ansible/requirements.yml; \
+            PACKER_VERSION=`packer --version` USER=`whoami` packer build ${filename}'
+
+            rm ./meta/${filename}_meta.json
+            """
     }
 }
 
 pipeline {
-    agent { label "jenkins_slave"}
+    agent { label "python3"}
 
     options {
         ansiColor('xterm')
