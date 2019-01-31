@@ -8,6 +8,15 @@
   "provisioners": [
     {
       "type": "file",
+      "source": "./meta/jenkins_slave_centos.json_meta.json",
+      "destination": "/opt/meta-data/jenkins_slave_centos.json"
+    },
+    {
+      "type": "shell",
+      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+    },
+    {
+      "type": "file",
       "source": "files/configure_github.sh",
       "destination": "/home/centos/configure_github"
     },

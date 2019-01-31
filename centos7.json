@@ -15,6 +15,10 @@
     },
     {
       "type": "shell",
+      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+    },
+    {
+      "type": "shell",
       "script": "scripts/centos7_awscli.sh"
     },
     {

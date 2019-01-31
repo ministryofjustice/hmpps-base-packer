@@ -10,6 +10,10 @@
       "destination": "/opt/meta-data/centos_docker.json"
     },
     {
+      "type": "shell",
+      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "./ansible/centos_docker.yml",
       "extra_arguments": [

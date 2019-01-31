@@ -5,6 +5,19 @@
   },
   "provisioners": [
     {
+      "type": "shell",
+      "inline": "sudo mkdir -p /opt/meta-data/; sudo chmod -R 777 /opt/meta-data"
+    },
+    {
+      "type": "file",
+      "source": "./meta/jenkins_slave.json_meta.json",
+      "destination": "/opt/meta-data/jenkins_slave.json"
+    },
+    {
+      "type": "shell",
+      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+    },
+    {
       "type": "file",
       "source": "files/configure_github.sh",
       "destination": "/home/ec2-user/configure_github"

@@ -5,6 +5,15 @@
   },
   "provisioners": [
     {
+      "type": "file",
+      "source": "./meta/centos_ecs.json_meta.json",
+      "destination": "/opt/meta-data/centos_ecs.json"
+    },
+    {
+      "type": "shell",
+      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "./ansible/centos_ecs.yml",
       "extra_arguments": [

@@ -9,6 +9,15 @@
       "script": "scripts/update.sh"
     },
     {
+      "type": "file",
+      "source": "./meta/amazonlinux.json_meta.json",
+      "destination": "/opt/meta-data/amazonlinux.json"
+    },
+    {
+      "type": "shell",
+      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+    },
+    {
       "type": "ansible",
       "playbook_file": "./ansible/amazonlinux.yml",
       "extra_arguments": [ "-b" ]
