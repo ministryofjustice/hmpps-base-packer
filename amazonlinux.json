@@ -28,6 +28,10 @@
       ]
     },
     {
+      "type": "shell",
+      "script": "scripts/ansible_galaxy_base.sh"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "./ansible/amazonlinux.yml",
       "extra_arguments": [ "-b" ],
