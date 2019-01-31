@@ -35,7 +35,7 @@ def build_image(filename) {
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'USER=`whoami` packer build ${filename}'
 
-        rm ./${filename}_meta.json
+        rm ./meta/${filename}_meta.json
         """
     }
 }

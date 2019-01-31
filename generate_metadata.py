@@ -68,10 +68,10 @@ def extract_galaxy_libs(filename):
 
 
 def write_file(filename, data):
-    with open('./{}_meta.json'.format(filename), 'w') as meta_file:
+    with open('./meta/{}_meta.json'.format(filename), 'w') as meta_file:
         print(data, file=meta_file)
 
-    return './{}_meta.json'.format(filename)
+    return './meta/{}_meta.json'.format(filename)
 
 
 def find_jenkins_env_data():
@@ -99,3 +99,4 @@ if __name__ == "__main__":
     meta_data = list()
     meta_data.append({'ansible_galaxy': extract_galaxy_libs(filename=sys.argv[1])})
     meta_data.append(find_jenkins_env_data())
+    write_file(filename=sys.argv[1], data=meta_data)

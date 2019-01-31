@@ -6,7 +6,7 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "./centos_docker.json_meta.json",
+      "source": "./meta/centos_docker.json_meta.json",
       "destination": "/opt/meta-data/centos_docker.json"
     },
     {

@@ -10,7 +10,7 @@
     },
     {
       "type": "file",
-      "source": "./centos7.json_meta.json",
+      "source": "./meta/centos7.json_meta.json",
       "destination": "/opt/meta-data/centos7.json"
     },
     {
