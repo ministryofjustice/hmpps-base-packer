@@ -15,7 +15,17 @@
     },
     {
       "type": "shell",
-      "inline": "echo \"SourceAMI: {{ .SourceAMIName }}\nSourceAMIID: {{ .SourceAMI }}\" > /opt/meta-data/ami.meta"
+      "environment_vars" : [
+        "PACKER_SOURCE_AMI={{ .SourceAMIName }}",
+        "PACKER_SOURCE_AMI_ID={{ .SourceAMI }}"
+      ],
+      "inline": [
+        "echo \"PackerBuildName: ${PACKER_BUILD_NAME}\" >> /opt/meta-data/ami.meta",
+        "echo \"SourceAMIName: ${PACKER_SOURCE_AMI}\" >> /opt/meta-data/ami.meta",
+        "echo \"SourceAMIId: ${PACKER_SOURCE_AMI_ID}\" >> /opt/meta-data/ami.meta",
+        "echo \"UpdateDateTime: `date`\" >> /opt/meta-data/ami.meta",
+        "echo \"\n\" >> /opt/meta-data/ami.meta"
+      ]
     },
     {
       "type": "shell",

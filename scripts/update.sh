@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-env
-
 sudo mkdir -p /opt/meta-data/
 sudo chmod -R 777 /opt/meta-data
 
