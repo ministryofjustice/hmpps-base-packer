@@ -56,7 +56,13 @@
       "ssh_username": "ec2-user",
       "ami_groups": "all",
       "ami_name": "HMPPS Base Amazon Linux {{user `branch_name`}} {{timestamp}}",
-      "ssh_file_transfer_method": "sftp"
+      "ssh_file_transfer_method": "sftp",
+      "tags": {
+        "OS_Version": "Amazon Linux",
+        "Release": "Latest",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}"
+      }
     }
   ]
 }
