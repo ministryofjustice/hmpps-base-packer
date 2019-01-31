@@ -77,7 +77,14 @@
       "ssh_username": "centos",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
       "ami_name": "HMPPS Jenkins Slave Centos {{user `branch_name`}} {{timestamp}}",
-      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile"
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile",
+      "tags": {
+        "OS_Version": "Centos7",
+        "Release": "Latest",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS Jenkins Slave CentOS {{user `branch_name`}} {{timestamp}}"
+      }
     }
   ]
 }
