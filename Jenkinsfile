@@ -33,7 +33,8 @@ def build_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder:0.0.113-alpha \
-        bash -c 'USER=`whoami` packer build ${filename}'
+        bash -c 'ansible-galaxy install -r ansible/requirements.yml; \
+            USER=`whoami` packer build ${filename}'
 
         rm ./meta/${filename}_meta.json
         """
