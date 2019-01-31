@@ -34,10 +34,10 @@ def build_image(filename) {
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
         bash -c 'ansible-galaxy install -r ansible/requirements.yml; \
-            USER=`whoami` packer build ${filename}'
+            PACKER_VERSION=`packer --version` USER=`whoami` packer build ${filename}'
 
-        rm ./meta/${filename}_meta.json
-        """
+            rm ./meta/${filename}_meta.json
+            """
     }
 }
 
