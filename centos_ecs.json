@@ -60,7 +60,14 @@
       "subnet_id": "subnet-00982fba28419ac5f",
       "ssh_username": "centos",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "ami_name": "HMPPS ECS Centos {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS ECS Centos {{user `branch_name`}} {{timestamp}}",
+      "tags": {
+        "OS_Version": "Centos7",
+        "Release": "Latest",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS ECS CentOS {{user `branch_name`}} {{timestamp}}"
+      }
     }
   ]
 }
