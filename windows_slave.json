@@ -32,7 +32,13 @@
       "ami_users": [
           "895523100917"
       ],
-      "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}"
+      "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}",
+      "tags": {
+        "OS_Version": "Windows Server 2012 R2 RTM",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS Jenkins Slave Windows Server {user `branch_name`}} {{timestamp}}"
+      }
     }
   ],
   "provisioners": [
