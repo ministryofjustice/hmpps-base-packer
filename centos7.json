@@ -30,14 +30,6 @@
     },
     {
       "type": "shell",
-      "script": "scripts/centos7_awscli.sh"
-    },
-    {
-      "type": "shell",
-      "script": "scripts/install_python3.sh"
-    },
-    {
-      "type": "shell",
       "script": "scripts/ansible_galaxy_base.sh"
     },
     {
