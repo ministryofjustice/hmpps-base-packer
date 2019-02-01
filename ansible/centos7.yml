@@ -5,6 +5,7 @@
     - dev-sec.os-hardening
     - linuxhq.yum_cron
     - sys_user
+    - packages
   tasks:
     - name: Disable selinux permanently
       selinux:
