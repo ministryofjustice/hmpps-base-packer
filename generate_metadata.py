@@ -6,6 +6,7 @@ import os
 import shutil
 import datetime
 
+
 def find_repo_revision(repo, filename, branch='master'):
     shutil.rmtree(os.path.join(filename + '_git'), ignore_errors=True)
     repo = git.Repo.clone_from(repo, os.path.join(filename+'_git'), branch=branch,)
@@ -69,7 +70,7 @@ def extract_galaxy_libs(filename):
 
 def write_file(filename, data):
     with open('./meta/{}_meta.json'.format(filename), 'w') as meta_file:
-        print(data, file=meta_file)
+        json.dump(data, meta_file)
 
     return './meta/{}_meta.json'.format(filename)
 
