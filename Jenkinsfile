@@ -18,12 +18,12 @@ def build_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
         #!/usr/env/bin bash
-        #virtualenv venv_${filename} -p python3
-        #. venv_${filename}/bin/activate
-        #pip install -r requirements.txt
-        python3 generate_metadata.py ${filename}
-        #deactivate
-        #rm -rf venv_${filename}
+        # virtualenv venv_${filename} -p python3
+        # . venv_${filename}/bin/activate
+        # pip install -r requirements.txt
+        # python3 generate_metadata.py ${filename}
+        # deactivate
+        # rm -rf venv_${filename}
 
         set +x
         docker run --rm \
