@@ -29,6 +29,16 @@
       ]
     },
     {
+      "type": "file",
+      "source": "./files/ebsnvme-id",
+      "destination": "/tmp/ebsnvme-id"
+    },
+    {
+      "type": "file",
+      "source": "./files/90-ec2-nvme-devices.rules",
+      "destination": "/tmp/90-ec2-nvme-devices.rules"
+    },
+    {
       "type": "shell",
       "script": "scripts/ansible_galaxy_base.sh"
     },
