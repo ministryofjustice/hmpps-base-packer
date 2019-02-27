@@ -18,3 +18,19 @@
         regexp: "kernel.yama.ptrace_scope="
         state: absent
       become: true
+
+    - name: Copy AWS ebsnvme-id script
+      copy:
+        src: /tmp/ebsnvme-id
+        dest: /usr/sbin/ebsnvme-id
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Copy udev rules for nvme disks
+      copy:
+        src: /tmp/90-ec2-nvme-devices.rules
+        dest: /etc/udev/rules.d/90-ec2-nvme-devices.rules
+        owner: root
+        group: root
+        mode: 0544
