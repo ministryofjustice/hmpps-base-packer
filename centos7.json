@@ -16,7 +16,7 @@
     },
     {
       "type": "shell",
-      "environment_vars" : [
+      "environment_vars": [
         "PACKER_VERSION={{user `packer_version`}}"
       ],
       "inline": [
@@ -64,11 +64,15 @@
           "description": "CentOS Linux 7 x86_64 HVM EBS*",
           "root-device-type": "ebs"
         },
-        "owners": ["410186602215"],
+        "owners": [
+          "410186602215"
+        ],
         "most_recent": true
       },
       "instance_type": "t2.micro",
-      "ami_regions": ["eu-west-2"],
+      "ami_regions": [
+        "eu-west-2"
+      ],
       "ssh_username": "centos",
       "ami_users": [
         "895523100917",
@@ -84,7 +88,8 @@
         "330914586320",
         "130847504577",
         "077643444046",
-        "479759138745"
+        "479759138745",
+        "301496033642"
       ],
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
