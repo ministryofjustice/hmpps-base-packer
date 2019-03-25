@@ -12,5 +12,6 @@ sudo chmod -R 777 /opt/meta-data
 sudo yum install -y deltarpm
 
 sudo yum clean all
-sudo yum update --exclude=polkit*
+sudo rm -rf /var/cache/yum
+sudo yum update -y --exclude=polkit*
 sudo reboot
