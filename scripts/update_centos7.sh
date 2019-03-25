@@ -14,6 +14,7 @@ sudo yum install -y deltarpm
 sudo yum clean all
 sudo rm -rf /var/cache/yum
 sudo yum update -y --exclude=polkit*
+echo "Rebooting our system"
 sudo systemctl stop sshd.service
 sudo nohup shutdown -r now < /dev/null > /dev/null 2>&1 &
 exit 0
