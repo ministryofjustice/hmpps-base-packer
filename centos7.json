@@ -8,7 +8,7 @@
     {
       "type": "shell",
       "script": "scripts/update_centos7.sh",
-      "expect_disconnect ": true
+      "expect_disconnect": true
     },
     {
       "type": "shell",
