@@ -28,6 +28,12 @@
       "galaxy_file": "./ansible/centos_req.yml",
       "inventory_groups": "centos_docker",
       "group_vars": "./ansible/group_vars"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo usermod -a -G docker centos"
+      ]
     }
   ],
   "builders": [
