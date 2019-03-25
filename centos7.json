@@ -7,7 +7,15 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "scripts/update.sh"
+      "script": "scripts/update_centos7.sh",
+      "expect_disconnect ": true
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum clean all",
+        "sudo yum -y update"
+      ]
     },
     {
       "type": "file",
