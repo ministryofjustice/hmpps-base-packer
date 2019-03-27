@@ -17,6 +17,3 @@ choco install jq -y
 
 #Carbon
 choco install carbon -y
-
-#Make IE play nice
-Disable-IEEnhancedSecurityConfiguration
