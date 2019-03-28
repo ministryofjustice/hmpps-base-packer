@@ -62,6 +62,10 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/Windows/Base/DisableIESecurity.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/Windows/Base/DisableUAC.ps1"
     },
     {
