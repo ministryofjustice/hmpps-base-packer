@@ -16,4 +16,4 @@ choco install -y awscli
 choco install jq -y
 
 #Carbon
-choco install carbon -y
+choco install carbon -y --version 2.5.0
