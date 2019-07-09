@@ -14,7 +14,8 @@ sudo yum install -y yum-utils \
      git \
      java-1.8.0-openjdk \
      python-pip \
-     jq
+     jq \
+     bzip2
 
 sudo amazon-linux-extras install -y docker
 
@@ -45,5 +46,3 @@ sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mav
 sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
 sudo yum install -y apache-maven
 mvn --version
-
-
