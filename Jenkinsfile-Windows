@@ -96,6 +96,9 @@ pipeline {
     }
 
     post {
+        always {
+            deleteDir()
+        }
         success {
             slackSend(message: "Build completed - ${env.JOB_NAME} ${env.BUILD_NUMBER}", color: 'good')
         }
