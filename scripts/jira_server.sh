@@ -4,7 +4,4 @@ set -e
 sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime
 sudo yum install -y yum-utils wget git python-pip
 sudo pip install -U pip
-sudo pip install virtualenv ansible==2.6 boto3 botocore
-
-sudo chmod +x /home/ec2-user/configure_github
-
+sudo pip install -U virtualenv ansible==2.6 boto3 botocore awscli
