@@ -2,4 +2,5 @@
 
 - hosts: localhost
   roles:
+     - dev-sec.os-hardening
      - jira-install
