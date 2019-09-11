@@ -24,6 +24,11 @@
       ]
     },
     {
+      "type": "file",
+      "source": "files/configure_github.sh",
+      "destination": "/home/ec2-user/configure_github"
+    },
+    {
       "type": "shell",
       "script": "scripts/jira_server.sh"
     },
