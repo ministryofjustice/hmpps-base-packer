@@ -1,4 +1,2 @@
----
-
 - name: jira-install
   src: https://github.com/ministryofjustice/hmpps-engineering-jira-installer.git
