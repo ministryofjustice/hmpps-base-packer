@@ -30,7 +30,7 @@
     {
       "type": "ansible-local",
       "playbook_file": "./ansible/jira_server.yml",
-      "extra_arguments": [],
+      "extra_arguments": ["-b"],
       "galaxy_file": "./ansible/jira_server_requirements.yml",
       "inventory_groups": "jira_server",
       "group_vars": "./ansible/group_vars"
