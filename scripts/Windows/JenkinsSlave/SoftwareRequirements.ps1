@@ -8,3 +8,6 @@ choco install nssm -y --version 2.24.101.20180116
 
 #--- Chromedriver
 choco install -y chromedriver --version 2.440
+
+#--- AWS CLI
+choco install -y awscli--version 1.16.236
