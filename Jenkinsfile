@@ -67,7 +67,7 @@ pipeline {
                 stage('Verify Centos 7 ECS-Ready') { steps { script {verify_image('centos_ecs.json')}}}
                 stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
                 stage('Verify Kali Linux Jenkins Slave') { steps { script {verify_image('jenkins_slave_kali.json')}}}
-                stage('Verify JIRA Server') { steps { script {verify_image('jira_server.json')}}}
+                stage('Verify Amazon Linux 2 JIRA Server') { steps { script {verify_image('jira_server.json')}}}
             }
         }
 
