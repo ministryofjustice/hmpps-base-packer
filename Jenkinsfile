@@ -95,8 +95,10 @@ pipeline {
         }
 
         stage('Build Amazon Linux 2 Dependent AMIs') {
-            stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
-            stage('Build Amazon Linux 2 JIRA Server') { steps { script {build_image('jira_server.json')}}}
+            parallel {
+                stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
+                stage('Build Amazon Linux 2 JIRA Server') { steps { script {build_image('jira_server.json')}}}
+            }
         }
     }
 
