@@ -39,7 +39,7 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-2",
-      "source_ami": "ami-0effb6b7c7602646a",
+      "source_ami": "ami-071d0c011e7ab12f5",
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ami_users": [
