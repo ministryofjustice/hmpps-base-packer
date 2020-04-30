@@ -65,7 +65,17 @@
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Jenkins Slave Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}"
-      }
+      },
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_type": "io1",
+          "iops": 1000,
+          "volume_size": 50,
+          "delete_on_termination": true,
+          "encrypted": false
+        }
+      ]
     }
   ]
 }
