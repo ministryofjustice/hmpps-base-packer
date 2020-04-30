@@ -95,7 +95,7 @@
           "iops": 500,
           "volume_size": 50,
           "delete_on_termination": true,
-          "encrypted": true
+          "encrypted": false
         }
       ]
     }
