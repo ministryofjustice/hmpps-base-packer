@@ -88,6 +88,14 @@
           "volume_size": 50,
           "delete_on_termination": true,
           "encrypted": false
+        },
+        {
+          "device_name": "/dev/xvdc",
+          "volume_type": "io1",
+          "iops": 500,
+          "volume_size": 50,
+          "delete_on_termination": true,
+          "encrypted": true
         }
       ]
     }
