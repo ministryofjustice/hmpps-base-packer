@@ -18,7 +18,7 @@ pip3 --version
 echo 'Installing virtualenv awscli boto ansible==2.6 botocore boto3'
 sudo pip3 install virtualenv awscli boto ansible==2.6 botocore boto3
 
-echo 'Intalling python-owasp-zap-v2.4'
+echo 'Installing python-owasp-zap-v2.4'
 pip3 install python-owasp-zap-v2.4
 
 echo 'Intalling ZAP 2.9 runtime in /usr/share/zaproxy'
