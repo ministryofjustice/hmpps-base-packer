@@ -1,3 +1,6 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+
 $ChocoInstallPath = "$env:SystemDrive\ProgramData\Chocolatey\bin"
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
