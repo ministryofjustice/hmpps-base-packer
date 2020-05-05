@@ -70,6 +70,9 @@ try {
     $winvolumedrive = Get-Partition -DiskNumber 1 
     Write-Host('Installing DotNet3.5 from media volume on drive: ' + $winvolumedrive.DriveLetter)
     $mediasource = $winvolumedrive.DriveLetter + ":\sources\sxs"
+
+    Get-ChildItem -Path $mediasource
+
     Install-WindowsFeature Net-Framework-Core -source $mediasource
     
     if (Get-WindowsFeature -Name Net-Framework-Core) {
