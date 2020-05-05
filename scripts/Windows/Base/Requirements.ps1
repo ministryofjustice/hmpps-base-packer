@@ -13,10 +13,10 @@ if (!(Test-Path $ChocoInstallPath)) {
 choco install miniconda3 -params="/InstallationType=AllUsers /AddToPath=1" -y --version 4.5.12
 
 #Awscli
-choco install -y awscli --version 1.16.133
+choco install -y awscli --version 2.0.10
 
 #JQ
-choco install jq -y --version 1.5
+choco install jq -y --version 1.6
 
 #Carbon
-choco install carbon -y --version 2.5.0
+choco install carbon -y --version 2.9.2
