@@ -1,6 +1,7 @@
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
+Import-Module 'Carbon'
 Import-Module psyaml
 # Set our tls version for the script becuase IE engine...
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
