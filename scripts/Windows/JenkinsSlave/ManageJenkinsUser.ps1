@@ -1,6 +1,8 @@
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
+Import-Module 'Carbon'
+
 # Create jenkins user
 # Get our our password details from ssm
 #$keyname = "/$env:TARGET_ENV/jenkins/windows/slave/jenkins/password"
