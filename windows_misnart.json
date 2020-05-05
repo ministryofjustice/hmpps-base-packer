@@ -109,6 +109,10 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/Windows/MIS/InstallDotNet35.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/Windows/MIS/MISSoftwareRequirements.ps1",
       "environment_vars": [
         "ARTIFACT_BUCKET={{user `artifact_bucket`}}"
