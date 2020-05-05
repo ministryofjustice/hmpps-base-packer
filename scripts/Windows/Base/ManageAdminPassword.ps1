@@ -1,6 +1,9 @@
 $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
+Import-Module 'Carbon'
+
+
 # Get our our password details from ssm
 #$keyname = "/$env:TARGET_ENV/jenkins/windows/slave/admin/password"
 #echo $env:TARGET_ENV
@@ -9,3 +12,5 @@ $VerbosePreference="Continue"
 # Update the admin user
 $adminCreds = New-Credential -UserName Administrator -Password "$env:WIN_ADMIN_PASS"
 Install-User -Credential $adminCreds
+
+
