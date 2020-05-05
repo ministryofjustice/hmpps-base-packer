@@ -71,9 +71,9 @@ try {
     Write-Host('Installing DotNet3.5 from media volume on drive: ' + $winvolumedrive.DriveLetter)
     $mediasource = $winvolumedrive.DriveLetter + ":\sources\sxs"
 
-    Get-ChildItem -Path $mediasource
+    Get-ChildItem -Path "$mediasource"
 
-    Install-WindowsFeature Net-Framework-Core -source $mediasource
+    Install-WindowsFeature -Name "Net-Framework-Core -Source" "$mediasource"
     
     if (Get-WindowsFeature -Name Net-Framework-Core) {
         Write-Host('DotNet 3.5 Installed Successfully')
