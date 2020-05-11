@@ -32,7 +32,7 @@ def build_win_image(filename) {
         -e WIN_BOBJ_PASS="${env.WIN_BOBJ_PASS}" \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'USER=`whoami` packer build """ + filename + "'"
+        bash -c 'USER=`whoami` packer build -debug """ + filename + "'"
     }
 }
 
