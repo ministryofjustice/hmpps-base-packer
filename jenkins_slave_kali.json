@@ -57,7 +57,8 @@
         "OS_Version": "Kali Linux",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Jenkins Slave Kali {{user `branch_name`}} {{timestamp}}"
+        "Name": "HMPPS Jenkins Slave Kali {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}"
       }
     }
   ]

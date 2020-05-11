@@ -35,7 +35,7 @@
         ],
         "most_recent": true
       },
-      "instance_type": "t2.micro",
+      "instance_type": "t2.medium",
       "ami_regions": [
         "eu-west-2"
       ],
@@ -75,7 +75,8 @@
         "OS_Version": "Windows Server 2012 R2 RTM",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS MIS NART Windows Server {user `branch_name`}} {{timestamp}}"
+        "Name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}"
       }
     }
   ],
@@ -106,6 +107,10 @@
     {
       "type": "powershell",
       "script": "scripts/Windows/MIS/InstallSaltStack.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/MIS/InstallDotNet35.ps1"
     },
     {
       "type": "powershell",
