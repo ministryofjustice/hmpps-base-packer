@@ -73,7 +73,7 @@ try {
 
     Get-ChildItem -Path "$mediasource"
 
-    Install-WindowsFeature -Name "Net-Framework-Core -Source" "$mediasource"
+    Install-WindowsFeature -Name "Net-Framework-Core" -Source "$mediasource"
     
     if (Get-WindowsFeature -Name Net-Framework-Core) {
         Write-Host('DotNet 3.5 Installed Successfully')
