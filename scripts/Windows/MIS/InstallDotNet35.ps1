@@ -93,7 +93,7 @@ try {
     Write-Host('Set Windows Media Source Partition Offline')
     Set-Partition -DriveLetter $winvolumedrive.DriveLetter -IsActive $false
     Write-Host('Detaching EBS Volume from Host')
-    $ebsvolumedetach = Dismount-EC2Volume -InstanceId $instanceid -VolumeId $ebsvolume.VolumeId -Device xvdh
+    $ebsvolumedetach = Dismount-EC2Volume -InstanceId $instanceid -VolumeId $ebsvolume.VolumeId -Device xvdb
     $ebsvolumedetach = Get-EC2Volume -VolumeId $ebsvolume.VolumeId
     while ($ebsvolumedetach.State.Equals('in-use') -or $ebsvolumedetach.State.Equals('detaching')) {
         Write-Host('Waiting for volume to detach')
