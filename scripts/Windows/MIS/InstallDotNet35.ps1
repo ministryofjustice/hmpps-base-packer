@@ -41,7 +41,7 @@ try {
     }
 
     Write-Host('Attaching media volume')
-    $winvolume = Add-EC2Volume -InstanceId $instanceid -VolumeId $ebsvolume.VolumeId -Device xvdh
+    $winvolume = Add-EC2Volume -InstanceId $instanceid -VolumeId $ebsvolume.VolumeId -Device /dev/xvdh
     Write-Host('Checking Windows Disk Manager Status')
     $winvolumestatus = Get-Disk -Number 1
     while ($winvolumestatus.OperationalStatus -ne "Online") {
@@ -57,7 +57,10 @@ try {
         $winvolumestatus = Get-Disk -Number 1
     }
     Write-Host('New Disk Online - Making Available')
-    $winvolumedrive = Get-Partition -DiskNumber 1 
+    Write-Host('*** Note:')
+    Write-Host('For MISNART we use Disk Number 2 (not 1) as this packer instance already has a 2nd drive attached')
+    Write-Host('***')
+    $winvolumedrive = Get-Partition -DiskNumber 2
     $winvolumeready = Set-Partition -DriveLetter $winvolumedrive.DriveLetter -IsActive $true -IsReadOnly $true
     Start-Sleep -Seconds 60
 }
@@ -68,7 +71,10 @@ catch [Exception] {
 }
 
 try {
-    $winvolumedrive = Get-Partition -DiskNumber 1 
+    Write-Host('*** Note:')
+    Write-Host('For MISNART we use Disk Number 2 (not 1) as this packer instance already has a 2nd drive attached')
+    Write-Host('***')
+    $winvolumedrive = Get-Partition -DiskNumber 2
     Write-Host('Installing DotNet3.5 from media volume on drive: ' + $winvolumedrive.DriveLetter)
     $mediasource = $winvolumedrive.DriveLetter + ":\sources\sxs"
 
