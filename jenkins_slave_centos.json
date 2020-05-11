@@ -78,7 +78,8 @@
         "OS_Version": "Centos7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Jenkins Slave CentOS {{user `branch_name`}} {{timestamp}}"
+        "Name": "HMPPS Jenkins Slave CentOS {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}"
       },
       "launch_block_device_mappings": [
         {

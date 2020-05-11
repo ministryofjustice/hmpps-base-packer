@@ -67,7 +67,8 @@
         "OS_Version": "Windows Server 2012 R2 RTM",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS MIS NART BCS Windows Server {{user `branch_name`}} {{timestamp}}"
+        "Name": "HMPPS MIS NART BCS Windows Server {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}"
       }
     }
   ],

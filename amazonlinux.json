@@ -57,7 +57,8 @@
         "OS_Version": "Amazon Linux",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Base Amazon Linux {{user `branch_name`}} {{timestamp}}"
+        "Name": "HMPPS Base Amazon Linux {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}"
       }
     }
   ]
