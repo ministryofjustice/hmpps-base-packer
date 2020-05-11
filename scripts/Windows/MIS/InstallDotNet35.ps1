@@ -43,18 +43,18 @@ try {
     Write-Host('Attaching media volume')
     $winvolume = Add-EC2Volume -InstanceId $instanceid -VolumeId $ebsvolume.VolumeId -Device /dev/xvdh
     Write-Host('Checking Windows Disk Manager Status')
-    $winvolumestatus = Get-Disk -Number 1
+    $winvolumestatus = Get-Disk -Number 2
     while ($winvolumestatus.OperationalStatus -ne "Online") {
         Write-Host('Waiting for new disk to come online. Current status: ' + $winvolumestatus.OperationalStatus)
         if ($winvolumestatus.OperationalStatus -eq "Offline") {
             Write-Host('Set Disk 1 Online')
-            Set-Disk -Number 1 -IsOffline $False
+            Set-Disk -Number 2 -IsOffline $False
         }
         Start-Sleep -Seconds 10
         Clear-Variable -Name winvolumestatus
         # Debug step
         Get-Disk
-        $winvolumestatus = Get-Disk -Number 1
+        $winvolumestatus = Get-Disk -Number 2
     }
     Write-Host('New Disk Online - Making Available')
     Write-Host('*** Note:')
