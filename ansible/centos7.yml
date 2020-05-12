@@ -2,7 +2,7 @@
 
 - hosts: localhost
   roles:
-    - dev-sec.os-hardening
+    - os-hardening
     - linuxhq.yum_cron
     - sys_user
     - packages
