@@ -1,4 +1,5 @@
-- src: dev-sec.os-hardening
+- src: https://github.com/dev-sec/ansible-os-hardening
+  version: 5.2.1
 - src: linuxhq.yum_cron
 - name: sys_user
   src:  https://github.com/ministryofjustice/hmpps-delius-core-system-user.git
