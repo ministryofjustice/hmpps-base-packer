@@ -1,4 +1,4 @@
-- name: os-hardening
+- name: dev-sec.os-hardening
   src: https://github.com/dev-sec/ansible-os-hardening
   version: 5.2.1
 - src: linuxhq.yum_cron
