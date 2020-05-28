@@ -8,4 +8,4 @@ sudo yum install -y \
 
 sudo easy_install pip
 
-sudo pip install ansible==2.6 virtualenv awscli boto botocore boto3
+sudo pip install ansible==2.6 virtualenv awscli boto botocore boto3 shyaml
