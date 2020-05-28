@@ -8,7 +8,8 @@
     "bobj_user": "{{env `WIN_BOBJ_USER`}}",
     "bobj_pass": "{{env `WIN_BOBJ_PASS`}}",
     "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
-    "target_env": "{{env `TARGET_ENV`}}"
+    "target_env": "{{env `TARGET_ENV`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "builders": [
     {
@@ -76,7 +77,8 @@
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}",
-        "Git_Branch": "{{user `branch_name`}}"
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}"
       }
     }
   ],

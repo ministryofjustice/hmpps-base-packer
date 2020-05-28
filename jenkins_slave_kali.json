@@ -3,7 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "target_env": "{{env `TARGET_ENV`}}",
-    "artifact_bucket": "{{env `ARTIFACT_BUCKET`}}"
+    "artifact_bucket": "{{env `ARTIFACT_BUCKET`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "provisioners": [
     {
@@ -58,7 +59,8 @@
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Jenkins Slave Kali {{user `branch_name`}} {{timestamp}}",
-        "Git_Branch": "{{user `branch_name`}}"
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}"
       }
     }
   ]

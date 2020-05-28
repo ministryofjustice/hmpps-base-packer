@@ -2,7 +2,8 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
-    "packer_version": "{{env `PACKER_VERSION`}}"
+    "packer_version": "{{env `PACKER_VERSION`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "provisioners": [
     {
@@ -112,7 +113,8 @@
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}",
-        "Git_Branch": "{{user `branch_name`}}"
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}"
       }
     }
   ]
