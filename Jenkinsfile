@@ -57,6 +57,18 @@ def get_git_latest_master_tag() {
     return git_branch
 }
 
+def set_tag_version() {
+    branchName = set_branch_name()
+    if (branchName == "master") {
+        git_tag = get_git_latest_master_tag()
+    }
+    else {
+        git_tag = '0.0.0'
+    }
+    return git_tag
+}
+
+
 pipeline {
     agent { label "python3"}
 
