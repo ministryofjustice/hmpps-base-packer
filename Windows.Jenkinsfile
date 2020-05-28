@@ -1,3 +1,7 @@
+def set_branch_name() {
+    return env.GIT_BRANCH.replace("/", "_")
+}
+
 def verify_win_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh """
