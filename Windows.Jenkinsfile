@@ -42,6 +42,17 @@ def build_win_image(filename) {
     }
 }
 
+def get_git_latest_master_tag() {
+    git_branch = sh (
+                    script: """docker run --rm \
+                                    -v `pwd`:/home/tools/data \
+                                    mojdigitalstudio/hmpps-packer-builder \
+                                    bash -c 'git describe --tags --exact-match'""",
+                    returnStdout: true
+                 ).trim()    
+    return git_branch
+}
+
 def set_tag_version() {
     branchName = set_branch_name()
     if (branchName == "master") {
