@@ -4,7 +4,8 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env_identifier": "{{env `TARGET_ENV`}}",
     "win_pass": "{{env `WIN_ADMIN_PASS`}}",
-    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "sensitive-variables": ["admin_pass"],
   "builders": [
@@ -52,7 +53,8 @@
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Windows Server Base {{user `branch_name`}} {{timestamp}}",
-        "Git_Branch": "{{user `branch_name`}}"
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}"
       }
     }
   ],
