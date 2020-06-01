@@ -71,7 +71,8 @@
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS JIRA Server Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
-        "image_tag_version": "{{user `image_tag_version`}}"
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
       }
     }
   ]
