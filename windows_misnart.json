@@ -96,15 +96,15 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallGit.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallGit.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallJDK8.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallJDK8.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallJDK8.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallJDK8.ps1"
     },
     {
       "type": "powershell",

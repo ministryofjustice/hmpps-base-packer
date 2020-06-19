@@ -2,6 +2,8 @@
   "variables": {
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
+    "target_env": "{{env `TARGET_ENV`}}",
+    "artifact_bucket": "{{env `ARTIFACT_BUCKET`}}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "provisioners": [
@@ -11,8 +13,8 @@
     },
     {
       "type": "file",
-      "source": "./meta/jenkins_slave.json_meta.json",
-      "destination": "/opt/meta-data/jenkins_slave.json"
+      "source": "./meta/jenkins_slave_kali.json_meta.json",
+      "destination": "/opt/meta-data/jenkins_slave_kali.json"
     },
     {
       "type": "shell",
@@ -31,23 +33,14 @@
     },
     {
       "type": "shell",
-      "script": "scripts/jenkins_slave.sh"
+      "script": "scripts/jenkins_kali_agent.sh"
     }
   ],
   "builders": [
     {
       "type": "amazon-ebs",
       "region": "eu-west-2",
-      "source_ami_filter": {
-        "filters": {
-          "virtualization-type": "hvm",
-          "architecture": "x86_64",
-          "name": "HMPPS Base Amazon Linux 2 LTS*",
-          "root-device-type": "ebs"
-        },
-        "owners": ["895523100917"],
-        "most_recent": true
-      },
+      "source_ami": "ami-071d0c011e7ab12f5",
       "instance_type": "t2.micro",
       "ami_regions": ["eu-west-2"],
       "ami_users": [
@@ -60,12 +53,12 @@
       "subnet_id": "subnet-00982fba28419ac5f",
       "ssh_username": "ec2-user",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "ami_name": "HMPPS Jenkins Slave Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
+      "ami_name": "HMPPS Jenkins Agent Kali {{user `branch_name`}} {{timestamp}}",
       "tags": {
-        "OS_Version": "Amazon Linux 2",
+        "OS_Version": "Kali Linux",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Jenkins Slave Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
+        "Name": "HMPPS Jenkins Agent Kali {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}"
       }

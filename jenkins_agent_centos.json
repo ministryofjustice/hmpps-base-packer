@@ -1,0 +1,106 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "target_env": "{{env `TARGET_ENV`}}",
+    "artifact_bucket": "{{env `ARTIFACT_BUCKET`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
+  },
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "./meta/jenkins_agent_centos.json_meta.json",
+      "destination": "/opt/meta-data/jenkins_agent_centos.json"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "echo \"PackerBuildName: ${PACKER_BUILD_NAME}\" >> /opt/meta-data/ami.meta",
+        "PACKER_SOURCE_AMI_ID=`curl -S http://169.254.169.254/latest/meta-data/ami-id`",
+        "echo \"SourceAMIId: $PACKER_SOURCE_AMI_ID\" >> /opt/meta-data/ami.meta",
+        "echo \"UpdateDateTime: `date`\" >> /opt/meta-data/ami.meta",
+        "echo \"\n\" >> /opt/meta-data/ami.meta"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "files/configure_github.sh",
+      "destination": "/home/centos/configure_github"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/centos_agent.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/centos_agent.yml",
+      "extra_arguments": [
+        "-b",
+        "-e artifact_bucket={{user `artifact_bucket`}}"
+      ],
+      "galaxy_file": "./ansible/centos_agent_req.yml",
+      "inventory_groups": "centos_agent",
+      "group_vars": "./ansible/group_vars"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/git_crypt.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Base Docker Centos {{user `branch_name`}}*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ami_users": [
+          "895523100917",
+          "077643444046",
+          "723123699647"
+      ],
+      "ssh_interface": "private_ip",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "ssh_username": "centos",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "ami_name": "HMPPS Jenkins Agent Centos {{user `branch_name`}} {{timestamp}}",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile",
+      "tags": {
+        "OS_Version": "Centos7",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS Jenkins Agent CentOS {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}"
+      },
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_type": "io1",
+          "iops": 1000,
+          "volume_size": 50,
+          "delete_on_termination": true,
+          "encrypted": false
+        },
+        {
+          "device_name": "/dev/xvdc",
+          "volume_type": "io1",
+          "iops": 500,
+          "volume_size": 50,
+          "delete_on_termination": true,
+          "encrypted": false
+        }
+      ]
+    }
+  ]
+}
