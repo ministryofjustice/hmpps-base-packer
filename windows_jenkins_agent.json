@@ -33,14 +33,15 @@
       "ami_users": [
           "895523100917"
       ],
-      "ami_name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}",
+      "ami_name": "HMPPS Jenkins Agent Windows Server {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "Windows Server 2012 R2 RTM",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Jenkins Slave Windows Server {{user `branch_name`}} {{timestamp}}",
+        "Name": "HMPPS Jenkins Agent Windows Server {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
-        "image_tag_version": "{{user `image_tag_version`}}"
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
       }
     }
   ],
@@ -52,31 +53,31 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallGit.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallGit.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/SoftwareRequirements.ps1"
+      "script": "scripts/Windows/JenkinsAgent/SoftwareRequirements.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallJDK8.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallJDK8.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallMaven.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallMaven.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallFirefox.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallFirefox.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/InstallChromeEnterprise.ps1"
+      "script": "scripts/Windows/JenkinsAgent/InstallChromeEnterprise.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsSlave/ManageJenkinsUser.ps1",
+      "script": "scripts/Windows/JenkinsAgent/ManageJenkinsUser.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
         "JENKINS_PASS={{user `jenkins_pass`}}"

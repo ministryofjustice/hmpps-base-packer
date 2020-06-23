@@ -65,7 +65,7 @@ def set_tag_version() {
 }
 
 pipeline {
-    agent { label "jenkins_slave"}
+    agent { label "jenkins_agent"}
 
     options {
         ansiColor('xterm')
@@ -105,7 +105,7 @@ pipeline {
         stage('Verify Packer AMIS') {
             parallel {
                 stage('Verify Windows Server Base') { steps { script {verify_win_image('windows_base.json')}}}
-                stage('Verify Windows Server Jenkins Slave') { steps { script {verify_win_image('windows_slave.json')}}}
+                stage('Verify Windows Server Jenkins Agent') { steps { script {verify_win_image('windows_jenkins_agent.json')}}}
                 stage('Verify Windows Server MIS Nart') { steps { script {verify_win_image('windows_misnart.json')}}}
                 stage('Verify Windows Server MIS Nart BCS') { steps { script {verify_win_image('windows_misnart_bcs.json')}}}
                 stage('Verify Windows Server MIS Nart BFS') { steps { script {verify_win_image('windows_misnart_bfs.json')}}}
@@ -120,7 +120,7 @@ pipeline {
 
         stage('Build Packer Dependant AMIS') {
             parallel {
-                stage('Build Windows Server Jenkins Slave') { steps { script {build_win_image('windows_slave.json')}}}
+                stage('Build Windows Server Jenkins Agent') { steps { script {build_win_image('windows_jenkins_agent.json')}}}
                 stage('Build Windows Server MIS Nart') { steps { script {build_win_image('windows_misnart.json')}}}
             }
         }

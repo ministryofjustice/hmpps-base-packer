@@ -9,8 +9,8 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "./meta/jenkins_slave_centos.json_meta.json",
-      "destination": "/opt/meta-data/jenkins_slave_centos.json"
+      "source": "./meta/jenkins_agent_centos.json_meta.json",
+      "destination": "/opt/meta-data/jenkins_agent_centos.json"
     },
     {
       "type": "shell",
@@ -29,17 +29,17 @@
     },
     {
       "type": "shell",
-      "script": "scripts/centos_slave.sh"
+      "script": "scripts/centos_jenkins_agent.sh"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "./ansible/centos_slave.yml",
+      "playbook_file": "./ansible/centos_jenkins_agent.yml",
       "extra_arguments": [
         "-b",
         "-e artifact_bucket={{user `artifact_bucket`}}"
       ],
-      "galaxy_file": "./ansible/centos_slave_req.yml",
-      "inventory_groups": "centos_slave",
+      "galaxy_file": "./ansible/centos_jenkins_agent_req.yml",
+      "inventory_groups": "centos_agent",
       "group_vars": "./ansible/group_vars"
     },
     {
@@ -73,15 +73,16 @@
       "subnet_id": "subnet-00982fba28419ac5f",
       "ssh_username": "centos",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "ami_name": "HMPPS Jenkins Slave Centos {{user `branch_name`}} {{timestamp}}",
+      "ami_name": "HMPPS Jenkins Agent Centos {{user `branch_name`}} {{timestamp}}",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile",
       "tags": {
         "OS_Version": "Centos7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Jenkins Slave CentOS {{user `branch_name`}} {{timestamp}}",
+        "Name": "HMPPS Jenkins Agent CentOS {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
-        "image_tag_version": "{{user `image_tag_version`}}"
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
       },
       "launch_block_device_mappings": [
         {

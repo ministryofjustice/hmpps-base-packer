@@ -6,7 +6,7 @@ The base images for Amazon Linux and Amazon Linux 2 are publically available.
 
 To use them you can search for the names listed in the build and use the account alias 'hmpps-engineering'
 
-An example for using the base images is in the jenkins_slave.json builder
+An example for using the base images is in the jenkins_agent.json builder
 
 ## Images
 

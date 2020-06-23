@@ -77,7 +77,7 @@ pipeline {
     }
 
     environment {
-        // TARGET_ENV is set on the jenkins slave and defaults to dev
+        // TARGET_ENV is set on the jenkins agent and defaults to dev
         AWS_REGION        = "eu-west-2"
         BRANCH_NAME       = set_branch_name()
         IMAGE_TAG_VERSION = set_tag_version()
@@ -107,10 +107,10 @@ pipeline {
                 stage('Verify Amazon Linux 2') { steps { script {verify_image('amazonlinux2.json')}}}
                 stage('Verify Centos 7') { steps { script {verify_image('centos7.json')}}}
                 stage('Verify Centos 7 Docker Base') { steps { script {verify_image('centos_docker.json')}}}
-                stage('Verify Centos 7 Jenkins Slave') { steps { script {verify_image('jenkins_slave_centos.json')}}}
+                stage('Verify Centos 7 Jenkins Agent') { steps { script {verify_image('jenkins_agent_centos.json')}}}
                 stage('Verify Centos 7 ECS-Ready') { steps { script {verify_image('centos_ecs.json')}}}
-                stage('Verify Amazon Linux 2 Jenkins Slave') { steps { script {verify_image('jenkins_slave.json')}}}
-                stage('Verify Kali Linux Jenkins Slave') { steps { script {verify_image('jenkins_slave_kali.json')}}}
+                stage('Verify Amazon Linux 2 Jenkins Agent') { steps { script {verify_image('jenkins_agent_amazonlinux2.json')}}}
+                stage('Verify Kali Linux Jenkins Agent') { steps { script {verify_image('jenkins_agent_kali.json')}}}
                 stage('Verify Amazon Linux 2 JIRA Server') { steps { script {verify_image('jira_server.json')}}}
             }
         }
@@ -120,7 +120,7 @@ pipeline {
                 stage('Build Amazon Linux') { steps { script {build_image('amazonlinux.json')}}}
                 stage('Build Amazon Linux 2') { steps { script {build_image('amazonlinux2.json')}}}
                 stage('Build Centos 7') { steps { script {build_image('centos7.json')}}}
-                stage('Build Kali Linux Jenkins Slave') { steps { script {build_image('jenkins_slave_kali.json')}}}
+                stage('Build Kali Linux Jenkins Agent') { steps { script {build_image('jenkins_agent_kali.json')}}}
             }
         }
 
@@ -132,14 +132,14 @@ pipeline {
 
         stage('Build Centos Docker Dependant AMIS') {
             parallel {
-                stage('Build Centos Jenkins Slave') { steps { script {build_image('jenkins_slave_centos.json')}}}
+                stage('Build Centos Jenkins Agent') { steps { script {build_image('jenkins_agent_centos.json')}}}
                 stage('Build Centos 7 ECS-Ready') { steps { script {build_image('centos_ecs.json')}}}
             }
         }
 
         stage('Build Amazon Linux 2 Dependent AMIs') {
             parallel {
-                stage('Build Amazon Linux 2 Jenkins Slave') { steps { script {build_image('jenkins_slave.json')}}}
+                stage('Build Amazon Linux 2 Jenkins Agent') { steps { script {build_image('jenkins_agent_amazonlinux2.json')}}}
                 stage('Build Amazon Linux 2 JIRA Server') { steps { script {build_image('jira_server.json')}}}
             }
         }
