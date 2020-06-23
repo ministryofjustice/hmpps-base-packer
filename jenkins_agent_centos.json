@@ -29,16 +29,16 @@
     },
     {
       "type": "shell",
-      "script": "scripts/centos_agent.sh"
+      "script": "scripts/centos_jenkins_agent.sh"
     },
     {
       "type": "ansible-local",
-      "playbook_file": "./ansible/centos_agent.yml",
+      "playbook_file": "./ansible/centos_jenkins_agent.yml",
       "extra_arguments": [
         "-b",
         "-e artifact_bucket={{user `artifact_bucket`}}"
       ],
-      "galaxy_file": "./ansible/centos_agent_req.yml",
+      "galaxy_file": "./ansible/centos_jenkins_agent_req.yml",
       "inventory_groups": "centos_agent",
       "group_vars": "./ansible/group_vars"
     },
