@@ -139,7 +139,7 @@ pipeline {
 
         stage('Build Amazon Linux 2 Dependent AMIs') {
             parallel {
-                stage('Build Amazon Linux 2 Jenkins Agent') { steps { script {build_image('jenkins_agent.json')}}}
+                stage('Build Amazon Linux 2 Jenkins Agent') { steps { script {build_image('jenkins_agent_amazonlinux2.json')}}}
                 stage('Build Amazon Linux 2 JIRA Server') { steps { script {build_image('jira_server.json')}}}
             }
         }
