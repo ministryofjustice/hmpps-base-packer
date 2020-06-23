@@ -13,8 +13,8 @@
     },
     {
       "type": "file",
-      "source": "./meta/jenkins_slave_kali.json_meta.json",
-      "destination": "/opt/meta-data/jenkins_slave_kali.json"
+      "source": "./meta/jenkins_agent_kali.json_meta.json",
+      "destination": "/opt/meta-data/jenkins_agent_kali.json"
     },
     {
       "type": "shell",
