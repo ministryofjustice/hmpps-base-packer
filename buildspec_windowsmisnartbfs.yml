@@ -1,0 +1,21 @@
+version: 0.2
+
+env:
+  variables:
+    ARTIFACT_BUCKET: "tf-eu-west-2-hmpps-eng-dev-config-s3bucket"
+    AWS_REGION:      "eu-west-2"
+    TARGET_ENV:      "dev"
+    ZAIZI_BUCKET:    "tf-eu-west-2-hmpps-eng-dev-artefacts-s3bucket"
+  parameter-store:
+    WIN_ADMIN_PASS:      "/${TARGET_ENV}/jenkins/windows/slave/admin/password"
+    WIN_JENKINS_PASS:    "/${TARGET_ENV}/jenkins/windows/agent/jenkins/password"
+    WIN_MIS_USER:        "/${TARGET_ENV}/jenkins/windows/mis/user"
+    WIN_MIS_PASS:        "/${TARGET_ENV}/jenkins/windows/mis/password"
+    WIN_BOBJ_USER:       "/${TARGET_ENV}/jenkins/windows/busobj/user"
+    WIN_BOBJ_PASS:       "/${TARGET_ENV}/jenkins/windows/busobj/password"
+    GITHUB_ACCESS_TOKEN: "/jenkins/github/accesstoken"
+phases:
+  build:
+    commands:
+      - ${CODEBUILD_SRC_DIR}/run-windows.sh 'windows_misnart_bfs.json'
+      

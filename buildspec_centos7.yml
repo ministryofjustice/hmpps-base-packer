@@ -1,0 +1,15 @@
+version: 0.2
+
+env:
+  variables:
+    ARTIFACT_BUCKET: "tf-eu-west-2-hmpps-eng-dev-config-s3bucket"
+    AWS_REGION:      "eu-west-2"
+    TARGET_ENV:      "dev"
+    ZAIZI_BUCKET:    "tf-eu-west-2-hmpps-eng-dev-artefacts-s3bucket"
+  parameter-store:
+    GITHUB_ACCESS_TOKEN: "/jenkins/github/accesstoken"
+phases:
+  build:
+    commands:
+      - ${CODEBUILD_SRC_DIR}/run.sh 'centos7.json'
+      
