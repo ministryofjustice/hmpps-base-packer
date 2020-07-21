@@ -45,7 +45,7 @@
           "owners": ["amazon"],	
           "most_recent": true	
         },	
-        "instance_type": "t2.micro",	
+        "instance_type": "t2.medium",	
         "ami_regions": ["eu-west-2"],	
         "ssh_username": "ec2-user",	
         "ssh_interface": "private_ip",	
