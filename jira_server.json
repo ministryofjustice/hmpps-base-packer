@@ -73,6 +73,15 @@
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
         "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+      },
+      "run_volume_tags": {
+        "OS_Version": "Amazon Linux 2",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS JIRA Server Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
       }
     }
   ]
