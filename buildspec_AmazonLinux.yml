@@ -12,3 +12,4 @@ phases:
   build:
     commands:
       - ${CODEBUILD_SRC_DIR}/run.sh 'amazonlinux.json'
+ 
