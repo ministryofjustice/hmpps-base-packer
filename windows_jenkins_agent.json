@@ -28,7 +28,7 @@
         "owners": ["895523100917"],
         "most_recent": true
       },
-      "instance_type": "t2.medium",
+      "instance_type": "t2.large",
       "ami_regions": ["eu-west-2"],
       "ami_users": [
           "895523100917"

@@ -44,7 +44,7 @@
         "owners": ["amazon"],
         "most_recent": true
       },
-      "instance_type": "t2.micro",
+      "instance_type": "t2.medium",
       "ami_regions": ["eu-west-2"],
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
