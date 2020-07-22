@@ -11,5 +11,5 @@ env:
 phases:
   build:
     commands:
-      - ${CODEBUILD_SRC_DIR}/run.sh 'centos_docker.json'
+      - ${CODEBUILD_SRC_DIR}/run-project.sh 'centos_docker.json'
       
