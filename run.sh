@@ -153,12 +153,16 @@ function set_environment_variables() {
 # set environment
 set_environment_variables
 
+# install python dependencies
+pip install -r requirements.txt
+    
 #======================================
 # Build Packer Base AMIS
 #======================================
 declare -a BasePackerFiles=("amazonlinux.json" "amazonlinux2.json" "centos7.json" "jenkins_agent_kali.json")
  
 for packerfile in ${BasePackerFiles[@]}; do
+    python generate_metadata.py ${packerfile}
     verify_image $packerfile
     build_image $packerfile
 done
@@ -169,6 +173,7 @@ done
 declare -a CentosDockerPackerFiles=("centos_docker.json")
 
 for packerfile in ${CentosDockerPackerFiles[@]}; do
+    python generate_metadata.py ${packerfile}
     verify_image $packerfile
     build_image $packerfile
 done
@@ -179,6 +184,7 @@ done
 declare -a CentosDockerDependentPackerFiles=("centos_ecs.json" "jenkins_agent_centos.json" "jenkins_agent_amazonlinux2.json")
 
 for packerfile in ${CentosDockerDependentPackerFiles[@]}; do
+    python generate_metadata.py ${packerfile}
     verify_image $packerfile
     build_image $packerfile
 done
@@ -189,6 +195,7 @@ done
 declare -a AmazonLinuxPackerFiles=("jenkins_agent_amazonlinux2.json" "jira_server.json")
 
 for packerfile in ${AmazonLinuxPackerFiles[@]}; do
+    python generate_metadata.py ${packerfile}
     verify_image $packerfile 
     build_image $packerfile 
 done
