@@ -48,9 +48,9 @@ function verify_image() {
 
 function generate_metadata() {
     echo '----------------------------------------------'
-    echo "Running python generate_metadata ${1}"
+    echo "Running python ./generate_metadata ${1}"
     echo '----------------------------------------------'
-     generate_metadata.py ${1}
+     python ./generate_metadata.py ${1}
 }
 
 function build_image() {
