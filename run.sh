@@ -46,6 +46,13 @@ function verify_image() {
     return $RESULT
 }
 
+function generate_metadata() {
+    echo '----------------------------------------------'
+    echo "Running python generate_metadata ${1}"
+    echo '----------------------------------------------'
+     generate_metadata.py ${1}
+}
+
 function build_image() {
     echo '----------------------------------------------'
     echo "Running packer build for Linux Image ${1}"
@@ -162,7 +169,7 @@ pip install -r requirements.txt
 declare -a BasePackerFiles=("amazonlinux.json" "amazonlinux2.json" "centos7.json" "jenkins_agent_kali.json")
  
 for packerfile in ${BasePackerFiles[@]}; do
-    python generate_metadata.py ${packerfile}
+    generate_metadata $packerfile
     verify_image $packerfile
     build_image $packerfile
 done
@@ -173,7 +180,7 @@ done
 declare -a CentosDockerPackerFiles=("centos_docker.json")
 
 for packerfile in ${CentosDockerPackerFiles[@]}; do
-    python generate_metadata.py ${packerfile}
+    generate_metadata $packerfile
     verify_image $packerfile
     build_image $packerfile
 done
@@ -184,7 +191,7 @@ done
 declare -a CentosDockerDependentPackerFiles=("centos_ecs.json" "jenkins_agent_centos.json" "jenkins_agent_amazonlinux2.json")
 
 for packerfile in ${CentosDockerDependentPackerFiles[@]}; do
-    python generate_metadata.py ${packerfile}
+    generate_metadata $packerfile
     verify_image $packerfile
     build_image $packerfile
 done
@@ -195,7 +202,7 @@ done
 declare -a AmazonLinuxPackerFiles=("jenkins_agent_amazonlinux2.json" "jira_server.json")
 
 for packerfile in ${AmazonLinuxPackerFiles[@]}; do
-    python generate_metadata.py ${packerfile}
+    generate_metadata $packerfile
     verify_image $packerfile 
     build_image $packerfile 
 done
