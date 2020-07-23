@@ -25,9 +25,12 @@
       ]
     },
     {
-      "type": "ansible",
+      "type": "ansible-local",
       "playbook_file": "./ansible/amazonlinux.yml",
-      "extra_arguments": [ "-b" ]
+      "extra_arguments": [ "-b" ],
+      "galaxy_file": "./ansible/requirements.yml",
+      "inventory_groups": "amazonlinux2",
+      "group_vars": "./ansible/group_vars"
     }
   ],
   "builders": [
