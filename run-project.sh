@@ -146,5 +146,10 @@ set_environment_variables
 PACKERFILE=${1}
 print_packerfile
 
+# install python dependencies
+pip install -r requirements.txt
+#generate ansible-galaxy metadata
+python generate_metadata.py ${PACKERFILE}
+
 verify_image $PACKERFILE
 build_image $PACKERFILE
