@@ -24,11 +24,19 @@
           "echo \"\n\" >> /opt/meta-data/ami.meta"
         ]
       },
+      {
+        "type": "shell",
+        "script": "scripts/ansible_galaxy_base.sh"
+      },
       {	
-        "type": "ansible",	
+        "type": "ansible-local",	
         "playbook_file": "./ansible/amazonlinux.yml",	
-        "extra_arguments": [ "-b" ],	
-        "groups": ["amazonlinux2"]	
+        "extra_arguments": [ 
+          "-b" 
+        ],	
+        "galaxy_file": "./ansible/requirements.yml",
+        "inventory_groups": "amazonlinux2",
+        "group_vars": "./ansible/group_vars"
       }	
     ],	
     "builders": [	
