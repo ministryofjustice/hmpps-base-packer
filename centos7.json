@@ -111,7 +111,7 @@
       "temporary_security_group_source_cidr": "10.0.0.0/8",
       "ami_name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}",
       "tags": {
-        "OS_Version": "Centos7",
+        "OS_Version": "CentOS Linux 7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}",
@@ -121,7 +121,7 @@
         "Codebuild": "{{user `codebuild`}}"
       },
       "run_volume_tags": {
-        "OS_Version": "Centos7",
+        "OS_Version": "CentOS Linux 7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Base CentOS {{user `branch_name`}} {{timestamp}}",

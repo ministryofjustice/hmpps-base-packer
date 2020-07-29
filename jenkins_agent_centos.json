@@ -77,7 +77,7 @@
       "ami_name": "HMPPS Jenkins Agent Centos {{user `branch_name`}} {{timestamp}}",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile",
       "tags": {
-        "OS_Version": "Centos7",
+        "OS_Version": "CentOS Linux 7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Jenkins Agent CentOS {{user `branch_name`}} {{timestamp}}",
@@ -87,7 +87,7 @@
         "Codebuild": "{{user `codebuild`}}"
       },
       "run_volume_tags": {
-        "OS_Version": "Centos7",
+        "OS_Version": "CentOS Linux 7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Jenkins Agent CentOS {{user `branch_name`}} {{timestamp}}",
