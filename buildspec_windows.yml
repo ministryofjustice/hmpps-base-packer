@@ -2,10 +2,8 @@ version: 0.2
 
 env:
   variables:
-    ARTIFACT_BUCKET: "tf-eu-west-2-hmpps-eng-dev-config-s3bucket"
     AWS_REGION:      "eu-west-2"
     TARGET_ENV:      "dev"
-    ZAIZI_BUCKET:    "tf-eu-west-2-hmpps-eng-dev-artefacts-s3bucket"
   parameter-store:
     WIN_ADMIN_PASS:      "/${TARGET_ENV}/jenkins/windows/slave/admin/password"
     WIN_JENKINS_PASS:    "/${TARGET_ENV}/jenkins/windows/agent/jenkins/password"
@@ -14,6 +12,8 @@ env:
     WIN_BOBJ_USER:       "/${TARGET_ENV}/jenkins/windows/busobj/user"
     WIN_BOBJ_PASS:       "/${TARGET_ENV}/jenkins/windows/busobj/password"
     GITHUB_ACCESS_TOKEN: "/jenkins/github/accesstoken"
+    ARTIFACT_BUCKET:     "/codebuild/artifact_bucket"
+    ZAIZI_BUCKET:        "/codebuild/zaizi_bucket"
 phases:
   build:
     commands:
