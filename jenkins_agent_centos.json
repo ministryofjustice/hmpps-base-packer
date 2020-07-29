@@ -4,7 +4,8 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "target_env": "{{env `TARGET_ENV`}}",
     "artifact_bucket": "{{env `ARTIFACT_BUCKET`}}",
-    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
+    "codebuild": "{{env `CODEBUILD`}}"
   },
   "provisioners": [
     {
@@ -82,7 +83,8 @@
         "Name": "HMPPS Jenkins Agent CentOS {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+        "Codebuild": "{{user `codebuild`}}"
       },
       "run_volume_tags": {
         "OS_Version": "Centos7",
@@ -91,7 +93,8 @@
         "Name": "HMPPS Jenkins Agent CentOS {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+        "Codebuild": "{{user `codebuild`}}"
       },
       "launch_block_device_mappings": [
         {

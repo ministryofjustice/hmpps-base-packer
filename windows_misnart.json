@@ -9,7 +9,8 @@
     "bobj_pass": "{{env `WIN_BOBJ_PASS`}}",
     "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
     "target_env": "{{env `TARGET_ENV`}}",
-    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
+    "codebuild": "{{env `CODEBUILD`}}"
   },
   "builders": [
     {
@@ -82,7 +83,8 @@
         "Name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+        "Codebuild": "{{user `codebuild`}}"
       },
       "run_volume_tags": {
         "OS_Version": "Windows Server 2012 R2 RTM",
@@ -91,7 +93,8 @@
         "Name": "HMPPS MIS NART Windows Server {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+        "Codebuild": "{{user `codebuild`}}"
       }
     }
   ],
