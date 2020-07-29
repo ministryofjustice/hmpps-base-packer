@@ -2,7 +2,8 @@
     "variables": {	
       "packer_profile": "packer",	
       "branch_name": "{{env `BRANCH_NAME`}}",
-      "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
+      "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
+      "codebuild": "{{env `CODEBUILD`}}"
     },	
     "provisioners": [	
       {	
@@ -69,7 +70,8 @@
             "Name": "HMPPS Base Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
             "Git_Branch": "{{user `branch_name`}}",
             "image_tag_version": "{{user `image_tag_version`}}",
-            "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+            "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+            "Codebuild": "{{user `codebuild`}}"
           },
           "run_volume_tags": {
             "OS_Version": "Amazon Linux 2",
@@ -78,7 +80,8 @@
             "Name": "HMPPS Base Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
             "Git_Branch": "{{user `branch_name`}}",
             "image_tag_version": "{{user `image_tag_version`}}",
-            "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+            "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+            "Codebuild": "{{user `codebuild`}}"
           }
       }	
     ]	

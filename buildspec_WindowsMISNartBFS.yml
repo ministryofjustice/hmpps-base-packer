@@ -17,5 +17,5 @@ env:
 phases:
   build:
     commands:
-      - ${CODEBUILD_SRC_DIR}/run-windows.sh 'windows_misnart_bfs.json'
+      - ${CODEBUILD_SRC_DIR}/run-project.sh 'windows_misnart_bfs.json'
       
