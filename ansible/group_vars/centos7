@@ -16,3 +16,4 @@ system:
     - jq
     - vim
     - tree
+    - https://s3.eu-west-2.amazonaws.com/amazon-ssm-eu-west-2/latest/linux_amd64/amazon-ssm-agent.rpm
