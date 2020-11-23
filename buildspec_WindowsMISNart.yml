@@ -5,7 +5,7 @@ env:
     AWS_REGION:      "eu-west-2"
     TARGET_ENV:      "dev"
   parameter-store:
-    WIN_ADMIN_PASS:      "/${TARGET_ENV}/jenkins/windows/slave/admin/password"
+    WIN_ADMIN_PASS:      "/${TARGET_ENV}/jenkins/windows/agent/admin/password"
     WIN_JENKINS_PASS:    "/${TARGET_ENV}/jenkins/windows/agent/jenkins/password"
     WIN_MIS_USER:        "/${TARGET_ENV}/jenkins/windows/mis/user"
     WIN_MIS_PASS:        "/${TARGET_ENV}/jenkins/windows/mis/password"

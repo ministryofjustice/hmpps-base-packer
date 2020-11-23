@@ -76,8 +76,8 @@ pipeline {
     }
 
     environment {
-        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
-        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/agent/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+        WIN_JENKINS_PASS = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/agent/jenkins/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
         WIN_MIS_USER     = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/mis/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'
         WIN_MIS_PASS     = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/mis/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
         WIN_BOBJ_USER    = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/busobj/user --region eu-west-2 --query Parameters[0].Value | sed \'s/"//g\')'

@@ -5,7 +5,7 @@ Import-Module 'Carbon'
 
 # Create jenkins user
 # Get our our password details from ssm
-#$keyname = "/$env:TARGET_ENV/jenkins/windows/slave/jenkins/password"
+#$keyname = "/$env:TARGET_ENV/jenkins/windows/agent/jenkins/password"
 #$jenkins_password = (aws --region eu-west-2 ssm get-parameters --with-decryption --names ${keyname} --query Parameters[0].Value)
 $jenkinsCreds = New-Credential -UserName Jenkins -Password "$env:JENKINS_PASS"
 Install-User -Credential $jenkinsCreds

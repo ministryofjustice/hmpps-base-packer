@@ -75,7 +75,7 @@
       "ssh_username": "centos",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
       "ami_name": "HMPPS Jenkins Agent Centos {{user `branch_name`}} {{timestamp}}",
-      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-slave-role-instance-profile",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-agent-role-instance-profile",
       "tags": {
         "OS_Version": "CentOS Linux 7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
