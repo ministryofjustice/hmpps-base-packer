@@ -1,0 +1,3 @@
+jira_filename: "atlassian-jira-core"
+jira_version: "8.5.7"
+jira_artefact_bucket: "tf-eu-west-2-hmpps-eng-dev-artefacts-s3bucket"
