@@ -1,6 +1,0 @@
-- name: jira-install
-  src: https://github.com/ministryofjustice/hmpps-engineering-jira-installer.git
-  version: jira_8_5_7
-- name: dev-sec.os-hardening
-  src: https://github.com/dev-sec/ansible-os-hardening
-  version: 5.2.1
