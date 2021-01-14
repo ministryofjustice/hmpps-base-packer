@@ -4,7 +4,7 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
     "codebuild": "{{env `CODEBUILD`}}",
-    "jira_version": "{{env `7.0.11`}}"
+    "jira_version": "7.0.11"
   },
   "provisioners": [
     {
