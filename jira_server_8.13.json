@@ -4,7 +4,7 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
     "codebuild": "{{env `CODEBUILD`}}",
-    "jira_version": "{{env `7.0.11`}}"
+    "jira_version": "{{env `8.13.2`}}"
   },
   "provisioners": [
     {
@@ -38,7 +38,7 @@
         "\"jira_version={{user `jira_version`}}\""
       ],
       "galaxy_file": "./ansible/jira_server_requirements.yml",
-      "inventory_groups": "jira_server_7",
+      "inventory_groups": "jira_server_8",
       "group_vars": "./ansible/group_vars"
     }
   ],

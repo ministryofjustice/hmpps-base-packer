@@ -1,0 +1,15 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION:      "eu-west-2"
+    TARGET_ENV:      "dev"
+  parameter-store:
+    GITHUB_ACCESS_TOKEN: "/jenkins/github/accesstoken"
+    ARTIFACT_BUCKET:     "/codebuild/artifact_bucket"
+    ZAIZI_BUCKET:        "/codebuild/zaizi_bucket"
+phases:
+  build:
+    commands:
+      - ${CODEBUILD_SRC_DIR}/run-project.sh 'jira_server_8.13.json'
+      
