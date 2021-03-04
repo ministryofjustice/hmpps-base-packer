@@ -40,7 +40,7 @@ $fileData = @"
 }
 "@
 
-$fileData | Out-File -FilePath "C:\Program Files (x86)\Google\Chrome\Application\master_preferences"
+$fileData | Out-File -FilePath "C:\Program Files\Google\Chrome\Application\master_preferences"
 
 # Turn our auto update cron off
 New-Item -Path Registry::HKEY_LOCAL_MACHINE\Software\Policies\Google\Update `
