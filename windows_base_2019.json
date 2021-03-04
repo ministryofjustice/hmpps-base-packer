@@ -59,9 +59,7 @@
         "image_tag_version": "{{user `image_tag_version`}}",
         "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
       },
-      "temporary_security_group_source_cidrs": [
-        "10.0.0.0/8"
-      ],
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
       "type": "amazon-ebs",
       "user_data_file": "scripts/Windows/Base/ConfigureWinRM.txt",
       "vpc_id": "vpc-02321f288159e5d0e",
