@@ -1,0 +1,104 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "mis_user": "{{env `WIN_MIS_USER`}}",
+    "mis_password": "{{env `WIN_MIS_PASS`}}",
+    "bobj_user": "{{env `WIN_BOBJ_USER`}}",
+    "bobj_pass": "{{env `WIN_BOBJ_PASS`}}",
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
+    "target_env": "{{env `TARGET_ENV`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
+    "codebuild": "{{env `CODEBUILD`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
+      "winrm_use_ssl": false,
+      "winrm_insecure": true,
+      "region": "eu-west-2",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-agent-role-instance-profile",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS MIS NART Windows Server 2019 Base {{user `branch_name`}}*",
+          "root-device-type": "ebs"
+        },
+        "owners": [
+          "895523100917"
+        ],
+        "most_recent": true
+      },
+      "instance_type": "t2.large",
+      "ami_regions": [
+        "eu-west-2"
+      ],
+      "ami_users": [
+        "563502482979",
+        "723123699647",
+        "895523100917",
+        "077643444046",
+        "431912413968",
+        "645753425509",
+        "479759138745",
+        "349354156492",
+        "130975965028",
+        "716683748953",
+        "010587221707",
+        "050243167760",
+        "205048117103",
+        "728765553488",
+        "330914586320",
+        "130847504577",
+        "434401102446",
+        "766455809178"
+      ],
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 60,
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        },
+        {
+          "device_name": "/dev/xvdb",
+          "volume_size": 50,
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        }
+      ],
+      "ami_name": "HMPPS MIS NART DIS Windows Server 2019 {{user `branch_name`}} {{timestamp}}",
+      "tags": {
+        "OS_Version": "Windows Server 2019 DataCenter",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS MIS NART DIS Windows Server 2019 {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+        "Codebuild": "{{user `codebuild`}}"
+      },
+      "run_volume_tags": {
+        "OS_Version": "Windows Server 2019 DataCenter",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS MIS NART DIS Windows Server {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
+        "Codebuild": "{{user `codebuild`}}"
+      }
+    }
+  ],
+  "provisioners": [
+    
+  ]
+}
