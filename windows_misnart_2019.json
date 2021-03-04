@@ -29,7 +29,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HHMPPS Windows Server Base 2019 {{user `branch_name`}}*",
+          "name": "HMPPS Windows Server Base 2019 {{user `branch_name`}}*",
           "root-device-type": "ebs"
         },
         "owners": [
