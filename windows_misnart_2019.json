@@ -108,11 +108,13 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/BCS/FetchAndInstallOracleClient64Bit.ps1"
+      "script": "scripts/Windows/BCS/FetchAndInstallOracleClient64Bit.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/BCS/InstallSQLDeveloper.ps1"
+      "script": "scripts/Windows/BCS/InstallSQLDeveloper.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "powershell",
