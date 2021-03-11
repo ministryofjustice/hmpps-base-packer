@@ -26,5 +26,5 @@ Start-Sleep -Seconds 30
 $logFiles = Get-ChildItem "$env:SYSTEM_DRIVE\Program Files\Oracle\Inventory\logs\silent*.log" -ErrorAction Ignore
 
 foreach ($logFile in $logfiles.Name) {
-    type "$env:SYSTEM_DRIVE\Program Files\Oracle\Inventory\logs\$logFile"
+    Get-Content "$env:SYSTEM_DRIVE\Program Files\Oracle\Inventory\logs\$logFile"
 }
