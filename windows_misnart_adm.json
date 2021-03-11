@@ -110,10 +110,18 @@
       ]
     },
     {
+      "type": "powershell",
+      "script": "scripts/Windows/Base/2019/SetIEEnabled.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Admin/InstallAdminUtils.ps1"
+    },
+    {
       "type": "file",
       "source": "files/ora64_client.rsp",
       "destination": "c:\\temp\\ora64_client.rsp"
-    } ,
+    },
     {
       "type": "powershell",
       "script": "scripts/Windows/BCS/FetchAndInstallOracleClient64Bit.ps1",
