@@ -11,7 +11,7 @@ if (!(Test-Path $ChocoInstallPath)) {
     Invoke-Expression ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 
-# Install awscli, jq and python2
+# Install notepad++
 choco install notepadplusplus -y
 
 # AdExplorer - https://docs.microsoft.com/en-us/sysinternals/downloads/adexplorer
