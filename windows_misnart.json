@@ -120,10 +120,6 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/JenkinsAgent/InstallJDK8.ps1"
-    },
-    {
-      "type": "powershell",
       "script": "scripts/Windows/MIS/InstallSaltStack.ps1"
     },
     {

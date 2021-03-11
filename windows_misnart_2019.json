@@ -105,10 +105,6 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/Base/2019/SetIEEnabled.ps1"
-    },
-    {
-      "type": "powershell",
       "script": "scripts/Windows/All/ResizePartition.ps1",
       "environment_vars": [
         "TARGET_DRIVE=C"
@@ -116,13 +112,36 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/BCS/FetchAndInstallOracleClient64Bit.ps1",
-      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+      "script": "scripts/Windows/JenkinsAgent/InstallGit.ps1"
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/BCS/InstallSQLDeveloper.ps1",
-      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
+      "script": "scripts/Windows/JenkinsAgent/InstallJDK8.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/MIS/MISSoftwareRequirements.ps1",
+      "environment_vars": [
+        "ARTIFACT_BUCKET={{user `artifact_bucket`}}"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/MIS/ManageMISUser.ps1",
+      "environment_vars": [
+        "TARGET_ENV={{user `env_identifier`}}",
+        "MIS_USER={{user `mis_user`}}",
+        "MIS_PASSWORD={{user `mis_password`}}"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/MIS/ManageMISUser.ps1",
+      "environment_vars": [
+        "TARGET_ENV={{user `env_identifier`}}",
+        "MIS_USER={{user `bobj_user`}}",
+        "MIS_PASSWORD={{user `bobj_pass`}}"
+      ]
     },
     {
       "type": "powershell",
