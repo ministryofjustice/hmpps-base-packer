@@ -11,6 +11,10 @@
   "sensitive-variables": ["admin_pass"],
   "builders": [
     {
+      "ami_name": "HMPPS Windows Server Base {{user `branch_name`}} {{timestamp}}",
+      "ami_regions": [
+        "eu-west-2"
+      ],
       "type": "amazon-ebs",
       "communicator": "winrm",
       "winrm_username": "Administrator",
@@ -30,7 +34,6 @@
         "most_recent": true
       },
       "instance_type": "t2.large",
-      "ami_regions": ["eu-west-2"],
       "ami_users": [
         "563502482979",
         "723123699647",
@@ -51,7 +54,6 @@
         "434401102446",
         "766455809178"
       ],
-      "ami_name": "HMPPS Windows Server Base {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "Windows Server 2012 R2 RTM",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
