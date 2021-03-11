@@ -98,24 +98,22 @@
     {
       "type": "powershell",
       "script": "scripts/Windows/All/ResizePartition.ps1",
-      "environment_vars": [
-        "TARGET_DRIVE=C"
-      ]
+      "environment_vars": [ "TARGET_DRIVE=C" ]
     },
     {
       "type": "powershell",
       "script": "scripts/Windows/All/ResizePartition.ps1",
-      "environment_vars": [
-        "TARGET_DRIVE=D"
-      ]
+      "environment_vars": [ "TARGET_DRIVE=D" ]
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/Base/2019/SetIEEnabled.ps1"
+      "script": "scripts/Windows/Base/2019/SetIEEnabled.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/Admin/InstallAdminUtils.ps1"
+      "script": "scripts/Windows/Admin/InstallAdminUtils.ps1",
+      "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
     },
     {
       "type": "file",
