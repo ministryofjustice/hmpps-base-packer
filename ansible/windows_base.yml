@@ -1,0 +1,27 @@
+- hosts: all
+  remote_user: Administrator 
+  gather_facts: false
+  tasks:
+  - name: Install required packages
+    win_chocolatey:
+      name:
+      - openssh
+
+  - name: Invoke OpenSSD Install script
+    win_shell: powershell.exe -ExecutionPolicy Bypass -File "c:\Program Files\OpenSSH-Win64\install-sshd.ps1"
+
+  - name: Enable SSHD
+    win_service:
+      name: sshd
+      state: started
+      start_mode: auto
+
+  - name: SSHD Firewall Rule
+    win_firewall_rule:
+      name: OpenSSHD
+      localport: 22
+      action: allow
+      direction: in
+      protocol: tcp
+      state: present
+      enabled: yes
