@@ -19,15 +19,17 @@
       ],
       "type": "amazon-ebs",
       "communicator": "winrm",
+      "force_deregister": true,
       "winrm_username": "Administrator",
-      "winrm_use_ssl": false,
+      "winrm_use_ssl": true,
       "winrm_insecure": true,
+      "winrm_use_ntlm": true,
       "region": "eu-west-2",
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-agent-role-instance-profile",
       "temporary_security_group_source_cidr": "10.0.0.0/8",
-      "user_data_file": "scripts/Windows/Base/ConfigureWinRM.txt",
+      "user_data_file": "scripts/Windows/Base/ConfigureWinRM2019.txt",
       "source_ami_filter": {
         "filters": {
           "name": "Windows_Server-2019-English-Full-Base-*"
@@ -109,7 +111,9 @@
     {
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "type": "powershell",
-      "environment_vars": [ "WIN_ADMIN_PASS={{user `win_pass`}}" ]
+      "environment_vars": [ 
+        "WIN_ADMIN_PASS={{user `win_pass`}}" 
+      ]
     },
     {
       "type": "powershell",
