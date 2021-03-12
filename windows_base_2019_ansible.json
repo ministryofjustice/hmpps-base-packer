@@ -96,10 +96,7 @@
         "ansible_shell_type=powershell",
         "--extra-vars",
         "ansible_shell_executable=None"
-      ],
-      "galaxy_file": "./ansible/centos_req.yml",
-      "inventory_groups": "centos_docker",
-      "group_vars": "./ansible/group_vars"
+      ]
     },
     {
       "type": "powershell",
