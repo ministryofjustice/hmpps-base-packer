@@ -109,13 +109,6 @@
       ]
     },
     {
-      "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
-      "type": "powershell",
-      "environment_vars": [ 
-        "WIN_ADMIN_PASS={{user `win_pass`}}" 
-      ]
-    },
-    {
       "type": "powershell",
       "inline": [
         "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendEventLogs.ps1 -Schedule",
