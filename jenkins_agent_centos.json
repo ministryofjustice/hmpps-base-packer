@@ -73,7 +73,7 @@
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
       "ssh_username": "centos",
-      "temporary_security_group_source_cidrs": "10.0.0.0/8",
+      "temporary_security_group_source_cidrs": [ "10.0.0.0/8" ],
       "ami_name": "HMPPS Jenkins Agent Centos {{user `branch_name`}} {{timestamp}}",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `target_env`}}-jenkins-ec2-agent-role-instance-profile",
       "tags": {

@@ -63,7 +63,7 @@
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
       "ssh_username": "ec2-user",
-      "temporary_security_group_source_cidrs": "10.0.0.0/8",
+      "temporary_security_group_source_cidrs": [ "10.0.0.0/8" ],
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-dev-jenkins-ec2-agent-role-instance-profile", 
       "ami_name": "HMPPS JIRA Server Amazon Linux 2 LTS {{user `branch_name`}} {{timestamp}}",
       "tags": {
