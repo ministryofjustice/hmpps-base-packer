@@ -17,5 +17,6 @@ env:
 phases:
   build:
     commands:
+      - ls -la ${CODEBUILD_SRC_DIR}
       - ${CODEBUILD_SRC_DIR}/run-project.sh 'windows_base.json'
       
