@@ -87,7 +87,7 @@
       "user": "Administrator",
       "ansible_env_vars": [ "WINRM_PASSWORD={{user `win_pass`}}" ],
       "extra_arguments": [
-        "--connection", "packer -vvv",          
+        "--connection", "packer",          
         "--extra-vars",
         "ansible_shell_type=powershell",
         "--extra-vars",
