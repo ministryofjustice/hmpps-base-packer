@@ -19,9 +19,10 @@
       ],
       "type": "amazon-ebs",
       "communicator": "winrm",
-      "winrm_username": "Administrator",
-      "winrm_use_ssl": false,
+      "force_deregister": true,
       "winrm_insecure": true,
+      "winrm_username": "Administrator",
+      "winrm_use_ssl": true,
       "region": "eu-west-2",
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
@@ -85,13 +86,9 @@
       "type": "ansible",
       "playbook_file": "./ansible/windows_base.yml",
       "user": "Administrator",
-      "ansible_env_vars": [ "WINRM_PASSWORD={{user `win_pass`}}" ],
+      "use_proxy": false,
       "extra_arguments": [
-        "--connection", "packer",          
-        "--extra-vars",
-        "ansible_shell_type=powershell",
-        "--extra-vars",
-        "ansible_shell_executable=None"
+        "-e", "ansible_winrm_server_cert_validation=ignore"
       ]
     },
     {
