@@ -43,5 +43,13 @@ cmd.exe /c net stop winrm
 cmd.exe /c sc config winrm start= auto
 cmd.exe /c net start winrm
 
+# Set Local Administrator User Password from SSM ParameterStore
+$admin_password    = Get-SSMParameter -Name "/dev/jenkins/windows/agent/admin/password" -WithDecryption $true
+$decryptedPassword = $admin_password.Value
+$UserAccount       = Get-LocalUser -Name "Administrator"
+$SecurePassword    = ConvertTo-SecureString "${decryptedPassword}" -AsPlainText -Force
+$UserAccount | Set-LocalUser -Password $SecurePassword
+
 </powershell>
 <persist>true</persist>
+

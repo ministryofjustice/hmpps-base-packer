@@ -3,7 +3,7 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env_identifier": "{{env `TARGET_ENV`}}",
-    "win_pass": "{{env `WIN_ADMIN_PASS`}}",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
     "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
     "codebuild": "{{env `CODEBUILD`}}"
@@ -113,7 +113,7 @@
       "script": "scripts/Windows/Base/ManageAdminPassword.ps1",
       "environment_vars": [
         "TARGET_ENV={{user `env_identifier`}}",
-        "WIN_ADMIN_PASS={{user `win_pass`}}"
+        "WIN_ADMIN_PASS={{user `admin_pass`}}"
       ]
     }
   ]
