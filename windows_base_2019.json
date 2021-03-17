@@ -123,13 +123,6 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/Base/ManageAdminPassword.ps1",
-      "environment_vars": [
-        "WIN_ADMIN_PASS={{user `win_pass`}}"
-      ]
-    },
-    {
-      "type": "powershell",
       "inline": [
         "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendEventLogs.ps1 -Schedule",
         "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendWindowsIsReady.ps1 -Schedule",
