@@ -82,6 +82,20 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "files/cloudwatch.config.json",
+      "destination": "C:\\Setup\\Cloudwatch\\config.json"
+    },
+    {
+        "type": "powershell",
+        "script": "scripts/Windows/Base/InstallCloudwatchAgent.ps1"
+    },
+    {
+        "type": "file",
+        "source": "scripts/Windows/Base/SetupCloudwatchAgent.ps1",
+        "destination": "C:\\Setup\\RunTimeConfig\\SetupCloudwatchAgent.ps1"
+    },
+    {
       "type": "ansible",
       "playbook_file": "./ansible/windows_base.yml",
       "user": "Administrator",

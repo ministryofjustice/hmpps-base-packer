@@ -1,0 +1,128 @@
+{
+	"logs": {
+		"logs_collected": {
+			"files": {
+				"collect_list": [
+					{
+						"file_path": "c:\\ProgramData\\Amazon\\AmazonCloudWatchAgent\\Logs\\amazon-cloudwatch-agent.log",
+						"log_group_name": "/IAPS/amazon-cloudwatch-agent.log",
+						"log_stream_name": "{hostname}",
+						"timestamp_format": "%H: %M: %S%y%b%-d"
+					},
+					{
+						"file_path": "c:\\nginx\\nginx-1.17.6\\logs\\access.log",
+						"log_group_name": "/IAPS/access.log",
+						"log_stream_name": "{hostname}"
+					},
+					{
+						"file_path": "c:\\nginx\\nginx-1.17.6\\logs\\error.log",
+						"log_group_name": "/IAPS/error.log",
+						"log_stream_name": "{hostname}"
+					},
+					{
+						"file_path": "C:\\Program Files (x86)\\I2N\\IapsNDeliusInterface\\Log\\XMLTRANSFER.LOG",
+						"log_group_name": "/IAPS/i2n-xmltransfer.log",
+						"log_stream_name": "{hostname}"
+					},
+					{
+						"file_path": "C:\\Program Files (x86)\\I2N\\IapsNDeliusInterface\\Log\\DAILY\\DAYSUMMARY.LOG",
+						"log_group_name": "/IAPS/i2n-daysummary.log",
+						"log_stream_name": "{hostname}"
+					},
+					{
+						"file_path": "C:\\Program Files (x86)\\I2N\\IapsIMInterface\\Log\\IMIAPSIF.LOG",
+						"log_group_name": "/IAPS/imiapsif.log",
+						"log_stream_name": "{hostname}"
+					},
+					{
+						"file_path": "c:\\Setup\\BackupLogs\\backup.log",
+						"log_group_name": "/IAPS/backup.log",
+						"log_stream_name": "{hostname}"
+					}  
+				]
+			},
+			"windows_events": {
+				"collect_list": [
+					{
+						"event_format": "xml",
+						"event_levels": [
+							"WARNING",
+							"ERROR",
+							"CRITICAL"
+						],
+						"event_name": "System",
+						"log_group_name": "/IAPS/system-events",
+						"log_stream_name": "{hostname}"
+					},
+					{
+						"event_format": "xml",
+						"event_levels": [
+							"WARNING",
+							"ERROR",
+							"CRITICAL"
+						],
+						"event_name": "Application",
+						"log_group_name": "/IAPS/application-events",
+						"log_stream_name": "{hostname}"
+					}
+				]
+			}
+		}
+	},
+	"metrics": {
+		"append_dimensions": {
+			"AutoScalingGroupName": "${aws:AutoScalingGroupName}"
+		},
+		"metrics_collected": {
+			"LogicalDisk": {
+				"measurement": [
+					"% Free Space"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"Memory": {
+				"measurement": [
+					"% Committed Bytes In Use"
+				],
+				"metrics_collection_interval": 60
+			},
+			"Paging File": {
+				"measurement": [
+					"% Usage"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"PhysicalDisk": {
+				"measurement": [
+					"% Disk Time"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"Processor": {
+				"measurement": [
+					"% User Time",
+					"% Idle Time",
+					"% Interrupt Time"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"_Total"
+				]
+			},
+			"statsd": {
+				"metrics_aggregation_interval": 60,
+				"metrics_collection_interval": 30,
+				"service_address": ":8125"
+			}
+		}
+	}
+}
