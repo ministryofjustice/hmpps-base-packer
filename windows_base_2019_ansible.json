@@ -38,7 +38,7 @@
           "amazon"
         ]
       },
-      "instance_type": "t3.large",
+      "instance_type": "t3.xlarge",
       "ami_users": [
         "563502482979",
         "723123699647",
