@@ -6,7 +6,7 @@
     "env_identifier": "{{env `TARGET_ENV`}}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
     "packer_profile": "packer",
-    "win_pass": "{{env `WIN_ADMIN_PASS`}}"
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
   "sensitive-variables": [
     "admin_pass"
@@ -21,6 +21,7 @@
       "communicator": "winrm",
       "force_deregister": true,
       "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
       "winrm_use_ssl": true,
       "winrm_insecure": true,
       "winrm_use_ntlm": true,
@@ -118,7 +119,14 @@
       "type": "powershell",
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "environment_vars": [
-        "WIN_ADMIN_PASS={{user `win_pass`}}"
+        "WIN_ADMIN_PASS={{user `admin_pass`}}"
+      ]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/Base/ManageAdminPassword.ps1",
+      "environment_vars": [
+        "WIN_ADMIN_PASS={{user `admin_pass`}}"
       ]
     },
     {

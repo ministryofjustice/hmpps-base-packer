@@ -138,7 +138,7 @@
     {
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "type": "powershell",
-      "environment_vars": [ "WIN_ADMIN_PASS={{user `win_pass`}}" ]
+      "environment_vars": [ "WIN_ADMIN_PASS={{user `admin_pass`}}" ]
     },
     {
       "type": "powershell",

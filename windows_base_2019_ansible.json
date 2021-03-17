@@ -6,7 +6,7 @@
     "env_identifier": "{{env `TARGET_ENV`}}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
     "packer_profile": "packer",
-    "win_pass": "{{env `WIN_ADMIN_PASS`}}"
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
   },
   "sensitive-variables": [
     "admin_pass"
@@ -20,6 +20,7 @@
       "type": "amazon-ebs",
       "communicator": "winrm",
       "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
@@ -105,7 +106,7 @@
     {
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "type": "powershell",
-      "environment_vars": [ "WIN_ADMIN_PASS={{user `win_pass`}}" ]
+      "environment_vars": [ "WIN_ADMIN_PASS={{user `admin_pass`}}" ]
     },
     {
       "type": "powershell",

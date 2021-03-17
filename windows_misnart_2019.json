@@ -17,6 +17,7 @@
       "type": "amazon-ebs",
       "communicator": "winrm",
       "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
@@ -150,7 +151,7 @@
     {
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "type": "powershell",
-      "environment_vars": [ "WIN_ADMIN_PASS={{user `win_pass`}}" ]
+      "environment_vars": [ "WIN_ADMIN_PASS={{user `admin_pass`}}" ]
     },
     {
       "type": "powershell",
