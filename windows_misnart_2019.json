@@ -17,7 +17,6 @@
       "type": "amazon-ebs",
       "communicator": "winrm",
       "winrm_username": "Administrator",
-      "winrm_password": "{{user `admin_pass`}}",
       "winrm_use_ssl": false,
       "winrm_insecure": true,
       "region": "eu-west-2",
