@@ -1,0 +1,6 @@
+- hosts: all
+  remote_user: Administrator 
+  gather_facts: false
+ 
+  roles:
+    - Windows-2019-CIS
