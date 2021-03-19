@@ -104,14 +104,6 @@
       "extra_arguments": ["-e", "ansible_winrm_server_cert_validation=ignore"]
     },
     {
-      "type": "ansible",
-      "playbook_file": "./ansible/windows_base_cis.yml",
-      "galaxy_file": "./ansible/requirements-windows-2019-core.yml",
-      "user": "Administrator",
-      "use_proxy": false,
-      "extra_arguments": ["-e", "ansible_winrm_server_cert_validation=ignore"]
-    },
-    {
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "type": "powershell",
       "environment_vars": [ "WIN_ADMIN_PASS={{user `admin_pass`}}" ]
