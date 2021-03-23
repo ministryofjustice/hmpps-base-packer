@@ -70,7 +70,7 @@
       ],
       "ami_name": "HMPPS MIS NART ADM Windows Server {{user `branch_name`}} {{timestamp}}",
       "tags": {
-        "OS_Version": "Windows Server 2012 R2 RTM",
+        "OS_Version": "Windows Server 2019",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS MIS NART ADM Windows Server {{user `branch_name`}} {{timestamp}}",
@@ -80,7 +80,7 @@
         "Codebuild": "{{user `codebuild`}}"
       },
       "run_volume_tags": {
-        "OS_Version": "Windows Server 2012 R2 RTM",
+        "OS_Version": "Windows Server 2019",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS MIS NART ADM Windows Server {{user `branch_name`}} {{timestamp}}",
@@ -139,6 +139,20 @@
       "script": "scripts/Windows/All/2019/UpdateLaunchConfig.ps1",
       "type": "powershell",
       "environment_vars": [ "WIN_ADMIN_PASS={{user `admin_pass`}}" ]
+    },
+    {
+      "type": "file",
+      "source": "files/cloudwatch.config.json",
+      "destination": "c:\\setup\\cloudwatch\\config.json"
+    },
+    {
+      "script": "scripts/Windows/Base/InstallCloudwatchAgentFromS3.ps1",
+      "type": "powershell"
+    },
+    {
+      "type": "file",
+      "source": "scripts/Windows/Base/SetupCloudwatchAgent.ps1",
+      "destination": "c:\\setup\\runtimeconfig\\SetupCloudwatchAgent.ps1"
     },
     {
       "type": "powershell",
