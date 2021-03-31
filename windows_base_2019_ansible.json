@@ -27,7 +27,7 @@
       "vpc_id": "vpc-02321f288159e5d0e",
       "subnet_id": "subnet-00982fba28419ac5f",
       "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-agent-role-instance-profile",
-      "temporary_security_group_source_cidrs": [ "10.0.0.0/8" ], 
+      "temporary_security_group_source_cidrs": [ "10.0.0.0/8" ],
       "user_data_file": "scripts/Windows/Base/ConfigureWinRM2019.txt",
       "source_ami_filter": {
         "filters": {
@@ -40,10 +40,13 @@
       },
       "instance_type": "t3.xlarge",
       "ami_users": [
-        "563502482979",
         "723123699647",
-        "895523100917",
-        "077643444046",
+        "529698415668",
+        "172219029581",
+        "377957503799",
+        "097456858629",
+        "964150688482",
+        "787475932003",
         "431912413968",
         "645753425509",
         "479759138745",
@@ -56,8 +59,8 @@
         "728765553488",
         "330914586320",
         "130847504577",
-        "434401102446",
-        "766455809178"
+        "895523100917",
+        "077643444046"
       ],
       "tags": {
         "Base_AMI_ID": "{{ .SourceAMI }}",
