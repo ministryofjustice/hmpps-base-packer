@@ -88,8 +88,8 @@
   ],
   "provisioners": [
     {
-      "type": "powershell",
-      "script": "scripts/Windows/All/MakeTemp.ps1"
+      "type": "shell",
+      "inline": ["mkdir c:\temp"]
     },
     {
       "type": "file",
