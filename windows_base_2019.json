@@ -88,8 +88,8 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "inline": ["mkdir c:\temp"]
+      "type": "windows-shell",
+      "inline": ["mkdir c:\\temp"]
     },
     {
       "type": "file",
