@@ -1,0 +1,99 @@
+{
+  "variables": {
+    "artifact_bucket": "{{env `ZAIZI_BUCKET`}}",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "codebuild": "{{env `CODEBUILD`}}",
+    "env_identifier": "{{env `TARGET_ENV`}}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
+    "packer_profile": "packer",
+    "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
+  },
+  "sensitive-variables": [
+    "admin_pass"
+  ],
+  "builders": [
+    {
+      "ami_name": "HMPPS Windows CPOracle AppServer {{user `branch_name`}} {{timestamp}}",
+      "ami_regions": [
+        "eu-west-2"
+      ],
+      "type": "amazon-ebs",
+      "communicator": "winrm",
+      "force_deregister": true,
+      "winrm_username": "Administrator",
+      "winrm_password": "{{user `admin_pass`}}",
+      "winrm_use_ssl": true,
+      "winrm_insecure": true,
+      "winrm_use_ntlm": true,
+      "region": "eu-west-2",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env_identifier`}}-jenkins-ec2-agent-role-instance-profile",
+      "temporary_security_group_source_cidrs": [ "10.0.0.0/8" ],
+      "user_data_file": "scripts/Windows/Base/ConfigureWinRM2019.txt",
+      "source_ami_filter": {
+        "filters": {
+          "name": "Windows_Server-2019-English-Full-Base-*"
+        },
+        "most_recent": true,
+        "owners": [
+          "amazon"
+        ]
+      },
+      "instance_type": "t3.xlarge",
+      "ami_users": [
+        "964150688482",
+        "787475932003",
+        "895523100917"
+      ],
+      "tags": {
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Codebuild": "{{user `codebuild`}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "Name": "HMPPS Windows CPOracle AppServer {{user `branch_name`}} {{timestamp}}",
+        "OS_Version": "Windows Server 2019 DataCenter",
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+      },
+      "run_volume_tags": {
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Codebuild": "{{user `codebuild`}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "Name": "HMPPS Windows CPOracle AppServer {{user `branch_name`}} {{timestamp}}",
+        "OS_Version": "Windows Server 2019 DataCenter",
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-base-packer"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "windows-shell",
+      "inline": ["mkdir c:\\temp"]
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/CPOracle/CoreRequirements.ps1"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/Windows/CPOracle/InstallKarmaWebsite.ps1"
+    },
+    {
+      "type": "file",
+      "source": "scripts/Windows/CPOracle/InstallKarmaWebsite.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\CPOracleConfigure.ps1"
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendEventLogs.ps1 -Schedule",
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SendWindowsIsReady.ps1 -Schedule",
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -SchedulePerBoot",
+        "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SysprepInstance.ps1 -NoShutdown"
+      ]
+    }
+  ]
+}
