@@ -1,3 +1,5 @@
+
+
 Write-Output "------------------------------------"
 Write-Output "Install latest SSM Agent"
 Write-Output "------------------------------------"
@@ -22,10 +24,14 @@ cd  C:\Setup
 .\rewrite_amd64_en-US.msi /quiet 
 
 Write-Output "----------------------------------------------"
-Write-Output "Newtonsoft.Json.dll v"
+Write-Output "Newtonsoft.Json.dll"
 Write-Output "----------------------------------------------"
 # download dll from S3
 aws s3 cp s3://tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket/website_dependencies/Newtonsoft.Json.dll c:\setup\Newtonsoft.Json.dll
+
+Write-Output "Unblocking file c:\setup\Newtonsoft.Json.dll v"
+Unblock-File -Path c:\setup\Newtonsoft.Json.dll
+
 #  add dll to .NET GAC
 #Note that you should be running PowerShell as an Administrator
 [System.Reflection.Assembly]::Load("System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")            
@@ -36,3 +42,4 @@ $publish.GacInstall("C:\Setup\Newtonsoft.Json.dll")
 New-Item -ItemType Directory -Path C:\CPOracle
 New-Item -ItemType Directory -Path C:\CPOracle\logs
 
+ 
