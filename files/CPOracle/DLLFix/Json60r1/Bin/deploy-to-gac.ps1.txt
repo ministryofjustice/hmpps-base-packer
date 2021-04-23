@@ -1,8 +1,0 @@
-# C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\gacutil.exe 
-
-
-PS C:\Users\Administrator\Desktop\DLLFix\Json60r1\Bin\Net45> gacutil -i .\Newtonsoft.Json.dll
-Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.0
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Assembly successfully added to the cache
