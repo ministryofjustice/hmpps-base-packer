@@ -17,19 +17,14 @@ Get-WindowsFeature | where { $_.InstallState -eq "Installed" } | Format-Table
 Write-Output "----------------------------------------------"
 Write-Output "Install IIS Rewrite Module"
 Write-Output "----------------------------------------------"
-
-$Bucket        = "tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket"
-$region = "eu-west-2"
-Copy-S3Object -BucketName $Bucket -Key "/website_dependencies/rewrite_amd64_en-US.msi" -LocalFile C:\Setup\rewrite_amd64_en-US.msi -Region $region
-
+Copy-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key website_dependencies/rewrite_amd64_en-US.msi -DestinationKey C:\Setup\rewrite_amd64_en-US.msi -Region eu-west-2
 # Install the downloaded msi
 Start-Process -FilePath C:\Setup\rewrite_amd64_en-US.msi -ArgumentList "/quiet"
 
 Write-Output "----------------------------------------------"
 Write-Output "Newtonsoft.Json.dll"
 Write-Output "----------------------------------------------"
-# download dll from S3
-Copy-S3Object -BucketName $Bucket -Key "/website_dependencies/Newtonsoft.Json.dll" -LocalFile c:\setup\Newtonsoft.Json.dll -Region $region
+Copy-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key website_dependencies/Newtonsoft.Json.dll -LocalFile c:\setup\Newtonsoft.Json.dll -Region eu-west-2
 
 Write-Output "Unblocking file c:\setup\Newtonsoft.Json.dll v"
 Unblock-File -Path c:\setup\Newtonsoft.Json.dll
