@@ -17,8 +17,8 @@ $KarmaFileName = "karma-1.0.226.666.zip"
 Write-Output "#----------------------------------------------------------------------"
 Write-Output "Copying Karma Zip file from s3://$Bucket/$KarmaFileName"
 Write-Output "#----------------------------------------------------------------------"
-# aws s3 cp "s3://$Bucket/$KarmaFileName" c:\setup\$KarmaFileName
-Copy-S3Object -BucketName $Bucket -Key "/$KarmaFileName" -DestinationKey c:\setup\$KarmaFileName
+$region = "eu-west-2"
+Copy-S3Object -BucketName $Bucket -Key "/$KarmaFileName" -LocalFile c:\setup\$KarmaFileName -Region $region
 
 
 Write-Output "#----------------------------------------------------------------------"
