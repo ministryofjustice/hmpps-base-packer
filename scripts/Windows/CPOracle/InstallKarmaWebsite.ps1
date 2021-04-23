@@ -18,6 +18,8 @@ Write-Output "#-----------------------------------------------------------------
 Write-Output "Copying Karma Zip file from s3://$Bucket/$KarmaFileName"
 Write-Output "#----------------------------------------------------------------------"
 aws s3 cp "s3://$Bucket/$KarmaFileName" c:\setup\$KarmaFileName
+Copy-S3Object -BucketName $Bucket -Key "/$KarmaFileName" -DestinationKey c:\setup\$KarmaFileName
+
 
 Write-Output "#----------------------------------------------------------------------"
 Write-Output "Extracting Karma Zip to c:\inetpub"
