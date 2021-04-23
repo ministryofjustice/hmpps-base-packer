@@ -17,7 +17,7 @@ Write-Output "----------------------------------------------"
 Write-Output "Install IIS Rewrite Module"
 Write-Output "----------------------------------------------"
 # Download msi
-aws s3 cp s3://tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket/website_dependencies/rewrite_amd64_en-US.msi C:\Setup\rewrite_amd64_en-US.msi 
+# aws s3 cp s3://tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket/website_dependencies/rewrite_amd64_en-US.msi C:\Setup\rewrite_amd64_en-US.msi 
 Copy-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key /website_dependencies/rewrite_amd64_en-US.msi -DestinationKey C:\Setup\rewrite_amd64_en-US.msi
 
 # Install the downloaded msi
