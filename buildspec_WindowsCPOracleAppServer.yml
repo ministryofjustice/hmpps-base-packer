@@ -7,10 +7,6 @@ env:
   parameter-store:
     WIN_ADMIN_PASS:      "/${TARGET_ENV}/jenkins/windows/agent/admin/password"
     WIN_JENKINS_PASS:    "/${TARGET_ENV}/jenkins/windows/agent/jenkins/password"
-    WIN_MIS_USER:        "/${TARGET_ENV}/jenkins/windows/mis/user"
-    WIN_MIS_PASS:        "/${TARGET_ENV}/jenkins/windows/mis/password"
-    WIN_BOBJ_USER:       "/${TARGET_ENV}/jenkins/windows/busobj/user"
-    WIN_BOBJ_PASS:       "/${TARGET_ENV}/jenkins/windows/busobj/password"
     GITHUB_ACCESS_TOKEN: "/jenkins/github/accesstoken"
     ARTIFACT_BUCKET:     "/codebuild/artifact_bucket"
     ZAIZI_BUCKET:        "/codebuild/zaizi_bucket"
