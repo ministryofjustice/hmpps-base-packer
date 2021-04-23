@@ -26,9 +26,6 @@ Remove-IISSite -Name "Default Web Site"
 
 Write-Output "Creating CPOracle Web Application"
 
-
-Start-IISCommitDelay
-
 $TestSite = New-IISSite -Name CPOracle 
                         -BindingInformation "*:80:" 
                         -PhysicalPath "$env:systemdrive\inetpub\cporacle" 

@@ -45,7 +45,7 @@ try {
     Write-Output("cporacle_app_password: " + $cporacle_app_password.Value)
 
     ###############################################################
-    # Update IapsIMInterface\Config\IMIAPS.xml
+    # Update Config File
     ###############################################################
     $configfile="C:\inetpub\Karma-1.0.226.666\Web.config"
     Write-Output("Updating CPOracle Config file '${configfile}'")
@@ -57,7 +57,7 @@ try {
     $content.replace('$$RDSUSERNAME$$', $cporacle_app_username.Value) | Set-Content $configfile
 
     $content = Get-Content -path $configfile
-    $content.replace('$$RDSPASSWORD$$', $cporacle_app_dbpassword.Value) | Set-Content $configfile
+    $content.replace('$$RDSPASSWORD$$', $cporacle_app_password.Value) | Set-Content $configfile
 
     $content = Get-Content -path $configfile 
     $content
