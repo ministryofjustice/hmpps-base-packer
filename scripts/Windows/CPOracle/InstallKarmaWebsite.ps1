@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+# $ErrorActionPreference = "Stop"
 $VerbosePreference="Continue"
 
 Set-ExecutionPolicy Bypass -Force
