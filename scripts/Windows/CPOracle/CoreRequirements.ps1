@@ -7,10 +7,10 @@ Write-Output "------------------------------------"
 Invoke-WebRequest https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/windows_amd64/AmazonSSMAgentSetup.exe -OutFile $env:USERPROFILE\Desktop\SSMAgent_latest.exe
 Start-Process -FilePath $env:USERPROFILE\Desktop\SSMAgent_latest.exe -ArgumentList "/S"
 
-Write-Output "----------------------------------------------"
-Write-Output "Sleep instance for 1 hour to debug"
-Write-Output "----------------------------------------------"
-Start-Sleep -Seconds 3600
+# Write-Output "----------------------------------------------"
+# Write-Output "Sleep instance for 1 hour to debug"
+# Write-Output "----------------------------------------------"
+# Start-Sleep -Seconds 3600
 
 Write-Output "----------------------------------------------"
 Write-Output "Ensure C:\setup exists"
