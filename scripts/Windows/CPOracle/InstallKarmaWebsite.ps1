@@ -10,7 +10,8 @@
  Write-Output "#----------------------------------------------------------------------"
  Write-Output "# Download Karma Binaries from S3 Bucket "
  Write-Output "#----------------------------------------------------------------------"
- $KarmaFileName = "Karma-1.0.226.666.zip"
+ $KarmaFolder   = "Karma-1.0.226.666"
+ $KarmaFileName = "${KarmaFolder}.zip"
  
  Write-Output "#----------------------------------------------------------------------"
  Write-Output "Copying Karma Zip file from s3://$Bucket/$KarmaFileName"
@@ -18,15 +19,15 @@
  Read-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key /Karma-1.0.226.666.zip -File c:\setup\$KarmaFileName -Region eu-west-2
  
  Write-Output "#----------------------------------------------------------------------"
- Write-Output "Extracting Karma Zip to c:\inetpub"
+ Write-Output "Extracting Karma Zip to c:\inetpub\$KarmaFolder"
  Write-Output "#----------------------------------------------------------------------"
  Add-Type -AssemblyName System.IO.Compression.FileSystem
- [System.IO.Compression.ZipFile]::ExtractToDirectory("c:\\setup\\$KarmaFileName", "C:\\inetpub\\Karma-1.0.226.666")
+ [System.IO.Compression.ZipFile]::ExtractToDirectory("c:\\setup\\$KarmaFileName", "$KarmaFolder")
  
  Import-Module IISAdministration
  
  $WebSiteName = "CPOracle"
- $WebSitePath = "c:\inetpub\karma-1.0.226.666"
+ $WebSitePath = "c:\inetpub\${KarmaFolder}"
  $AppPoolName = "$WebSiteName"
  
  Get-IISSite
@@ -100,4 +101,3 @@
  $manager.CommitChanges()
  
   
- 
