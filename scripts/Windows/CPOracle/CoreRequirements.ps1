@@ -13,6 +13,13 @@ Write-Output "----------------------------------------------"
 Start-Sleep -Seconds 3600
 
 Write-Output "----------------------------------------------"
+Write-Output "Ensure C:\setup exists"
+Write-Output "----------------------------------------------"
+if( $false -eq (Test-Path -Path "C:\setup")) {
+    New-Item -Path "c:\" -Name "setup" -ItemType "directory"
+}
+
+Write-Output "----------------------------------------------"
 Write-Output "Install IIS Webserver, .NET Framework 4.5"
 Write-Output "----------------------------------------------"
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
@@ -23,7 +30,7 @@ Write-Output "----------------------------------------------"
 Write-Output "Install IIS Rewrite Module"
 Write-Output "----------------------------------------------"
 Write-Output "Copy-S3Object.."
-Copy-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key website_dependencies/rewrite_amd64_en-US.msi -DestinationKey C:\Setup\rewrite_amd64_en-US.msi -Region eu-west-2
+Read-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key website_dependencies/rewrite_amd64_en-US.msi -File c:\setup\rewrite_amd64_en-US.msi -Region eu-west-2
 
 Write-Output "Install the downloaded msi.."
 Start-Process -FilePath C:\Setup\rewrite_amd64_en-US.msi -ArgumentList "/quiet"
@@ -32,7 +39,7 @@ Write-Output "----------------------------------------------"
 Write-Output "Newtonsoft.Json.dll"
 Write-Output "----------------------------------------------"
 Write-Output "Copy-S3Object.."
-Copy-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key website_dependencies/Newtonsoft.Json.dll -LocalFile c:\setup\Newtonsoft.Json.dll -Region eu-west-2
+Read-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key website_dependencies/Newtonsoft.Json.dll -File c:\setup\Newtonsoft.Json.dll -Region eu-west-2
 
 Write-Output "Unblocking file c:\setup\Newtonsoft.Json.dll v"
 Unblock-File -Path c:\setup\Newtonsoft.Json.dll
