@@ -14,7 +14,7 @@
       "communicator": "winrm",
       "winrm_username": "Administrator",
       "winrm_password": "{{user `admin_pass`}}",
-      "winrm_use_ssl": false,
+      "winrm_use_ssl": true,
       "winrm_insecure": true,
       "region": "eu-west-2",
       "vpc_id": "vpc-02321f288159e5d0e",
