@@ -94,7 +94,7 @@
         "OS_Version": "Windows Server 2019 DataCenter",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS MIS NART DIS Windows Server {{user `branch_name`}} {{timestamp}}",
+        "Name": "HMPPS MIS NART DIS Windows Server 2019 {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
         "source-code": "https://github.com/ministryofjustice/hmpps-base-packer",
