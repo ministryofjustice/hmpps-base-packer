@@ -123,10 +123,6 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/Windows/MIS/InstallSaltStack.ps1"
-    },
-    {
-      "type": "powershell",
       "script": "scripts/Windows/MIS/InstallDotNet35.ps1"
     },
     {
