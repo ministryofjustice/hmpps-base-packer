@@ -51,7 +51,7 @@
     },
     {
       "type": "shell",
-      "script": "scripts/ansible_galaxy_base.sh"
+      "script": "scripts/ansible_galaxy_base_centos.sh"
     },
     {
       "type": "ansible-local",
