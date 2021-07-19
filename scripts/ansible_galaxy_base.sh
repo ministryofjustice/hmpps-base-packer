@@ -6,6 +6,6 @@ sudo yum install -y \
     wget \
     yum-utils
 
-sudo easy_install pip
+sudo easy_install pip==20.3.4
 
 sudo pip install ansible==2.6 virtualenv awscli boto botocore boto3 shyaml
