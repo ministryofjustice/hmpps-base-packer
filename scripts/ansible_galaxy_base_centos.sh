@@ -5,7 +5,10 @@ sudo yum install -y \
     git \
     wget \
     yum-utils \
-    epel-release \
-    python-pip
+    epel-release
+
+sudo yum repolist
+
+sudo yum install -y python-pip
 
 sudo pip install ansible==2.6 virtualenv awscli boto botocore boto3 shyaml
