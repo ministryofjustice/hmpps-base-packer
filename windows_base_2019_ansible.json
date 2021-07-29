@@ -100,6 +100,10 @@
         "destination": "C:\\Setup\\RunTimeConfig\\SetupCloudwatchAgent.ps1"
     },
     {
+      "script": "scripts/Windows/Base/DisableSpoolerService.ps1",
+      "type": "powershell"
+    },
+    {
       "type": "ansible",
       "playbook_file": "./ansible/windows_base.yml",
       "user": "Administrator",
