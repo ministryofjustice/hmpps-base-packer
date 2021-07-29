@@ -118,6 +118,10 @@
       "type": "powershell"
     },
     {
+      "script": "scripts/Windows/Base/DisableSpoolerService.ps1",
+      "type": "powershell"
+    },
+    {
       "script": "scripts/Windows/Base/YamlSupport.ps1",
       "type": "powershell",
       "environment_vars": [ "ARTIFACT_BUCKET={{user `artifact_bucket`}}" ]
