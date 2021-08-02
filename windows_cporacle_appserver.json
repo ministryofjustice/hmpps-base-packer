@@ -78,12 +78,13 @@
       "script": "scripts/Windows/CPOracle/CoreRequirements.ps1"
     },
     {
-      "type": "powershell",
-      "script": "scripts/Windows/CPOracle/InstallKarmaWebsite.ps1"
+      "type": "file",
+      "source": "scripts/Windows/CPOracle/InstallKarmaWebsite.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\InstallKarmaWebsite.ps1"
     },
     {
       "type": "file",
-      "source": "scripts/Windows/CPOracle/InstallKarmaWebsite.ps1",
+      "source": "scripts/Windows/CPOracle/CPOracleConfigure.ps1",
       "destination": "C:\\Setup\\RunTimeConfig\\CPOracleConfigure.ps1"
     },
     {
