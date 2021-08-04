@@ -35,7 +35,7 @@ try {
 
     # CHECK IF API OR WEB SERVER - build WEB by default
     if ($cporacleServerType.Value -Contains "api"){
-        Write-Output ('API instance detected')
+        Write-Output ('API server instance detected')
 
         Write-Output('Fetching CPOracle Configuration from SSM Parameter Store and existing RDS endpoint')
 
@@ -87,7 +87,26 @@ try {
 
     }else {
 
-        Write-Output ('WEB instance detected')
+        Write-Output ('WEB server instance detected')
+
+        ###############################################################
+        # Set index.html as default site
+        ###############################################################
+        Write-Output("Setting index.html to be default document..")
+        Remove-WebConfigurationProperty  -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/defaultDocument/files" -name "." -AtElement @{value='karma.html'}
+        Remove-WebConfigurationProperty  -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/defaultDocument/files" -name "." -AtElement @{value='Default.htm'}
+        Remove-WebConfigurationProperty  -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/defaultDocument/files" -name "." -AtElement @{value='Default.asp'}
+        Remove-WebConfigurationProperty  -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/defaultDocument/files" -name "." -AtElement @{value='index.htm'}
+        Remove-WebConfigurationProperty  -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/defaultDocument/files" -name "." -AtElement @{value='iisstart.htm'}
+        Remove-WebConfigurationProperty  -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/defaultDocument/files" -name "." -AtElement @{value='default.aspx'}
+
+        ###############################################################
+        # Set 404 errors to point to index.html
+        ###############################################################
+        Write-Output("Customizing 404 errors to point to index.html..")
+        #Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/httpErrors/error[@statusCode='404' and @subStatusCode='-1']" -name "prefixLanguageFilePath" -value "%SystemDrive%\inetpub\custerr"
+        Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/httpErrors/error[@statusCode='404' and @subStatusCode='-1']" -name "path" -value "/index.html"
+        Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST/CPOracle'  -filter "system.webServer/httpErrors/error[@statusCode='404' and @subStatusCode='-1']" -name "responseMode" -value "ExecuteURL"
 
         ###############################################################
         # Restart W3SVC service

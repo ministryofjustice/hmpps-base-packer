@@ -30,10 +30,6 @@ try {
     )
     $cporacleServerType.Value
 
-    Write-Output "#----------------------------------------------------------------------"
-    Write-Output "# Download CPOracle API Binaries from S3 Bucket "
-    Write-Output "#----------------------------------------------------------------------"
-
     # CHECK IF API OR WEB SERVER - build WEB by default
     if ($cporacleServerType.Value -Contains "api"){
 
