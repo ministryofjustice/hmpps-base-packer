@@ -54,11 +54,6 @@ try {
     }
 
     Write-Output "#----------------------------------------------------------------------"
-    Write-Output "Copying Karma Zip file from s3://$Bucket/$KarmaFileName"
-    Write-Output "#----------------------------------------------------------------------"
-    Read-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket -Key /$KarmaFileName -File c:\setup\$KarmaFileName -Region eu-west-2
-
-    Write-Output "#----------------------------------------------------------------------"
     Write-Output "Extracting Karma Zip to '$WebSitePath'"
     Write-Output "#----------------------------------------------------------------------"
     Add-Type -AssemblyName System.IO.Compression.FileSystem
