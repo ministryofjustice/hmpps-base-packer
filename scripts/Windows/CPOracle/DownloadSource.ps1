@@ -22,7 +22,7 @@ Read-S3Object -BucketName tf-eu-west-2-hmpps-eng-dev-artefacts-cporacle-s3bucket
 
 ##### UPDATE $KarmaWEBVersion with the Website release to deploy #####
 $KarmaWEBVersion   = "LondonCrc.Karma.Website.2021.06.04.14.40"
-Write-Output ("Will download Karma API version: ${KarmaWEBVersion}")
+Write-Output ("Will download Karma WEB version: ${KarmaWEBVersion}")
 $KarmaWEBFileName = "${KarmaWEBVersion}.zip"
 
 Write-Output "#----------------------------------------------------------------------"
