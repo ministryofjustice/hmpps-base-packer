@@ -34,7 +34,7 @@ try {
     $cporacleServerType.Value
 
     # CHECK IF API OR WEB SERVER - build WEB by default
-    if ($cporacleServerType.Value -Contains "api"){
+    if ($cporacleServerType.Value -Like "*api*"){
         Write-Output ('API server instance detected')
 
         Write-Output('Fetching CPOracle Configuration from SSM Parameter Store and existing RDS endpoint')
