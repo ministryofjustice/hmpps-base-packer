@@ -82,14 +82,23 @@
       "script": "scripts/Windows/CPOracle/DownloadSource.ps1"
     },
     {
-      "type": "file",
-      "source": "scripts/Windows/CPOracle/InstallKarmaWebsite.ps1",
-      "destination": "C:\\Setup\\RunTimeConfig\\InstallKarmaWebsite.ps1"
+      "type": "powershell",
+      "script": "scripts/Windows/CPOracle/SetRDSEndpointRegistryKeys.ps1"
     },
     {
       "type": "file",
-      "source": "scripts/Windows/CPOracle/CPOracleConfigure.ps1",
-      "destination": "C:\\Setup\\RunTimeConfig\\CPOracleConfigure.ps1"
+      "source": "scripts/Windows/CPOracle/SetInstanceRegistryKeys.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\SetInstanceRegistryKeys.ps1"
+    },
+    {
+      "type": "file",
+      "source": "scripts/Windows/CPOracle/InstallKarmaApp.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\InstallKarmaApp.ps1"
+    },
+    {
+      "type": "file",
+      "source": "scripts/Windows/CPOracle/KarmaAppConfigure.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\KarmaAppConfigure.ps1"
     },
     {
       "type": "powershell",

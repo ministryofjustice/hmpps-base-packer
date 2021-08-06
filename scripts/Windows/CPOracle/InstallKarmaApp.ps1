@@ -7,43 +7,29 @@
 $VerbosePreference="Continue"
 Set-ExecutionPolicy Bypass -Force
 
+Write-Output('Start of InstallKarmaApp.ps1 ---->')
 
 try {
 
-    # Get the instance id from ec2 meta data
-    $instanceid = Invoke-RestMethod "http://169.254.169.254/latest/meta-data/instance-id"
+    $key = 'HKLM:\Software\HMMPS'
+    $instanceName = (Get-ItemProperty -Path $key -Name cporacleenvironmentname).cporacleenvironmentname
+    $KarmaAPIVersion = (Get-ItemProperty -Path $key -Name karmawebversion).karmawebversion
+    $KarmaWEBVersion = (Get-ItemProperty -Path $key -Name karmaapiversion).karmaapiversion
 
     if( $false -eq (Test-Path -Path "C:\setup")) {
         New-Item -Path "c:\" -Name "setup" -ItemType "directory"
     }
 
-    # Get the Instance Name from this instance's environment-name and application tag values
-    $cporacleServerType = Get-EC2Tag -Region eu-west-2 -Filter @(
-        @{
-            name="resource-id"
-            values="$instanceid"
-        }
-        @{
-            name="key"
-            values="Name"
-        }
-    )
-    $cporacleServerType.Value
-
     # CHECK IF API OR WEB SERVER - build WEB by default
-    if ($cporacleServerType.Value -Contains "api"){
+    if ($instanceName -Like "*api*"){
 
         Write-Output ('API instance detected, installing Karma API')
-        ##### UPDATE $KarmaAPIVersion with the API release to deploy #####
-        $KarmaAPIVersion   = "LondonCrc.Karma.API.2021.06.03.10.43"
         $KarmaFileName = "${KarmaAPIVersion}.zip"
         $WebSitePath   = "c:\inetpub\${KarmaAPIVersion}"
 
     }else {
 
         Write-Output ('WEB instance detected, installing Karma Website')
-        ##### UPDATE $KarmaWEBVersion with the Website release to deploy #####
-        $KarmaWEBVersion   = "LondonCrc.Karma.Website.2021.06.04.14.40"
         $KarmaFileName = "${KarmaWEBVersion}.zip"
         $WebSitePath   = "c:\inetpub\${KarmaWEBVersion}"
 
@@ -101,8 +87,14 @@ try {
     Write-Output "------------------------------------------------------------------------------------------"
     $ConfigSection = Get-IISConfigSection -SectionPath "system.webServer/defaultDocument"
     $DefaultDocumentCollection = Get-IISConfigCollection -ConfigElement $ConfigSection -CollectionName "files"
-    New-IISConfigCollectionElement -ConfigCollection $DefaultDocumentCollection -ConfigAttribute @{"Value" = "karma.html"} -AddAt 0
+    if ($cporacleServerType.Value -Like "*api*"){
+        New-IISConfigCollectionElement -ConfigCollection $DefaultDocumentCollection -ConfigAttribute @{"Value" = "karma.html"} -AddAt 0
 
+
+    }else {
+        New-IISConfigCollectionElement -ConfigCollection $DefaultDocumentCollection -ConfigAttribute @{"Value" = "index.html"} -AddAt 0
+
+    }
     Write-Output "----------------------------------------------"
     Write-Output "Enabling anonymousAuthentication on website $WebsiteName"
     Write-Output "----------------------------------------------"
@@ -129,6 +121,8 @@ try {
     $logFile.Enabled = $true
     $logFile.Period = "Daily"
     $manager.CommitChanges()
+
+    Write-Output('<---- End of of InstallKarmaApp.ps1')
 
 }
 catch [Exception] {
