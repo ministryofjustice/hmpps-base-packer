@@ -32,8 +32,8 @@ try {
     )
     $cporacleServerType.Value
 
-    New-Item -Path HKLM:\Software\HMMPS -Name cporacleenvironmentname –Force -Value “$environmentName.Value”
-    New-Item -Path HKLM:\Software\HMMPS -Name cporacleinstancename –Force -Value “$cporacleServerType.Value”
+    New-Item -Path HKLM:\Software\HMMPS -Name cporacleenvironmentname -Force -Value “$environmentName.Value”
+    New-Item -Path HKLM:\Software\HMMPS -Name cporacleinstancename -Force -Value “$cporacleServerType.Value”
 
 }
 catch [Exception] {
