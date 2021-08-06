@@ -2,7 +2,7 @@ $VerbosePreference="Continue"
 Set-ExecutionPolicy Bypass -Force
 
 Write-Output('Start of SetRDSEndpointRegistryKeys.ps1 ---->')
-
+Install-Module -Name AWS.Tools.Installer -Force
 Write-Output('Fetching CPOracle Configuration from SSM Parameter Store and existing RDS endpoint')
 
 Write-Output('Get the RDS Endpoint for the CPOracle Database')
