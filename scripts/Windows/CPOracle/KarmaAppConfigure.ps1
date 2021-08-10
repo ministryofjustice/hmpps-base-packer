@@ -6,7 +6,7 @@ try {
     Write-Output('Start of KarmaAppConfigure.ps1 ---->')
 
     $key = 'HKLM:\Software\HMMPS'
-    $instanceName = (Get-ItemProperty -Path $key -Name cporacleenvironmentname).cporacleenvironmentname
+    $instanceName = (Get-ItemProperty -Path $key -Name cporacleinstancename).cporacleenvironmentname
     $RDSEndpoint = (Get-ItemProperty -Path $key -Name rdsendpoint).rdsendpoint
     $cporacle_app_username = (Get-ItemProperty -Path $key -Name cporacleappuser).cporacleappuser
     $cporacle_app_password = (Get-ItemProperty -Path $key -Name cporacleapppw).cporacleapppw

@@ -20,7 +20,7 @@ try {
 
 
     # Get the Instance Name from this instance's environment-name and application tag values
-    $cporacleServerType = Get-EC2Tag -Region eu-west-2 -Filter @(
+    $instanceName = Get-EC2Tag -Region eu-west-2 -Filter @(
     @{
     name="resource-id"
     values="$instanceid"
@@ -30,10 +30,10 @@ try {
     values="Name"
     }
     )
-    $cporacleServerType.Value
+    $instanceName.Value
 
     New-Item -Path HKLM:\Software\HMMPS -Name cporacleenvironmentname -Force -Value “$environmentName.Value”
-    New-Item -Path HKLM:\Software\HMMPS -Name cporacleinstancename -Force -Value “$cporacleServerType.Value”
+    New-Item -Path HKLM:\Software\HMMPS -Name cporacleinstancename -Force -Value “$instanceName.Value”
 
 }
 catch [Exception] {
