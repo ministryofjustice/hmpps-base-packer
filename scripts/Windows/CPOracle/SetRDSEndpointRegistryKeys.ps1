@@ -1,33 +1,14 @@
 $VerbosePreference="Continue"
 Set-ExecutionPolicy Bypass -Force
 
+$environmentName = (Get-ItemProperty -Path $key -Name cporacleenvironmentname).cporacleenvironmentname
+
 Write-Output('Start of SetRDSEndpointRegistryKeys.ps1 ---->')
 
 Write-Output('Fetching CPOracle Configuration from SSM Parameter Store and existing RDS endpoint')
-
 Write-Output('Get the RDS Endpoint for the CPOracle Database')
 $RDSEndpoint=(aws rds describe-db-instances --db-instance-identifier 'cp-oracle-native-backup-restore' --query 'DBInstances[].Endpoint.Address' --output text)
 Write-Output("Using RDS Endpoint '" + $RDSEndpoint + "'")
-
-### GET ENVIRONMENT NAME ###
-
-# Get the instance id from ec2 meta data
-$instanceid = Invoke-RestMethod "http://169.254.169.254/latest/meta-data/instance-id"
-
-# Get the environment name from this instance's environment-name and application tag values
-$environmentName = Get-EC2Tag -Region eu-west-2 -Filter @(
-@{
-    name="resource-id"
-    values="$instanceid"
-}
-@{
-    name="key"
-    values="environment-name"
-}
-)
-$environmentName.Value
-
-##############################
 
 $cporacle_app_username_SSMPath = "/" + $environmentName.Value + "/cr/cporacle/rds/cporacle_app_username"
 Write-Output("get ssm param $cporacle_app_username_SSMPath")
