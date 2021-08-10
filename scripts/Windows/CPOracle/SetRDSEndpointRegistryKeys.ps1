@@ -2,7 +2,17 @@ $VerbosePreference="Continue"
 Set-ExecutionPolicy Bypass -Force
 
 Write-Output('Start of SetRDSEndpointRegistryKeys.ps1 ---->')
-Install-Module -Name AWS.Tools.Installer -Force
+
+# Currently AWS CLI is needed to get the rds endpoint
+
+### INSTALL AWS CLI ###
+Write-Output('Installing AWS CLI')
+Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -Outfile "C:\aws.msi"
+Start-Process -Wait -FilePath msiexec -ArgumentList /i, "c:\aws.msi", /qn
+Remove-Item "c:\aws.msi"
+Write-Output('Finished installing AWS CLI')
+### FINISH INSTALLING AWS CLI ###
+
 Write-Output('Fetching CPOracle Configuration from SSM Parameter Store and existing RDS endpoint')
 
 Write-Output('Get the RDS Endpoint for the CPOracle Database')
@@ -23,4 +33,12 @@ New-Item -Path HKLM:\Software\HMMPS -Name rdsendpoint -Force -Value “$RDSEndpo
 New-Item -Path HKLM:\Software\HMMPS -Name cporacleappuser -Force -Value “$cporacle_app_username.Value”
 New-Item -Path HKLM:\Software\HMMPS -Name cporacleapppw -Force -Value “$cporacle_app_password.Value”
 
+### REMOVE AWS CLI ###
+Write-Output('Removing AWS CLI')
+$MyApp = Get-WmiObject -Class Win32_Product | Where-Object{$_.Name -eq "AWS Command Line Interface v2"}
+$MyApp.Uninstall()
+Write-Output('Finished removing AWS CLI')
+### FINISH REMOVING AWS CLI ###
+
 Write-Output('<---- End of of SetRDSEndpointRegistryKeys.ps1')
+
