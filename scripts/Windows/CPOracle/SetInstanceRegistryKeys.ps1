@@ -8,12 +8,12 @@ try {
     # Get the environment name from this instance's environment-name and application tag values
     $environmentName = Get-EC2Tag -Region eu-west-2 -Filter @(
     @{
-    name="resource-id"
-    values="$instanceid"
+        name="resource-id"
+        values="$instanceid"
     }
     @{
-    name="key"
-    values="environment-name"
+        name="key"
+        values="environment-name"
     }
     )
     $environmentName.Value
@@ -22,18 +22,20 @@ try {
     # Get the Instance Name from this instance's environment-name and application tag values
     $instanceName = Get-EC2Tag -Region eu-west-2 -Filter @(
     @{
-    name="resource-id"
-    values="$instanceid"
+        name="resource-id"
+        values="$instanceid"
     }
     @{
-    name="key"
-    values="Name"
+        name="key"
+        values="Name"
     }
     )
     $instanceName.Value
 
-    New-Item -Path HKLM:\Software\HMMPS -Name cporacleenvironmentname -Force -Value “$environmentName.Value”
-    New-Item -Path HKLM:\Software\HMMPS -Name cporacleinstancename -Force -Value “$instanceName.Value”
+    $key ="HKLM:\Software\HMPPS"
+    Set-ItemProperty -Path $key -Name cporacleenvironmentname  -Value $environmentName.Value
+    Set-ItemProperty -Path $key -Name cporacleinstancename  -Value $instanceName.Value
+
 
 }
 catch [Exception] {

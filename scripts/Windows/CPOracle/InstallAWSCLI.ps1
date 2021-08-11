@@ -6,4 +6,8 @@ Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -Outfile "C:\aw
 Start-Process -Wait -FilePath msiexec -ArgumentList /i, "c:\aws.msi", /qn
 Remove-Item "c:\aws.msi"
 Write-Output('Finished installing AWS CLI')
+
+Write-Output('Updating Enviromental Variables')
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
 ### FINISH INSTALLING AWS CLI ###

@@ -11,10 +11,10 @@ Write-Output('Start of InstallKarmaApp.ps1 ---->')
 
 try {
 
-    $key = 'HKLM:\Software\HMMPS'
-    $instanceName = (Get-ItemProperty -Path $key -Name cporacleenvironmentname).cporacleenvironmentname
-    $KarmaAPIVersion = (Get-ItemProperty -Path $key -Name karmawebversion).karmawebversion
-    $KarmaWEBVersion = (Get-ItemProperty -Path $key -Name karmaapiversion).karmaapiversion
+    $key = "HKLM:\Software\HMPPS"
+    $instanceName = (Get-ItemProperty -Path $key -Name "cporacleinstancename").cporacleinstancename
+    $KarmaAPIVersion = (Get-ItemProperty -Path $key -Name "karmaapiversion").karmaapiversion
+    $KarmaWEBVersion = (Get-ItemProperty -Path $key -Name "karmawebversion").karmawebversion
 
     if( $false -eq (Test-Path -Path "C:\setup")) {
         New-Item -Path "c:\" -Name "setup" -ItemType "directory"
@@ -126,8 +126,8 @@ try {
 
 }
 catch [Exception] {
-Write-Output ('Failed to install Karma Website or API')
-echo $_.Exception|format-list -force
-Exit 1
+    Write-Output ('Failed to install Karma Website or API')
+    echo $_.Exception|format-list -force
+    Exit 1
 }
 
