@@ -5,11 +5,11 @@ try {
 
     Write-Output('Start of KarmaAppConfigure.ps1 ---->')
 
-    $key = 'HKLM:\Software\HMMPS'
-    $instanceName = (Get-ItemProperty -Path $key -Name cporacleinstancename).cporacleenvironmentname
-    $RDSEndpoint = (Get-ItemProperty -Path $key -Name rdsendpoint).rdsendpoint
-    $cporacle_app_username = (Get-ItemProperty -Path $key -Name cporacleappuser).cporacleappuser
-    $cporacle_app_password = (Get-ItemProperty -Path $key -Name cporacleapppw).cporacleapppw
+    $key = "HKLM:\Software\HMPPS"
+    $instanceName = (Get-ItemProperty -Path $key -Name "cporacleinstancename").cporacleinstancename
+    $RDSEndpoint = (Get-ItemProperty -Path $key -Name "rdsendpoint").rdsendpoint
+    $cporacle_app_username = (Get-ItemProperty -Path $key -Name "cporacleappuser").cporacleappuser
+    $cporacle_app_password = (Get-ItemProperty -Path $key -Name "cporacleapppw").cporacleapppw
 
     # CHECK IF API OR WEB SERVER - build WEB by default
     if ($instanceName -Like "*api*"){
