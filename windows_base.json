@@ -93,6 +93,10 @@
       "script": "scripts/Windows/Base/DisableUAC.ps1"
     },
     {
+      "script": "scripts/Windows/Base/DisableSpoolerService.ps1",
+      "type": "powershell"
+    },
+    {
       "type": "powershell",
       "script": "scripts/Windows/Base/InstallOpenSSH.ps1",
       "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]
