@@ -75,6 +75,10 @@
     },
     {
       "type": "powershell",
+      "script": "scripts/Windows/Base/DisableSpoolerService.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/Windows/CPOracle/CoreRequirements.ps1"
     },
     {
