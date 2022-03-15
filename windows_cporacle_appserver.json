@@ -33,12 +33,15 @@
       "user_data_file": "scripts/Windows/Base/ConfigureWinRM2019.txt",
       "source_ami_filter": {
         "filters": {
-          "name": "Windows_Server-2019-English-Full-Base-*"
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Windows Server Base 2019 {{user `branch_name`}}*",
+          "root-device-type": "ebs"
         },
-        "most_recent": true,
         "owners": [
-          "amazon"
-        ]
+          "895523100917"
+        ],
+        "most_recent": true
       },
       "instance_type": "t3.xlarge",
       "ami_users": [
