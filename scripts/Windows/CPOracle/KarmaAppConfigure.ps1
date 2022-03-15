@@ -7,6 +7,7 @@ try {
 
     $key = "HKLM:\Software\HMPPS"
     $instanceName = (Get-ItemProperty -Path $key -Name "cporacleinstancename").cporacleinstancename
+    $environmentName = (Get-ItemProperty -Path $key -Name "cporacleenvironmentname").cporacleenvironmentname
     $RDSEndpoint = (Get-ItemProperty -Path $key -Name "rdsendpoint").rdsendpoint
     $cporacle_app_username = (Get-ItemProperty -Path $key -Name "cporacleappuser").cporacleappuser
     $cporacle_app_password = (Get-ItemProperty -Path $key -Name "cporacleapppw").cporacleapppw
@@ -18,6 +19,7 @@ try {
         # Update API WEB Config File
         ###############################################################
 
+        # Sets RDS DB details
         $configfile="C:\inetpub\${KarmaAPIVersion}\Web.config"
         Write-Output("Updating CPOracle Config file '${configfile}'")
 
@@ -29,6 +31,35 @@ try {
 
         $content = Get-Content -path $configfile
         $content.replace('$$RDSPASSWORD$$', $cporacle_app_password) | Set-Content $configfile
+
+        # Sets the flag to enable or disable password reset emails
+        # Sets the flag to enable or disable test banner
+        # Sets initial internal DB PWD for API user
+        if ($environmentName -Like "*dev*"){
+            Write-Output("Dev detected, setting banner and disabling password reset emails")
+
+            $content = Get-Content -path $configfile
+            $content.replace('$$PWDRESETEMAILS$$', 'false') | Set-Content $configfile
+
+            $content = Get-Content -path $configfile
+            $content.replace('$$DEVBANNER$$', 'true') | Set-Content $configfile
+
+            # Unknown development reason for hardcoded different initial password here:
+            $content = Get-Content -path $configfile
+            $content.replace('$$INITCREATEUSERPASSWORD$$', 'P8aXbferf;djbgtrpojnbiolg5sjOqq7u') | Set-Content $configfile
+
+        }else {
+            Write-Output("Prod detected, enabling password reset emails")
+
+            $content = Get-Content -path $configfile
+            $content.replace('$$PWDRESETEMAILS$$', 'true') | Set-Content $configfile
+
+            $content = Get-Content -path $configfile
+            $content.replace('$$DEVBANNER$$', 'false') | Set-Content $configfile
+
+            $content = Get-Content -path $configfile
+            $content.replace('$$INITCREATEUSERPASSWORD$$', $cporacle_app_password) | Set-Content $configfile
+        }
 
         $content = Get-Content -path $configfile
         $content
