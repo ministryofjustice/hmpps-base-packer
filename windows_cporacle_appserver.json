@@ -90,13 +90,13 @@
     },
     {
       "type": "file",
-      "source": "scripts/Windows/CPOracle/RemoveAWSCLI.ps1",
-      "destination": "C:\\Setup\\RunTimeConfig\\RemoveAWSCLI.ps1"
+      "source": "scripts/Windows/CPOracle/SetRDSEndpointRegistryKeys.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\SetRDSEndpointRegistryKeys.ps1"
     },
     {
       "type": "file",
-      "source": "scripts/Windows/CPOracle/SetRDSEndpointRegistryKeys.ps1",
-      "destination": "C:\\Setup\\RunTimeConfig\\SetRDSEndpointRegistryKeys.ps1"
+      "source": "scripts/Windows/CPOracle/RemoveAWSCLI.ps1",
+      "destination": "C:\\Setup\\RunTimeConfig\\RemoveAWSCLI.ps1"
     },
     {
       "type": "file",
