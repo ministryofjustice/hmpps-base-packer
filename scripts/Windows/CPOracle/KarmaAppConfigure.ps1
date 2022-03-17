@@ -11,6 +11,8 @@ try {
     $RDSEndpoint = (Get-ItemProperty -Path $key -Name "rdsendpoint").rdsendpoint
     $cporacle_app_username = (Get-ItemProperty -Path $key -Name "cporacleappuser").cporacleappuser
     $cporacle_app_password = (Get-ItemProperty -Path $key -Name "cporacleapppw").cporacleapppw
+    $KarmaAPIVersion = (Get-ItemProperty -Path $key -Name "karmaapiversion").karmaapiversion
+    $KarmaWEBVersion = (Get-ItemProperty -Path $key -Name "karmawebversion").karmawebversion
 
     # CHECK IF API OR WEB SERVER - build WEB by default
     if ($instanceName -Like "*api*"){
@@ -20,7 +22,7 @@ try {
         ###############################################################
 
         # Sets RDS DB details
-        $configfile="C:\inetpub\${KarmaAPIVersion}\Web.config"
+        $configfile="C:\inetpub\$KarmaAPIVersion\Web.config"
         Write-Output("Updating CPOracle Config file '${configfile}'")
 
         $content = Get-Content -path $configfile
