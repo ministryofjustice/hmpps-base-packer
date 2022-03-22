@@ -13,6 +13,7 @@ try {
     $cporacle_app_password = (Get-ItemProperty -Path $key -Name "cporacleapppw").cporacleapppw
     $KarmaAPIVersion = (Get-ItemProperty -Path $key -Name "karmaapiversion").karmaapiversion
     $KarmaWEBVersion = (Get-ItemProperty -Path $key -Name "karmawebversion").karmawebversion
+    $EncryptionKeyPath = (Get-ItemProperty -Path $key -Name "cporaclekeypath").cporaclekeypath
 
     # CHECK IF API OR WEB SERVER - build WEB by default
     if ($instanceName -Like "*api*"){
@@ -33,6 +34,9 @@ try {
 
         $content = Get-Content -path $configfile
         $content.replace('$$RDSPASSWORD$$', $cporacle_app_password) | Set-Content $configfile
+
+        $content = Get-Content -path $configfile
+        $content.replace('$$ENCRYPTIONPATH$$', $EncryptionKeyPath) | Set-Content $configfile
 
         # Sets the flag to enable or disable password reset emails
         # Sets the flag to enable or disable test banner
