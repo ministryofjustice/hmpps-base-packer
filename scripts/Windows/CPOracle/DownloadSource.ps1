@@ -13,7 +13,7 @@ Write-Output "# Download CPOracle API Binaries from S3 Bucket "
 Write-Output "#----------------------------------------------------------------------"
 
 ##### UPDATE $KarmaAPIVersion with the API release to deploy #####
-$KarmaAPIVersion   = "LATEST_LondonCrc.Karma.API.2021.06.03.10.43.zip"
+$KarmaAPIVersion   = "LATEST_LondonCrc.Karma.API.2021.06.03.10.43"
 Write-Output ("Will download Karma API version: ${KarmaAPIVersion}")
 $KarmaAPIFileName = "${KarmaAPIVersion}.zip"
 
@@ -28,7 +28,7 @@ $key ="HKLM:\Software\HMPPS"
 Set-ItemProperty -Path $key -Name karmaapiversion  -Value $KarmaAPIVersion
 
 ##### UPDATE $KarmaWEBVersion with the Website release to deploy #####
-$KarmaWEBVersion   = "LATEST_LondonCrc.Karma.Website.2021.06.08.11.48.zip"
+$KarmaWEBVersion   = "LATEST_LondonCrc.Karma.Website.2021.06.08.11.48"
 Write-Output ("Will download Karma WEB version: ${KarmaWEBVersion}")
 $KarmaWEBFileName = "${KarmaWEBVersion}.zip"
 
