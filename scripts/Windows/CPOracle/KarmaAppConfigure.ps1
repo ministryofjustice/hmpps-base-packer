@@ -50,6 +50,10 @@ try {
             $content = Get-Content -path $configfile
             $content.replace('$$DEVBANNER$$', 'true') | Set-Content $configfile
 
+            # Sets instance name (cosmetic, not functionally needed)
+            $content = Get-Content -path $configfile
+            $content.replace('$$INSTANCE$$', 'dev instance') | Set-Content $configfile
+
             # Unknown development reason for hardcoded different initial password here:
             $content = Get-Content -path $configfile
             $content.replace('$$INITCREATEUSERPASSWORD$$', 'P8aXbferf;djbgtrpojnbiolg5sjOqq7u') | Set-Content $configfile
@@ -62,6 +66,10 @@ try {
 
             $content = Get-Content -path $configfile
             $content.replace('$$DEVBANNER$$', 'false') | Set-Content $configfile
+
+            # Sets instance name (cosmetic, not functionally needed)
+            $content = Get-Content -path $configfile
+            $content.replace('$$INSTANCE$$', 'prod instance') | Set-Content $configfile
 
             $content = Get-Content -path $configfile
             $content.replace('$$INITCREATEUSERPASSWORD$$', $cporacle_app_password) | Set-Content $configfile
