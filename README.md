@@ -39,7 +39,6 @@ Note: This action will not bump the tag if the HEAD commit has already been tagg
 | delius-core-non-prod        | 723123699647 |
 | eng-dev                     | 895523100917 |
 | eng-prod                    | 077643444046 |
-| hmpps-delius-auto-test      | 431912413968 |
 | hmpps-delius-int            | 645753425509 |
 | hmpps-delius-mis-dev        | 479759138745 |
 | hmpps-delius-mis-test       | 349354156492 |
