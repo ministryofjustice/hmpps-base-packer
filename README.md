@@ -43,7 +43,6 @@ Note: This action will not bump the tag if the HEAD commit has already been tagg
 | hmpps-delius-mis-dev        | 479759138745 |
 | hmpps-delius-mis-test       | 349354156492 |
 | hmpps-delius-perf           | 130975965028 |
-| hmpps-delius-po-test1       | 716683748953 |
 | hmpps-delius-pre-prod       | 010587221707 |
 | hmpps-delius-prod           | 050243167760 |
 | hmpps-delius-stage          | 205048117103 |
