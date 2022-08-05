@@ -48,5 +48,4 @@ Note: This action will not bump the tag if the HEAD commit has already been tagg
 | hmpps-delius-test           | 728765553488 |
 | hmpps-delius-training       | 330914586320 |
 | hmpps-delius-training-test  | 130847504577 |
-| hmpps-sandpit               | 434401102446 |
 | pcs-tools                   | 766455809178 |
