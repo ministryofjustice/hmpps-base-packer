@@ -46,5 +46,4 @@ Note: This action will not bump the tag if the HEAD commit has already been tagg
 | hmpps-delius-stage          | 205048117103 |
 | hmpps-delius-test           | 728765553488 |
 | hmpps-delius-training       | 330914586320 |
-| hmpps-sandpit               | 434401102446 |
 | pcs-tools                   | 766455809178 |
