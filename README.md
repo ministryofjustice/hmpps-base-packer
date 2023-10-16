@@ -36,7 +36,6 @@ Note: This action will not bump the tag if the HEAD commit has already been tagg
 | aws_account_ids             |              |
 |-----------------------------|--------------|
 | alfresco-dev                | 563502482979 |
-| delius-core-non-prod        | 723123699647 |
 | eng-dev                     | 895523100917 |
 | eng-prod                    | 077643444046 |
 | hmpps-delius-mis-dev        | 479759138745 |
