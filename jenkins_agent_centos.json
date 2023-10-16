@@ -66,8 +66,7 @@
       "ami_regions": ["eu-west-2"],
       "ami_users": [
           "895523100917",
-          "077643444046",
-          "723123699647"
+          "077643444046"
       ],
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
